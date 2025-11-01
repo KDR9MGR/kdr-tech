@@ -6,6 +6,7 @@ import RazakDescription from "../descriptions/RazakDescription";
 import ApoorvaDescription from "../descriptions/ApoorvaDescription";
 import ArbazDescription from "../descriptions/ArbazDescription";
 import KadarDescription from "../descriptions/KadarDescription";
+import ShreyaDescription from "../descriptions/ShreyaDescription";
 import App from "next/app";
 
 const Team = () => {
@@ -115,12 +116,13 @@ const Team = () => {
                   quote="#FlutterExpert"
                 />
                 <ProfileCard
-                  image="/images/profiles/bhakti.jpg"
-                  name="Bhakti"
-                  role="UI/UX Designer"
-                  description={BhaktiDescription}
-                  quote="#DesignGuru"
+                  image="/images/profiles/shreya.jpeg"
+                  name="Shreya"
+                  role="Social Media Manager"
+                  description={ShreyaDescription}
+                  quote="#MarketingPro"
                 />
+               
                 <ProfileCard
                   image="/images/profiles/Razak.jpg"
                   name="Abdul Razak"
@@ -143,6 +145,13 @@ const Team = () => {
                   role="Backend Developer"
                   description={ApoorvaDescription}
                   quote="#BackendWizard"
+                />
+                 <ProfileCard
+                  image="/images/profiles/bhakti.jpg"
+                  name="Bhakti"
+                  role="UI/UX Designer"
+                  description={BhaktiDescription}
+                  quote="#DesignGuru"
                 />
                 {/* Add more ProfileCard components as needed */}
               </div>

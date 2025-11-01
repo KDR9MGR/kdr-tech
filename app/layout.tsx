@@ -47,7 +47,7 @@ export default function RootLayout({
         <title>{String(metadata.title) || "Default Title"}</title>
       </head>
       <body
-        className={`${inter.className} bg-[#030014] overflow-y-scroll overflow-x-hidden`}
+        className={`${inter.className} bg-[#030014] overflow-y-scroll overflow-x-hidden max-w-[100vw]`}
       >
         <StarsCanvas />
         <Navbar />

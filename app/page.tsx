@@ -6,16 +6,17 @@ import About from "@/components/main/About";
 import Team from "@/components/main/Team";
 import Encryption from "@/components/main/Encryption";
 import Projects from "@/components/main/Projects";
-import ProjectsSection from "@/components/main/ProjectSection";
 import AchievementsSection from "@/components/main/AchievementsSection";
+import AppLogosScroll from "@/components/main/AppLogosScroll";
 
 export default function Home() {
   return (
     <main className="h-full w-full">
-      <div className="container px-0 py-10 flex flex-col gap-10">
+      <div className="w-full max-w-[100vw] overflow-x-hidden px-0 py-10 flex flex-col gap-10">
         <Hero />
         <AchievementsSection />
-        
+        <AppLogosScroll />
+
         <Skills />
         <About />
         <Team />

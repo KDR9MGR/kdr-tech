@@ -1,4 +1,5 @@
 @import url("https://fonts.googleapis.com/css2?family=Cedarville+Cursive&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800;900&display=swap");
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -109,4 +110,31 @@ html {
 
 .animate-scroll-right {
   animation: scroll-right 30s linear infinite;
+}
+
+/* App logos scroll animation - continuous infinite scroll */
+@keyframes scroll-left-continuous {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-33.333%);
+  }
+}
+
+@keyframes scroll-right-continuous {
+  0% {
+    transform: translateX(-33.333%);
+  }
+  100% {
+    transform: translateX(0);
+  }
+}
+
+.animate-scroll-left-continuous {
+  animation: scroll-left-continuous 20s linear infinite;
+}
+
+.animate-scroll-right-continuous {
+  animation: scroll-right-continuous 20s linear infinite;
 }
