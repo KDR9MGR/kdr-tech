@@ -1,6 +1,7 @@
 import React from "react";
 import Head from "next/head";
 import ProfileCard from "../sub/ProfileCard";
+<<<<<<< HEAD
 import BhaktiDescription from "../descriptions/BhaktiDescription";
 import RazakDescription from "../descriptions/RazakDescription";
 import ApoorvaDescription from "../descriptions/ApoorvaDescription";
@@ -10,6 +11,43 @@ import ShreyaDescription from "../descriptions/ShreyaDescription";
 import App from "next/app";
 
 const Team = () => {
+=======
+
+interface TeamMember {
+  id: string;
+  full_name: string;
+  slug: string;
+  job_title: string;
+  bio: string;
+  short_bio: string;
+  photo_url: string;
+  visible: boolean;
+  is_featured: boolean;
+  order_index: number;
+}
+
+async function getTeamMembers(): Promise<TeamMember[]> {
+  try {
+    const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3001';
+    const response = await fetch(`${baseUrl}/api/team`, {
+      cache: 'no-store', // Always get fresh data
+    });
+
+    if (!response.ok) {
+      throw new Error('Failed to fetch team members');
+    }
+
+    return await response.json();
+  } catch (error) {
+    console.error('Error fetching team members:', error);
+    return [];
+  }
+}
+
+const Team = async () => {
+  const members = await getTeamMembers();
+
+>>>>>>> 191af93 (Initial commit: import kdr-tech-portfolio)
   return (
     <>
       <Head>
@@ -52,6 +90,7 @@ const Team = () => {
           name="twitter:image"
           content="https://www.kdrtech.in/images/team.jpg"
         />
+<<<<<<< HEAD
         <script type="application/ld+json">
           {JSON.stringify({
             "@context": "https://schema.org",
@@ -91,6 +130,8 @@ const Team = () => {
             ],
           })}
         </script>
+=======
+>>>>>>> 191af93 (Initial commit: import kdr-tech-portfolio)
       </Head>
       <div id='Team' className="py-12 bg-gray-900">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -108,6 +149,7 @@ const Team = () => {
           <div className="mt-10">
             <div className="flex justify-center">
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+<<<<<<< HEAD
                 <ProfileCard
                   image="/images/profiles/me.png"
                   name="Arbaz Kudekar"
@@ -154,6 +196,24 @@ const Team = () => {
                   quote="#DesignGuru"
                 />
                 {/* Add more ProfileCard components as needed */}
+=======
+                {members.length > 0 ? (
+                  members.map((member) => (
+                    <ProfileCard
+                      key={member.id}
+                      image={member.photo_url}
+                      name={member.full_name}
+                      role={member.job_title}
+                      description={member.short_bio || member.bio.slice(0, 150) + '...'}
+                      quote={`#${member.job_title.replace(/\s+/g, '')}`}
+                    />
+                  ))
+                ) : (
+                  <div className="col-span-3 text-center py-12">
+                    <p className="text-gray-400">Loading team members...</p>
+                  </div>
+                )}
+>>>>>>> 191af93 (Initial commit: import kdr-tech-portfolio)
               </div>
             </div>
           </div>

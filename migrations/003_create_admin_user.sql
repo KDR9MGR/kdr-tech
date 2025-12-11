@@ -1,0 +1,29 @@
+-- Create admin user for KDR Tech Admin Dashboard
+-- This will create an admin user that can access the /admin panel
+
+-- IMPORTANT: You need to create this user through the Supabase Dashboard
+-- Go to: Authentication → Users → Add user
+--
+-- Use these credentials:
+-- Email: admin@kdrtech.com
+-- Password: KdrTech2024!Admin
+--
+-- Make sure to check "Auto Confirm User" so the user is immediately active
+--
+-- Alternatively, you can use the Supabase CLI or create the user programmatically
+-- through your application's sign-up flow.
+
+-- Note: This SQL file is for documentation purposes only.
+-- Supabase Auth users are managed through the Supabase Auth system,
+-- not through direct SQL inserts into the auth.users table.
+--
+-- To create the admin user, follow these steps:
+-- 1. Go to your Supabase Dashboard: https://ecdbvjqgqwhttdgfnzzr.supabase.co
+-- 2. Navigate to Authentication → Users
+-- 3. Click "Add user" button
+-- 4. Enter email: admin@kdrtech.com
+-- 5. Enter password: KdrTech2024!Admin
+-- 6. Check the "Auto Confirm User" checkbox
+-- 7. Click "Create user"
+--
+-- After creating the user, you can log in at: http://localhost:3001/admin/login
