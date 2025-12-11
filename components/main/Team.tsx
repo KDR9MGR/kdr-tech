@@ -1,17 +1,6 @@
 import React from "react";
 import Head from "next/head";
 import ProfileCard from "../sub/ProfileCard";
-<<<<<<< HEAD
-import BhaktiDescription from "../descriptions/BhaktiDescription";
-import RazakDescription from "../descriptions/RazakDescription";
-import ApoorvaDescription from "../descriptions/ApoorvaDescription";
-import ArbazDescription from "../descriptions/ArbazDescription";
-import KadarDescription from "../descriptions/KadarDescription";
-import ShreyaDescription from "../descriptions/ShreyaDescription";
-import App from "next/app";
-
-const Team = () => {
-=======
 
 interface TeamMember {
   id: string;
@@ -47,7 +36,6 @@ async function getTeamMembers(): Promise<TeamMember[]> {
 const Team = async () => {
   const members = await getTeamMembers();
 
->>>>>>> 191af93 (Initial commit: import kdr-tech-portfolio)
   return (
     <>
       <Head>
@@ -90,48 +78,6 @@ const Team = async () => {
           name="twitter:image"
           content="https://www.kdrtech.in/images/team.jpg"
         />
-<<<<<<< HEAD
-        <script type="application/ld+json">
-          {JSON.stringify({
-            "@context": "https://schema.org",
-            "@type": "Organization",
-            name: "Your Company",
-            url: "https:///www.kdrtech.in",
-            logo: "https:///www.kdrtech.in/images/logo.png",
-            sameAs: [
-              "https://www.facebook.com/arbazkdr",
-              "https://www.twitter.com/arbazkdr",
-              "https://www.linkedin.com/in/arbazkdr/",
-            ],
-            description:
-              "Meet our team of expert Flutter developers, Android developers, and mobile application developers. Our team has extensive experience in delivering high-quality projects.",
-            member: [
-              {
-                "@type": "Person",
-                name: "Bhakti",
-                jobTitle: "UI/UX Designer",
-                description: BhaktiDescription,
-                image: "https://www.kdrtech.in/bhakti.jpg",
-              },
-              {
-                "@type": "Person",
-                name: "Abdul Razak",
-                jobTitle: "Manager & Developer",
-                description: RazakDescription,
-                image: "https://www.kdrtech.in/Razak.jpg",
-              },
-              {
-                "@type": "Person",
-                name: "Apoorv Pandey",
-                jobTitle: "Backend Developer",
-                description: ApoorvaDescription,
-                image: "https://www.kdrtech.in/apoorv.jpg",
-              },
-            ],
-          })}
-        </script>
-=======
->>>>>>> 191af93 (Initial commit: import kdr-tech-portfolio)
       </Head>
       <div id='Team' className="py-12 bg-gray-900">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -149,54 +95,6 @@ const Team = async () => {
           <div className="mt-10">
             <div className="flex justify-center">
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-<<<<<<< HEAD
-                <ProfileCard
-                  image="/images/profiles/me.png"
-                  name="Arbaz Kudekar"
-                  role="Lead Developer"
-                  description={ArbazDescription}
-                  quote="#FlutterExpert"
-                />
-                <ProfileCard
-                  image="/images/profiles/shreya.jpeg"
-                  name="Shreya"
-                  role="Social Media Manager"
-                  description={ShreyaDescription}
-                  quote="#MarketingPro"
-                />
-               
-                <ProfileCard
-                  image="/images/profiles/Razak.jpg"
-                  name="Abdul Razak"
-                  role="Manager & Developer"
-                  description={RazakDescription}
-                  quote="#ManagerExtraordinaire"
-                />
-
-                <ProfileCard
-                  image="/images/profiles/kadar.png"
-                  name="Abdul Kadar"
-                  role="Frontend Developer"
-                  description={KadarDescription}
-                  quote="#FrontendMaster"
-                />
-                
-                <ProfileCard
-                  image="/images/profiles/apoorva.jpg"
-                  name="Apoorv pandey"
-                  role="Backend Developer"
-                  description={ApoorvaDescription}
-                  quote="#BackendWizard"
-                />
-                 <ProfileCard
-                  image="/images/profiles/bhakti.jpg"
-                  name="Bhakti"
-                  role="UI/UX Designer"
-                  description={BhaktiDescription}
-                  quote="#DesignGuru"
-                />
-                {/* Add more ProfileCard components as needed */}
-=======
                 {members.length > 0 ? (
                   members.map((member) => (
                     <ProfileCard
@@ -213,7 +111,6 @@ const Team = async () => {
                     <p className="text-gray-400">Loading team members...</p>
                   </div>
                 )}
->>>>>>> 191af93 (Initial commit: import kdr-tech-portfolio)
               </div>
             </div>
           </div>
