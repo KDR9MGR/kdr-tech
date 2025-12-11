@@ -2,7 +2,7 @@
 
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
-import { Home, Users, FileText, MessageSquare, LogOut, AppWindow } from 'lucide-react'
+import { Home, Users, FileText, MessageSquare, LogOut, AppWindow, Link2 } from 'lucide-react'
 import { createClient } from '@/lib/supabase/client'
 import { useRouter } from 'next/navigation'
 import { Button } from '@/components/ui/button'
@@ -13,6 +13,7 @@ const navItems = [
   { href: '/admin/blog', icon: FileText, label: 'Blog' },
   { href: '/admin/testimonials', icon: MessageSquare, label: 'Testimonials' },
   { href: '/admin/showcase', icon: AppWindow, label: 'Showcase' },
+  { href: '/admin/footer-links', icon: Link2, label: 'Footer Links' },
 ]
 
 export default function AdminSidebar() {
