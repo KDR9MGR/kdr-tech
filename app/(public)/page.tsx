@@ -9,6 +9,8 @@ import Projects from "@/components/main/Projects";
 import AchievementsSection from "@/components/main/AchievementsSection";
 import AppShowcase from "@/components/main/AppShowcase";
 
+export const dynamic = 'force-dynamic'
+
 export default function Home() {
   return (
     <main className="h-full w-full">

@@ -1,5 +1,7 @@
 import ProtectedRoute from '@/components/admin/ProtectedRoute'
 
+export const dynamic = 'force-dynamic'
+
 export default function AdminLayout({
   children,
 }: {

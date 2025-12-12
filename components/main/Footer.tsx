@@ -7,6 +7,7 @@ import {
   RxLinkedinLogo,
 } from "react-icons/rx";
 import { FaYoutube, FaFacebook } from "react-icons/fa";
+import { createClient } from "@/lib/supabase/server";
 
 interface FooterLink {
   id: string;
@@ -20,17 +21,20 @@ interface FooterLink {
 
 async function getFooterLinks(): Promise<FooterLink[]> {
   try {
-    const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3001';
-    const response = await fetch(`${baseUrl}/api/footer-links`, {
-      cache: 'no-store',
-    });
+    const supabase = await createClient();
 
-    if (!response.ok) {
-      console.error('Failed to fetch footer links');
+    const { data, error } = await supabase
+      .from('footer_links')
+      .select('*')
+      .eq('visible', true)
+      .order('order_index', { ascending: true });
+
+    if (error) {
+      console.error('Error fetching footer links:', error);
       return [];
     }
 
-    return await response.json();
+    return data || [];
   } catch (error) {
     console.error('Error fetching footer links:', error);
     return [];

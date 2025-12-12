@@ -1,6 +1,7 @@
 import Link from 'next/link'
 import { format } from 'date-fns'
 import { Calendar, User, ArrowRight } from 'lucide-react'
+import { createClient } from '@/lib/supabase/server'
 
 interface BlogPost {
   id: string
@@ -17,16 +18,43 @@ interface BlogPost {
 }
 
 async function getBlogPosts(): Promise<BlogPost[]> {
-  const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3001'
-  const response = await fetch(`${baseUrl}/api/blog?status=published`, {
-    cache: 'no-store',
-  })
+  try {
+    const supabase = await createClient()
 
-  if (!response.ok) {
+    const { data, error } = await supabase
+      .from('blog_posts')
+      .select(`
+        id,
+        title,
+        slug,
+        excerpt,
+        category,
+        featured_image,
+        published_at,
+        profiles!author_id (
+          full_name,
+          slug
+        )
+      `)
+      .eq('status', 'published')
+      .order('published_at', { ascending: false })
+
+    if (error) {
+      console.error('Error fetching blog posts:', error)
+      return []
+    }
+
+    if (!data) return []
+
+    // Transform the data to match our interface
+    return data.map(post => ({
+      ...post,
+      author: Array.isArray(post.profiles) ? post.profiles[0] : post.profiles
+    })) as BlogPost[]
+  } catch (error) {
+    console.error('Error in getBlogPosts:', error)
     return []
   }
-
-  return await response.json()
 }
 
 export default async function BlogPage() {

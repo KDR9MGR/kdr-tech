@@ -1,6 +1,7 @@
 import React from "react";
 import Head from "next/head";
 import ProfileCard from "../sub/ProfileCard";
+import { createClient } from "@/lib/supabase/server";
 
 interface TeamMember {
   id: string;
@@ -17,16 +18,20 @@ interface TeamMember {
 
 async function getTeamMembers(): Promise<TeamMember[]> {
   try {
-    const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3001';
-    const response = await fetch(`${baseUrl}/api/team`, {
-      cache: 'no-store', // Always get fresh data
-    });
+    const supabase = await createClient();
 
-    if (!response.ok) {
-      throw new Error('Failed to fetch team members');
+    const { data, error } = await supabase
+      .from('profiles')
+      .select('*')
+      .eq('visible', true)
+      .order('order_index', { ascending: true });
+
+    if (error) {
+      console.error('Error fetching team members:', error);
+      return [];
     }
 
-    return await response.json();
+    return data || [];
   } catch (error) {
     console.error('Error fetching team members:', error);
     return [];
