@@ -8,6 +8,7 @@ import Encryption from "@/components/main/Encryption";
 import Projects from "@/components/main/Projects";
 import AchievementsSection from "@/components/main/AchievementsSection";
 import AppShowcase from "@/components/main/AppShowcase";
+import TestimonialsShowcase from "@/components/main/TestimonialsShowcase";
 
 export const dynamic = 'force-dynamic'
 
@@ -18,6 +19,7 @@ export default function Home() {
         <Hero />
         <AchievementsSection />
         <AppShowcase />
+        <TestimonialsShowcase />
 
         <Skills />
         <About />
