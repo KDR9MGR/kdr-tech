@@ -23,7 +23,7 @@ export default async function EditTeamMemberPage({ params }: { params: { id: str
         <div className="space-y-6">
           <div>
             <h1 className="text-3xl font-bold text-white mb-2">Edit Team Member</h1>
-            <p className="text-gray-400">Update {member.full_name}'s profile</p>
+            <p className="text-gray-400">Update {member.full_name}&apos;s profile</p>
           </div>
 
           <TeamMemberForm initialData={member} isEdit={true} />

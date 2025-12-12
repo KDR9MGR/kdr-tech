@@ -58,7 +58,7 @@ export default function AppShowcase() {
             Our Portfolio
           </h2>
           <p className="text-gray-300 text-lg">
-            Apps we've built for our clients
+            Apps we&apos;ve built for our clients
           </p>
         </div>
 

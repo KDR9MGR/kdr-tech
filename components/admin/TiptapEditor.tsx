@@ -257,7 +257,7 @@ export default function TiptapEditor({ content, onChange, placeholder }: TiptapE
           variant="ghost"
           onClick={() => editor.chain().focus().redo().run()}
           disabled={!editor.can().redo()}
-          className="text-gray-400"}
+          className="text-gray-400"
         >
           <Redo className="w-4 h-4" />
         </Button>

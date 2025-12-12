@@ -5,7 +5,7 @@ export async function GET(
   request: NextRequest,
   { params }: { params: { id: string } }
 ) {
-  const supabase = createClient()
+  const supabase = await createClient()
 
   const { data, error } = await supabase
     .from('footer_links')
@@ -24,7 +24,7 @@ export async function PUT(
   request: NextRequest,
   { params }: { params: { id: string } }
 ) {
-  const supabase = createClient()
+  const supabase = await createClient()
 
   // Check authentication
   const { data: { user } } = await supabase.auth.getUser()
@@ -52,7 +52,7 @@ export async function DELETE(
   request: NextRequest,
   { params }: { params: { id: string } }
 ) {
-  const supabase = createClient()
+  const supabase = await createClient()
 
   // Check authentication
   const { data: { user } } = await supabase.auth.getUser()
