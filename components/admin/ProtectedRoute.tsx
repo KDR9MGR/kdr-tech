@@ -15,7 +15,7 @@ export default function ProtectedRoute({ children }: { children: React.ReactNode
       const { data: { user } } = await supabase.auth.getUser()
 
       if (!user) {
-        router.push('/auth/login')
+        router.push('/admin/login')
       } else {
         setIsAuthenticated(true)
       }
@@ -27,7 +27,7 @@ export default function ProtectedRoute({ children }: { children: React.ReactNode
     // Listen for auth changes
     const { data: { subscription } } = supabase.auth.onAuthStateChange((event, session) => {
       if (event === 'SIGNED_OUT' || !session) {
-        router.push('/auth/login')
+        router.push('/admin/login')
       } else if (event === 'SIGNED_IN') {
         setIsAuthenticated(true)
       }
