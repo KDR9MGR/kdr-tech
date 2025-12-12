@@ -16,30 +16,60 @@ interface TeamMember {
   order_index: number;
 }
 
-async function getTeamMembers(): Promise<TeamMember[]> {
+interface TeamMembersResult {
+  members: TeamMember[];
+  error?: string;
+}
+
+async function getTeamMembers(): Promise<TeamMembersResult> {
   try {
+    // Check if environment variables are set
+    if (!process.env.NEXT_PUBLIC_SUPABASE_URL || !process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY) {
+      console.error('Supabase environment variables are not set');
+      return {
+        members: [],
+        error: 'Database configuration missing. Please check environment variables.'
+      };
+    }
+
     const supabase = await createClient();
 
     const { data, error } = await supabase
-      .from('profiles')
+      .from('team_members')
       .select('*')
       .eq('visible', true)
       .order('order_index', { ascending: true });
 
     if (error) {
       console.error('Error fetching team members:', error);
-      return [];
+      return {
+        members: [],
+        error: `Failed to load team members: ${error.message}`
+      };
     }
 
-    return data || [];
+    if (!data || data.length === 0) {
+      console.warn('No team members found in database');
+      return {
+        members: [],
+        error: 'No team members found. Please add team members in the admin panel.'
+      };
+    }
+
+    return { members: data };
   } catch (error) {
     console.error('Error fetching team members:', error);
-    return [];
+    const errorMessage = error instanceof Error ? error.message : 'Unknown error occurred';
+    return {
+      members: [],
+      error: `An error occurred while loading team members: ${errorMessage}`
+    };
   }
 }
 
 const Team = async () => {
-  const members = await getTeamMembers();
+  const result = await getTeamMembers();
+  const { members, error } = result;
 
   return (
     <>
@@ -104,16 +134,27 @@ const Team = async () => {
                   members.map((member) => (
                     <ProfileCard
                       key={member.id}
-                      image={member.photo_url}
+                      image={member.photo_url || member.avatar_url}
                       name={member.full_name}
                       role={member.job_title}
-                      description={member.short_bio || member.bio.slice(0, 150) + '...'}
+                      description={member.short_bio || member.bio?.slice(0, 150) + '...'}
                       quote={`#${member.job_title.replace(/\s+/g, '')}`}
                     />
                   ))
                 ) : (
                   <div className="col-span-3 text-center py-12">
-                    <p className="text-gray-400">Loading team members...</p>
+                    <div className="bg-yellow-900/20 border border-yellow-600 rounded-lg p-6 max-w-2xl mx-auto">
+                      <svg className="w-12 h-12 text-yellow-500 mx-auto mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+                      </svg>
+                      <p className="text-yellow-400 font-semibold mb-2">No Team Members Found</p>
+                      <p className="text-gray-400 text-sm">{error || 'Loading team members...'}</p>
+                      {error && error.includes('admin panel') && (
+                        <a href="/admin" className="mt-4 inline-block bg-indigo-600 hover:bg-indigo-700 text-white px-6 py-2 rounded-lg transition-colors">
+                          Go to Admin Panel
+                        </a>
+                      )}
+                    </div>
                   </div>
                 )}
               </div>

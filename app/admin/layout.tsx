@@ -1,14 +1,23 @@
-import ProtectedRoute from '@/components/admin/ProtectedRoute'
+'use client'
 
-export const dynamic = 'force-dynamic'
+import { usePathname } from 'next/navigation'
+import ProtectedRoute from '@/components/admin/ProtectedRoute'
 
 export default function AdminLayout({
   children,
 }: {
   children: React.ReactNode
 }) {
-  // This layout wraps all /admin/* routes
-  // It protects all admin routes with authentication
+  const pathname = usePathname()
+
+  // Don't protect the login page - it should be publicly accessible
+  const isLoginPage = pathname === '/admin/login'
+
+  if (isLoginPage) {
+    return <>{children}</>
+  }
+
+  // Protect all other admin routes with authentication
   return (
     <ProtectedRoute>
       {children}
