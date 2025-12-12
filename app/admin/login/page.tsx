@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { useRouter } from 'next/navigation'
 import { createClient } from '@/lib/supabase/client'
 
@@ -9,11 +9,27 @@ export default function LoginPage() {
   const [password, setPassword] = useState('')
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState('')
+  const [supabase, setSupabase] = useState<any>(null)
+  const [initError, setInitError] = useState('')
   const router = useRouter()
-  const supabase = createClient()
+
+  useEffect(() => {
+    try {
+      const client = createClient()
+      setSupabase(client)
+    } catch (err: any) {
+      setInitError(err.message)
+    }
+  }, [])
 
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault()
+
+    if (!supabase) {
+      setError('Supabase client not initialized')
+      return
+    }
+
     setLoading(true)
     setError('')
 
@@ -34,6 +50,71 @@ export default function LoginPage() {
     } finally {
       setLoading(false)
     }
+  }
+
+  // Show initialization error if environment variables are missing
+  if (initError) {
+    return (
+      <div style={{
+        minHeight: '100vh',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        background: 'linear-gradient(135deg, #030014 0%, #1A1A2E 50%, #2A0E61 100%)',
+        padding: '20px',
+        fontFamily: 'system-ui, -apple-system, sans-serif'
+      }}>
+        <div style={{
+          width: '100%',
+          maxWidth: '600px',
+          backgroundColor: '#1A1A2E',
+          border: '2px solid #7F1D1D',
+          borderRadius: '12px',
+          padding: '40px',
+          boxShadow: '0 10px 40px rgba(0,0,0,0.3)'
+        }}>
+          <h1 style={{
+            color: '#FCA5A5',
+            fontSize: '24px',
+            fontWeight: 'bold',
+            marginBottom: '16px'
+          }}>
+            ⚠️ Configuration Error
+          </h1>
+          <p style={{
+            color: '#FCA5A5',
+            marginBottom: '20px',
+            lineHeight: '1.6'
+          }}>
+            {initError}
+          </p>
+          <div style={{
+            backgroundColor: '#030014',
+            border: '1px solid #2A0E61',
+            borderRadius: '6px',
+            padding: '20px',
+            color: '#9CA3AF',
+            fontSize: '14px',
+            lineHeight: '1.6'
+          }}>
+            <p style={{ marginBottom: '12px', color: 'white', fontWeight: 'bold' }}>
+              To fix this:
+            </p>
+            <ol style={{ paddingLeft: '20px', margin: 0 }}>
+              <li style={{ marginBottom: '8px' }}>Go to your Vercel project dashboard</li>
+              <li style={{ marginBottom: '8px' }}>Navigate to Settings → Environment Variables</li>
+              <li style={{ marginBottom: '8px' }}>Add these variables:
+                <ul style={{ paddingLeft: '20px', marginTop: '8px' }}>
+                  <li>NEXT_PUBLIC_SUPABASE_URL</li>
+                  <li>NEXT_PUBLIC_SUPABASE_ANON_KEY</li>
+                </ul>
+              </li>
+              <li>Redeploy your application</li>
+            </ol>
+          </div>
+        </div>
+      </div>
+    )
   }
 
   return (

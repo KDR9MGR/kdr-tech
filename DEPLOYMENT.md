@@ -4,24 +4,33 @@
 
 This project is configured to deploy on Vercel. Follow these steps to deploy successfully:
 
-### Required Environment Variables
+### ⚠️ CRITICAL: Required Environment Variables
 
-Before deploying to Vercel, you **must** add the following environment variables in your Vercel project settings:
+**The application WILL NOT WORK without these environment variables!**
 
-1. Go to your Vercel project dashboard
-2. Navigate to **Settings** → **Environment Variables**
-3. Add the following variables:
+Before deploying to Vercel, you **must** add the following environment variables:
+
+1. Go to your Vercel project dashboard: https://vercel.com/dashboard
+2. Select your project
+3. Navigate to **Settings** → **Environment Variables**
+4. Add the following variables for **all environments** (Production, Preview, Development):
 
 ```
-NEXT_PUBLIC_SUPABASE_URL=your-supabase-project-url
-NEXT_PUBLIC_SUPABASE_ANON_KEY=your-supabase-anon-key
+NEXT_PUBLIC_SUPABASE_URL=https://ecdbvjqgqwhttdgfnzzr.supabase.co
+NEXT_PUBLIC_SUPABASE_ANON_KEY=your-supabase-anon-key-here
 ```
 
-You can find these values in your Supabase project:
+**Where to find these values:**
 - Go to [Supabase Dashboard](https://supabase.com/dashboard)
 - Select your project
 - Navigate to **Settings** → **API**
-- Copy the **Project URL** and **anon/public** key
+- Copy the **Project URL** → Use this for `NEXT_PUBLIC_SUPABASE_URL`
+- Copy the **anon/public** key → Use this for `NEXT_PUBLIC_SUPABASE_ANON_KEY`
+
+**After adding variables:**
+- Click **Save**
+- Go to **Deployments** tab
+- Click on the latest deployment → **Redeploy**
 
 ### Deployment Steps
 
