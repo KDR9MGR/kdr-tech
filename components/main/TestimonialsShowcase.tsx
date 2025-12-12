@@ -70,7 +70,7 @@ export default function TestimonialsShowcase() {
             Client Testimonials
           </h2>
           <p className="text-gray-300 text-lg max-w-2xl mx-auto">
-            Don't just take our word for it - hear what our clients have to say about their experience working with us
+            Don&apos;t just take our word for it - hear what our clients have to say about their experience working with us
           </p>
         </div>
 
@@ -154,7 +154,7 @@ export default function TestimonialsShowcase() {
 
                   {/* Testimonial Text */}
                   <p className="text-gray-300 mb-6 flex-1 leading-relaxed">
-                    "{testimonial.testimonial_text}"
+                    &quot;{testimonial.testimonial_text}&quot;
                   </p>
 
                   {/* Client Info */}
