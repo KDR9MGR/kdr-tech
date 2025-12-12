@@ -115,7 +115,7 @@ const Team = async () => {
           content="https://www.kdrtech.in/images/team.jpg"
         />
       </Head>
-      <div id='Team' className="py-12 bg-gray-900">
+      <div id='Team' className="py-12 pb-24 bg-gray-900">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center">
             {/* <h2 className="text-base text-indigo-600 font-semibold tracking-wide uppercase">
@@ -128,9 +128,9 @@ const Team = async () => {
               Our team is the best team in the world.
             </p>
           </div>
-          <div className="mt-10">
+          <div className="mt-10 mb-12">
             <div className="flex justify-center">
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
                 {members.length > 0 ? (
                   members.map((member) => (
                     <ProfileCard
