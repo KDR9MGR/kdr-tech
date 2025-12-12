@@ -135,7 +135,7 @@ const Team = async () => {
                   members.map((member) => (
                     <ProfileCard
                       key={member.id}
-                      image={member.photo_url || member.avatar_url}
+                      image={member.photo_url || member.avatar_url || '/images/default-avatar.png'}
                       name={member.full_name}
                       role={member.job_title}
                       description={member.short_bio || member.bio?.slice(0, 150) + '...'}
