@@ -3,6 +3,8 @@ import { format } from 'date-fns'
 import { Calendar, User, ArrowRight } from 'lucide-react'
 import { createClient } from '@/lib/supabase/server'
 
+export const dynamic = 'force-dynamic'
+
 interface BlogPost {
   id: string
   title: string
