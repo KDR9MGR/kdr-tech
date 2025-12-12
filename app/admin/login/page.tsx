@@ -106,9 +106,6 @@ export default function LoginPage() {
               placeholder="admin@kdrtech.com"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              onInput={(e) => console.log('Email input:', e.currentTarget.value)}
-              onClick={() => console.log('Email clicked')}
-              onFocus={() => console.log('Email focused')}
               required
               autoComplete="email"
               disabled={loading}
@@ -148,9 +145,6 @@ export default function LoginPage() {
               placeholder="Enter your password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
-              onInput={(e) => console.log('Password input:', e.currentTarget.value.length + ' chars')}
-              onClick={() => console.log('Password clicked')}
-              onFocus={() => console.log('Password focused')}
               required
               autoComplete="current-password"
               disabled={loading}
@@ -191,32 +185,6 @@ export default function LoginPage() {
             {loading ? 'Signing in...' : 'Sign In'}
           </button>
         </form>
-
-        <div style={{
-          marginTop: '20px',
-          padding: '12px',
-          backgroundColor: '#030014',
-          borderRadius: '6px',
-          fontSize: '12px',
-          color: '#6B7280',
-          fontFamily: 'monospace'
-        }}>
-          <div style={{ marginBottom: '4px' }}>Debug Info:</div>
-          <div>Email: {email || '(empty)'}</div>
-          <div>Password: {password ? '•'.repeat(password.length) : '(empty)'}</div>
-          <div>Loading: {loading ? 'Yes' : 'No'}</div>
-        </div>
-
-        <div style={{
-          marginTop: '20px',
-          padding: '12px',
-          backgroundColor: '#1E3A8A',
-          borderRadius: '6px',
-          fontSize: '12px',
-          color: '#BFDBFE'
-        }}>
-          <strong>Instructions:</strong> Open browser console (F12) and try clicking/typing in the fields above. You should see console logs.
-        </div>
       </div>
     </div>
   )
