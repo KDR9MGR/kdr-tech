@@ -11,6 +11,7 @@ interface TeamMember {
   bio: string;
   short_bio: string;
   photo_url: string;
+  avatar_url?: string;
   visible: boolean;
   is_featured: boolean;
   order_index: number;
