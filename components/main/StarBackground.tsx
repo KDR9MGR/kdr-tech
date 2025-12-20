@@ -13,13 +13,16 @@ const StarBackground = (props: any) => {
   );
 
   useFrame((state, delta) => {
-    ref.current.rotation.x -= delta/10;
-    ref.current.rotation.y -= delta/15;
+    if (ref.current) {
+      ref.current.rotation.x -= delta/10;
+      ref.current.rotation.y -= delta/15;
+    }
   })
 
+  const Group = 'group' as any;
 
   return (
-    <group rotation={[0,0, Math.PI / 4]}>
+    <Group rotation={[0, 0, Math.PI / 4]}>
         <Points
         ref={ref}
         positions={sphere}
@@ -29,13 +32,13 @@ const StarBackground = (props: any) => {
         >
             <PointMaterial
                 transparent
-                color="$fff"
+                color="#fff"
                 size={0.002}
                 sizeAttenuation={true}
-                dethWrite={false}
+                depthWrite={false}
             />
         </Points>
-    </group>
+    </Group>
   )
 };
 
