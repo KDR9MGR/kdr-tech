@@ -1,6 +1,6 @@
 'use client'
 
-import { useEffect, useState } from 'react'
+import { useEffect, useState, useCallback } from 'react'
 import Link from 'next/link'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
@@ -27,11 +27,7 @@ export default function ShowcasePage() {
   const [loading, setLoading] = useState(true)
   const { toast } = useToast()
 
-  useEffect(() => {
-    fetchApps()
-  }, [])
-
-  const fetchApps = async () => {
+  const fetchApps = useCallback(async () => {
     setLoading(true)
     try {
       // Add cache-busting query parameter to force fresh data
@@ -47,7 +43,11 @@ export default function ShowcasePage() {
     } finally {
       setLoading(false)
     }
-  }
+  }, [toast])
+
+  useEffect(() => {
+    fetchApps()
+  }, [fetchApps])
 
   const handleDelete = async (id: string, name: string) => {
     if (!confirm(`Are you sure you want to delete ${name}?`)) return

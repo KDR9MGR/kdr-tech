@@ -31,27 +31,27 @@ export default function TestimonialsShowcase() {
   const [selectedVideo, setSelectedVideo] = useState<string | null>(null)
 
   useEffect(() => {
+    const fetchTestimonials = async () => {
+      try {
+        const [textRes, videoRes] = await Promise.all([
+          fetch('/api/testimonials/text'),
+          fetch('/api/testimonials/video'),
+        ])
+
+        const textData = await textRes.json()
+        const videoData = await videoRes.json()
+
+        setTextTestimonials(textData.filter((t: TextTestimonial) => t.visible))
+        setVideoTestimonials(videoData.filter((v: VideoTestimonial) => v.visible))
+      } catch (error) {
+        console.error('Failed to load testimonials:', error)
+      } finally {
+        setLoading(false)
+      }
+    }
+
     fetchTestimonials()
   }, [])
-
-  const fetchTestimonials = async () => {
-    try {
-      const [textRes, videoRes] = await Promise.all([
-        fetch('/api/testimonials/text'),
-        fetch('/api/testimonials/video'),
-      ])
-
-      const textData = await textRes.json()
-      const videoData = await videoRes.json()
-
-      setTextTestimonials(textData.filter((t: TextTestimonial) => t.visible))
-      setVideoTestimonials(videoData.filter((v: VideoTestimonial) => v.visible))
-    } catch (error) {
-      console.error('Failed to load testimonials:', error)
-    } finally {
-      setLoading(false)
-    }
-  }
 
   if (loading) {
     return null

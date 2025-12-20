@@ -1,4 +1,6 @@
+'use client'
 import React from 'react';
+import Image from 'next/image';
 
 interface ProfileCardProps {
   image: string;
@@ -23,11 +25,15 @@ const ProfileCard: React.FC<ProfileCardProps> = ({ image, name, role, descriptio
       title={profileUrl ? `Visit ${name}'s profile` : ''}
     >
       <div className="flex justify-center mt-4">
-        <img
-          className="h-32 w-32 rounded-full object-cover border-4 border-indigo-600 transition duration-500"
-          src={image}
-          alt={name}
-        />
+        <div className="relative h-32 w-32 rounded-full overflow-hidden border-4 border-indigo-600 transition duration-500">
+          <Image
+            src={image}
+            alt={name}
+            fill
+            className="object-cover"
+            sizes="128px"
+          />
+        </div>
       </div>
       <div className="p-6 flex flex-col items-center ">
         <h3 className="text-lg leading-6 font-medium text-white mb-2">{name}</h3>

@@ -1,6 +1,6 @@
 'use client'
 
-import { useEffect, useState } from 'react'
+import { useEffect, useState, useCallback } from 'react'
 import { useParams } from 'next/navigation'
 import FooterLinkForm from '@/components/admin/forms/FooterLinkForm'
 import AdminSidebar from '@/components/admin/AdminSidebar'
@@ -22,11 +22,7 @@ export default function EditFooterLinkPage() {
   const [link, setLink] = useState<FooterLink | null>(null)
   const [loading, setLoading] = useState(true)
 
-  useEffect(() => {
-    fetchLink()
-  }, [params.id])
-
-  const fetchLink = async () => {
+  const fetchLink = useCallback(async () => {
     try {
       const response = await fetch(`/api/footer-links/${params.id}`)
       if (response.ok) {
@@ -48,7 +44,11 @@ export default function EditFooterLinkPage() {
     } finally {
       setLoading(false)
     }
-  }
+  }, [params.id, toast])
+
+  useEffect(() => {
+    fetchLink()
+  }, [fetchLink])
 
   if (loading) {
     return (

@@ -21,26 +21,26 @@ export default function AppShowcase() {
   const [loading, setLoading] = useState(true)
 
   useEffect(() => {
+    const fetchApps = async () => {
+      try {
+        const response = await fetch('/api/showcase')
+        const data = await response.json()
+
+        // Split apps by scroll direction
+        const left = data.filter((app: App) => app.scroll_direction === 'left')
+        const right = data.filter((app: App) => app.scroll_direction === 'right')
+
+        setLeftApps(left)
+        setRightApps(right)
+      } catch (error) {
+        console.error('Failed to load apps:', error)
+      } finally {
+        setLoading(false)
+      }
+    }
+
     fetchApps()
   }, [])
-
-  const fetchApps = async () => {
-    try {
-      const response = await fetch('/api/showcase')
-      const data = await response.json()
-
-      // Split apps by scroll direction
-      const left = data.filter((app: App) => app.scroll_direction === 'left')
-      const right = data.filter((app: App) => app.scroll_direction === 'right')
-
-      setLeftApps(left)
-      setRightApps(right)
-    } catch (error) {
-      console.error('Failed to load apps:', error)
-    } finally {
-      setLoading(false)
-    }
-  }
 
   if (loading) {
     return null

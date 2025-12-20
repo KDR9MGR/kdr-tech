@@ -16,23 +16,34 @@ const BrandScroll = () => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    fetchBrands();
-  }, []);
+    const fetchBrands = async () => {
+      try {
+        const { data, error } = await supabase
+          .from('brands')
+          .select('*')
+          .eq('is_active', true)
+          .order('display_order', { ascending: true });
 
-  const fetchBrands = async () => {
-    try {
-      const { data, error } = await supabase
-        .from('brands')
-        .select('*')
-        .eq('is_active', true)
-        .order('display_order', { ascending: true });
+        if (error) throw error;
 
-      if (error) throw error;
-
-      if (data && data.length > 0) {
-        setBrands(data);
-      } else {
-        // Fallback to sample brands if no data
+        if (data && data.length > 0) {
+          setBrands(data);
+        } else {
+          // Fallback to sample brands if no data
+          setBrands([
+            { id: '1', name: 'React', logo_url: '⚛️', display_order: 1 },
+            { id: '2', name: 'Next.js', logo_url: '▲', display_order: 2 },
+            { id: '3', name: 'TypeScript', logo_url: 'TS', display_order: 3 },
+            { id: '4', name: 'Tailwind', logo_url: '🎨', display_order: 4 },
+            { id: '5', name: 'Node.js', logo_url: '🟢', display_order: 5 },
+            { id: '6', name: 'MongoDB', logo_url: '🍃', display_order: 6 },
+            { id: '7', name: 'PostgreSQL', logo_url: '🐘', display_order: 7 },
+            { id: '8', name: 'AWS', logo_url: '☁️', display_order: 8 },
+          ]);
+        }
+      } catch (error) {
+        console.error('Error fetching brands:', error);
+        // Fallback to sample brands on error
         setBrands([
           { id: '1', name: 'React', logo_url: '⚛️', display_order: 1 },
           { id: '2', name: 'Next.js', logo_url: '▲', display_order: 2 },
@@ -43,24 +54,13 @@ const BrandScroll = () => {
           { id: '7', name: 'PostgreSQL', logo_url: '🐘', display_order: 7 },
           { id: '8', name: 'AWS', logo_url: '☁️', display_order: 8 },
         ]);
+      } finally {
+        setLoading(false);
       }
-    } catch (error) {
-      console.error('Error fetching brands:', error);
-      // Fallback to sample brands on error
-      setBrands([
-        { id: '1', name: 'React', logo_url: '⚛️', display_order: 1 },
-        { id: '2', name: 'Next.js', logo_url: '▲', display_order: 2 },
-        { id: '3', name: 'TypeScript', logo_url: 'TS', display_order: 3 },
-        { id: '4', name: 'Tailwind', logo_url: '🎨', display_order: 4 },
-        { id: '5', name: 'Node.js', logo_url: '🟢', display_order: 5 },
-        { id: '6', name: 'MongoDB', logo_url: '🍃', display_order: 6 },
-        { id: '7', name: 'PostgreSQL', logo_url: '🐘', display_order: 7 },
-        { id: '8', name: 'AWS', logo_url: '☁️', display_order: 8 },
-      ]);
-    } finally {
-      setLoading(false);
-    }
-  };
+    };
+
+    fetchBrands();
+  }, []);
 
   if (loading) {
     return (
