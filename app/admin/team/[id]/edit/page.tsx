@@ -3,13 +3,14 @@ import { redirect } from 'next/navigation'
 import TeamMemberForm from '@/components/admin/forms/TeamMemberForm'
 import AdminSidebar from '@/components/admin/AdminSidebar'
 
-export default async function EditTeamMemberPage({ params }: { params: { id: string } }) {
+export default async function EditTeamMemberPage({ params }: { params: Promise<{ id: string }> }) {
+  const { id } = await params
   const supabase = await createClient()
 
   const { data: member, error } = await supabase
     .from('team_members')
     .select('*')
-    .eq('id', params.id)
+    .eq('id', id)
     .single()
 
   if (error || !member) {

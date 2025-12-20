@@ -3,13 +3,14 @@ import { redirect } from 'next/navigation'
 import BlogPostForm from '@/components/admin/forms/BlogPostForm'
 import AdminSidebar from '@/components/admin/AdminSidebar'
 
-export default async function EditBlogPostPage({ params }: { params: { slug: string } }) {
+export default async function EditBlogPostPage({ params }: { params: Promise<{ slug: string }> }) {
+  const { slug } = await params
   const supabase = await createClient()
 
   const { data: post, error } = await supabase
     .from('blog_posts')
     .select('*')
-    .eq('slug', params.slug)
+    .eq('slug', slug)
     .single()
 
   if (error || !post) {

@@ -4,11 +4,11 @@ import { createClient } from '@/lib/supabase/server'
 // GET /api/blog/[slug] - Get single blog post by slug
 export async function GET(
   request: NextRequest,
-  { params }: { params: { slug: string } }
+  { params }: { params: Promise<{ slug: string }> }
 ) {
   try {
     const supabase = await createClient()
-    const { slug } = params
+    const { slug } = await params
 
     const { data, error } = await supabase
       .from('blog_posts')
@@ -35,7 +35,7 @@ export async function GET(
 // PUT /api/blog/[slug] - Update blog post (admin only)
 export async function PUT(
   request: NextRequest,
-  { params }: { params: { slug: string } }
+  { params }: { params: Promise<{ slug: string }> }
 ) {
   try {
     const supabase = await createClient()
@@ -46,7 +46,7 @@ export async function PUT(
       return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
     }
 
-    const { slug } = params
+    const { slug } = await params
     const body = await request.json()
 
     // Update slug if title changed and slug not provided
@@ -85,7 +85,7 @@ export async function PUT(
 // DELETE /api/blog/[slug] - Delete blog post (admin only)
 export async function DELETE(
   request: NextRequest,
-  { params }: { params: { slug: string } }
+  { params }: { params: Promise<{ slug: string }> }
 ) {
   try {
     const supabase = await createClient()
@@ -96,7 +96,7 @@ export async function DELETE(
       return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
     }
 
-    const { slug } = params
+    const { slug } = await params
 
     const { error } = await supabase
       .from('blog_posts')
