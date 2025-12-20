@@ -4,11 +4,11 @@ import { createClient } from '@/lib/supabase/server'
 // GET /api/team/[id] - Get single team member
 export async function GET(
   request: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
   try {
     const supabase = await createClient()
-    const { id } = params
+    const { id } = await params
 
     const { data, error } = await supabase
       .from('team_members')
@@ -32,7 +32,7 @@ export async function GET(
 // PUT /api/team/[id] - Update team member (admin only)
 export async function PUT(
   request: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
   try {
     const supabase = await createClient()
@@ -43,7 +43,7 @@ export async function PUT(
       return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
     }
 
-    const { id } = params
+    const { id } = await params
     const body = await request.json()
 
     // Update slug if full_name changed and slug not provided
@@ -77,7 +77,7 @@ export async function PUT(
 // DELETE /api/team/[id] - Delete team member (admin only)
 export async function DELETE(
   request: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
   try {
     const supabase = await createClient()
@@ -88,7 +88,7 @@ export async function DELETE(
       return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
     }
 
-    const { id } = params
+    const { id } = await params
 
     const { error } = await supabase
       .from('team_members')
