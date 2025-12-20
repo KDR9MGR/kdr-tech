@@ -15,6 +15,12 @@ interface TeamMember {
   visible: boolean;
   is_featured: boolean;
   order_index: number;
+  social_links?: {
+    linkedin?: string;
+    twitter?: string;
+    portfolio?: string;
+    github?: string;
+  };
 }
 
 interface TeamMembersResult {
@@ -134,7 +140,7 @@ const Team = async () => {
                 {members.length > 0 ? (
                   members.map((member) => {
                     // Get primary profile URL (prioritize: portfolio > linkedin > twitter > github)
-                    const socialLinks = member.social_links as any || {};
+                    const socialLinks = member.social_links || {};
                     const profileUrl = socialLinks.portfolio || socialLinks.linkedin || socialLinks.twitter || socialLinks.github;
 
                     return (
