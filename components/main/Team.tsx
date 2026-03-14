@@ -28,14 +28,99 @@ interface TeamMembersResult {
   error?: string;
 }
 
+const fallbackTeamMembers: TeamMember[] = [
+  {
+    id: "fallback-arbaz-kudekar",
+    full_name: "Arbaz Kudekar",
+    slug: "arbaz-kudekar",
+    job_title: "Lead Developer",
+    bio: "Arbaz Kudekar is a seasoned Flutter expert who has been working with the framework since its inception. With a deep understanding of Flutter's capabilities, Arbaz has successfully delivered numerous high-quality mobile applications. In addition to Flutter, Arbaz has extensive experience with React Native and other mobile application development frameworks, making him a versatile and skilled developer in the mobile app development industry.",
+    short_bio:
+      "Flutter expert with deep understanding of mobile app development, skilled in Flutter, React Native, and cross-platform solutions.",
+    photo_url: "/images/profiles/me.png",
+    visible: true,
+    is_featured: true,
+    order_index: 1,
+    social_links: {},
+  },
+  {
+    id: "fallback-shreya",
+    full_name: "Shreya",
+    slug: "shreya",
+    job_title: "Social Media Manager",
+    bio: "Shreya is an expert in digital marketing with a proven track record of driving growth through strategic campaigns and data-driven insights. She specializes in SEO, social media marketing, content strategy, and brand positioning, helping businesses achieve their marketing goals and maximize their online presence.",
+    short_bio:
+      "Digital marketing specialist focused on SEO, social media marketing, content strategy, and brand positioning.",
+    photo_url: "/images/profiles/shreya.jpeg",
+    visible: true,
+    is_featured: false,
+    order_index: 2,
+    social_links: {},
+  },
+  {
+    id: "fallback-abdul-razak",
+    full_name: "Abdul Razak",
+    slug: "abdul-razak",
+    job_title: "Manager & Developer",
+    bio: "Abdul Razak combines leadership with hands-on development experience. He focuses on project execution, team coordination, and delivering reliable solutions across web and mobile. With strong communication and planning skills, he helps turn requirements into shipped products.",
+    short_bio:
+      "Manager and developer focused on delivery, coordination, and building reliable web and mobile solutions.",
+    photo_url: "/images/profiles/Razak.jpg",
+    visible: true,
+    is_featured: true,
+    order_index: 3,
+    social_links: {},
+  },
+  {
+    id: "fallback-abdul-kadar",
+    full_name: "Abdul Kadar",
+    slug: "abdul-kadar",
+    job_title: "Frontend Developer",
+    bio: "Abdul Kadar is a frontend developer who focuses on building polished user experiences with modern web technologies. He enjoys turning designs into responsive interfaces, improving performance, and creating reusable UI components.",
+    short_bio:
+      "Frontend developer focused on responsive UI, performance, and building reusable components.",
+    photo_url: "/images/profiles/kadar.png",
+    visible: true,
+    is_featured: false,
+    order_index: 4,
+    social_links: {},
+  },
+  {
+    id: "fallback-apoorv-pandey",
+    full_name: "Apoorv Pandey",
+    slug: "apoorv-pandey",
+    job_title: "Backend Developer",
+    bio: "Apoorv Pandey is a backend developer who designs APIs and database systems that are secure, scalable, and maintainable. He focuses on clean architecture, data modeling, and building integrations that keep products reliable as they grow.",
+    short_bio:
+      "Backend developer focused on scalable APIs, secure systems, and maintainable architecture.",
+    photo_url: "/images/profiles/apoorva.jpg",
+    visible: true,
+    is_featured: false,
+    order_index: 5,
+    social_links: {},
+  },
+  {
+    id: "fallback-bhakti",
+    full_name: "Bhakti",
+    slug: "bhakti",
+    job_title: "UI/UX Designer",
+    bio: "Bhakti is a UI/UX designer who crafts intuitive, user-centered experiences. She focuses on research-driven design, clear interaction patterns, and consistent visual systems that make products both beautiful and easy to use.",
+    short_bio:
+      "UI/UX designer focused on research-driven design, clean interactions, and consistent visual systems.",
+    photo_url: "/images/profiles/bhakti.jpg",
+    visible: true,
+    is_featured: false,
+    order_index: 6,
+    social_links: {},
+  },
+];
+
 async function getTeamMembers(): Promise<TeamMembersResult> {
   try {
     // Check if environment variables are set
     if (!process.env.NEXT_PUBLIC_SUPABASE_URL || !process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY) {
-      console.error('Supabase environment variables are not set');
       return {
-        members: [],
-        error: 'Database configuration missing. Please check environment variables.'
+        members: fallbackTeamMembers,
       };
     }
 
@@ -50,26 +135,22 @@ async function getTeamMembers(): Promise<TeamMembersResult> {
     if (error) {
       console.error('Error fetching team members:', error);
       return {
-        members: [],
-        error: `Failed to load team members: ${error.message}`
+        members: fallbackTeamMembers,
       };
     }
 
     if (!data || data.length === 0) {
       console.warn('No team members found in database');
       return {
-        members: [],
-        error: 'No team members found. Please add team members in the admin panel.'
+        members: fallbackTeamMembers,
       };
     }
 
     return { members: data };
   } catch (error) {
     console.error('Error fetching team members:', error);
-    const errorMessage = error instanceof Error ? error.message : 'Unknown error occurred';
     return {
-      members: [],
-      error: `An error occurred while loading team members: ${errorMessage}`
+      members: fallbackTeamMembers,
     };
   }
 }

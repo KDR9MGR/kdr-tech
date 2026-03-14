@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
 import { Toaster } from "@/components/ui/toaster";
@@ -12,7 +12,6 @@ export const metadata: Metadata = {
     "Welcome to KDR Tech Portfolio. Arbaz KDR is a skilled Flutter Developer, React Native Developer, Mobile App Developer, and Game Developer. Explore our projects and services to see how we can bring your ideas to life.",
   keywords:
     "Flutter Developer, React Native Developer, Mobile App Developer, Game Developer, Cross-Platform Development, iOS Development, Android Development, App Development, Game Development, UI/UX Design, Front-End Development, Full-Stack Development, Arbaz KDR, KDR Tech",
-  viewport: "width=device-width, initial-scale=1.0" as string,
   robots: "index, follow",
   twitter: {
     card: "summary_large_image",
@@ -21,6 +20,11 @@ export const metadata: Metadata = {
     description:
       "Welcome to KDR Tech Portfolio. Arbaz KDR is a skilled Flutter Developer, React Native Developer, Mobile App Developer, and Game Developer. Explore our projects and services to see how we can bring your ideas to life.",
   },
+};
+
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
 };
 
 export default function RootLayout({
@@ -40,7 +44,6 @@ export default function RootLayout({
               : metadata.keywords || ""
           }
         />
-        <meta name="viewport" content={String(metadata.viewport) || ""} />
         <title>{String(metadata.title) || "Default Title"}</title>
       </head>
       <body
