@@ -1,18 +1,18 @@
 "use client";
 import React, { useState } from "react";
-import { Check, X, Zap, Rocket, TrendingUp, ChevronRight } from "lucide-react";
+import { Check, X, Zap, Rocket, TrendingUp, Globe, Layout, Database, ChevronRight } from "lucide-react";
 
-const CALENDLY_URL = "https://calendly.com/kdrtech/strategy-call";
+const CALENDLY_URL = "https://calendly.com/developer-kdrtech-in/30min";
 
-const tiers = [
+const mobileAppTiers = [
   {
     icon: Zap,
     badge: "Most Affordable",
     badgeColor: "text-[#94A3B8] border-[#1E3A5F] bg-[#0A1628]",
-    name: "Starter App",
+    name: "Basic App",
     price: "$500 – $1,500",
-    timeline: "2 – 4 Weeks",
-    idealFor: "Freelancers, creators, local businesses, simple utility apps, single-feature tools",
+    timeline: "1 – 3 Weeks",
+    idealFor: "Local businesses, creators, and entrepreneurs who need a simple utility app or prototype fast.",
     included: [
       "Flutter (iOS + Android) or React Native",
       "Up to 5 core screens",
@@ -40,8 +40,8 @@ const tiers = [
     badgeColor: "text-[#2563EB] border-[#2563EB]/40 bg-[#2563EB]/10",
     name: "MVP Lite",
     price: "$2,000 – $4,999",
-    timeline: "4 – 8 Weeks",
-    idealFor: "Early-stage startups, entrepreneurs validating an idea, apps needing user auth and backend logic",
+    timeline: "4 – 7 Weeks",
+    idealFor: "Early-stage startups and entrepreneurs validating an idea with a polished, shippable product.",
     included: [
       "Flutter or React Native (iOS + Android)",
       "Up to 12 screens",
@@ -49,17 +49,17 @@ const tiers = [
       "User auth (email, Google, Apple Sign-In)",
       "REST API or Firebase backend",
       "Push notifications",
-      "Stripe or Razorpay payment integration",
-      "Admin dashboard (basic)",
+      "Stripe or PayPal payment integration",
+      "Basic admin dashboard",
       "Google Play + App Store submission",
       "4 rounds of revisions",
       "30-day post-launch support",
-      "Bi-weekly video calls",
+      "Bi-weekly video calls (Zoom/Loom)",
       "Full source code + documentation",
     ],
     excluded: [
       "AI/ML features",
-      "Real-time chat/video",
+      "Real-time chat/video calling",
     ],
     cta: "Start Your MVP",
     highlighted: true,
@@ -72,16 +72,16 @@ const tiers = [
     badgeColor: "text-[#10B981] border-[#10B981]/40 bg-[#10B981]/10",
     name: "Growth MVP",
     price: "$5,000 – $10,000",
-    timeline: "8 – 16 Weeks",
-    idealFor: "Funded startups, product companies, apps ready for launch and early traction",
+    timeline: "8 – 12 Weeks",
+    idealFor: "Funded startups and product companies ready to launch, scale, and acquire early users.",
     included: [
       "Flutter or React Native (iOS + Android)",
-      "Unlimited screens (scoped to project)",
+      "Unlimited screens (scoped)",
       "Full custom UI/UX design system (Figma)",
       "Complex backend (Node.js / Supabase / PostgreSQL)",
       "Third-party API integrations (maps, payments, etc.)",
       "Real-time features (chat, notifications, live feeds)",
-      "Role-based user system + admin panel",
+      "Role-based user system + full admin panel",
       "Analytics integration (Mixpanel / Firebase Analytics)",
       "Performance optimization (60fps, offline support)",
       "CI/CD pipeline setup",
@@ -98,14 +98,119 @@ const tiers = [
   },
 ];
 
+const websiteTiers = [
+  {
+    icon: Globe,
+    badge: "Fast & Affordable",
+    badgeColor: "text-[#94A3B8] border-[#1E3A5F] bg-[#0A1628]",
+    name: "Static Website",
+    price: "$400 – $1,200",
+    timeline: "1 – 2 Weeks",
+    idealFor: "Freelancers, consultants, startups, and local businesses needing a fast, professional online presence.",
+    included: [
+      "Next.js or HTML/CSS (fully responsive)",
+      "Up to 6 pages (Home, About, Services, Portfolio, Blog, Contact)",
+      "Custom design from your Figma or our template",
+      "Contact form with email notifications",
+      "SEO meta tags + sitemap",
+      "Google Analytics integration",
+      "Vercel or Netlify deployment",
+      "2 rounds of revisions",
+      "14-day post-launch support",
+      "Full source code ownership",
+    ],
+    excluded: [
+      "Backend / database",
+      "User authentication",
+      "CMS or admin panel",
+    ],
+    cta: "Get a Free Quote",
+    highlighted: false,
+    cardClass: "bg-[#0F2040] border-[#1E3A5F]",
+    ctaClass: "border border-[#2563EB] text-[#2563EB] hover:bg-[#2563EB] hover:text-white",
+  },
+  {
+    icon: Layout,
+    badge: "⭐ Most Popular",
+    badgeColor: "text-[#2563EB] border-[#2563EB]/40 bg-[#2563EB]/10",
+    name: "Dynamic Website",
+    price: "$1,500 – $4,000",
+    timeline: "3 – 6 Weeks",
+    idealFor: "Growing businesses, SaaS products, and service agencies needing a fully functional web application.",
+    included: [
+      "Next.js (App Router) — fully responsive",
+      "Unlimited pages",
+      "Custom UI/UX design (Figma → Code)",
+      "User authentication (email, Google OAuth)",
+      "Supabase or PostgreSQL backend",
+      "API integrations (Stripe, Mailchimp, Calendly, etc.)",
+      "Dashboard or member portal",
+      "SEO optimization + Open Graph tags",
+      "Vercel deployment with CI/CD",
+      "4 rounds of revisions",
+      "30-day post-launch support",
+      "Bi-weekly progress calls (Zoom/Loom)",
+      "Full source code + documentation",
+    ],
+    excluded: [
+      "AI/ML features",
+      "E-commerce store (available in CMS tier)",
+    ],
+    cta: "Start Your Website",
+    highlighted: true,
+    cardClass: "bg-[#0F2040] border-[#2563EB]/50 shadow-xl shadow-blue-900/20",
+    ctaClass: "bg-[#2563EB] hover:bg-[#1D4ED8] text-white",
+  },
+  {
+    icon: Database,
+    badge: "Full-Featured",
+    badgeColor: "text-[#10B981] border-[#10B981]/40 bg-[#10B981]/10",
+    name: "Dynamic + CMS",
+    price: "$3,000 – $8,000",
+    timeline: "5 – 9 Weeks",
+    idealFor: "Businesses, agencies, and e-commerce brands who need to manage content, products, or teams without a developer.",
+    included: [
+      "Next.js or WordPress/Headless CMS",
+      "Full custom UI/UX design system (Figma)",
+      "Fully custom admin/CMS panel",
+      "E-commerce (Stripe, product catalog, orders)",
+      "Multi-role user management",
+      "Blog, news, or portfolio module",
+      "Email marketing integration (Mailchimp / ConvertKit)",
+      "Performance optimization (Core Web Vitals)",
+      "SEO-ready structure + schema markup",
+      "Advanced analytics dashboard",
+      "Unlimited revisions (within scope)",
+      "60-day post-launch support",
+      "Weekly video calls + Slack/WhatsApp access",
+      "Full source code + handover documentation",
+    ],
+    excluded: [],
+    cta: "Discuss Your Project",
+    highlighted: false,
+    cardClass: "bg-[#0F2040] border-[#1E3A5F]",
+    ctaClass: "border border-[#10B981] text-[#10B981] hover:bg-[#10B981] hover:text-[#0A1628]",
+  },
+];
+
+type ServiceTab = "mobile" | "website";
+
 const ServicesSection = () => {
+  const [activeTab, setActiveTab] = useState<ServiceTab>("mobile");
   const [expandedTier, setExpandedTier] = useState<number | null>(1);
+
+  const tiers = activeTab === "mobile" ? mobileAppTiers : websiteTiers;
+
+  const handleTabChange = (tab: ServiceTab) => {
+    setActiveTab(tab);
+    setExpandedTier(1);
+  };
 
   return (
     <section id="services" className="w-full py-20 lg:py-28">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
-        <div className="text-center mb-14">
+        <div className="text-center mb-10">
           <p className="text-sm font-semibold tracking-[0.2em] uppercase text-[#2563EB] mb-3">
             Pricing & Packages
           </p>
@@ -116,6 +221,44 @@ const ServicesSection = () => {
             Every project starts with a free strategy call. We scope it
             together, then you choose the package that fits your stage and budget.
           </p>
+        </div>
+
+        {/* Service tabs */}
+        <div className="flex justify-center mb-10">
+          <div className="flex gap-1 p-1 bg-[#0F2040] border border-[#1E3A5F] rounded-xl">
+            <button
+              onClick={() => handleTabChange("mobile")}
+              className={`flex items-center gap-2 px-5 py-2.5 rounded-lg text-sm font-semibold transition-all duration-200 ${
+                activeTab === "mobile"
+                  ? "bg-[#2563EB] text-white shadow-lg shadow-blue-900/30"
+                  : "text-[#94A3B8] hover:text-white"
+              }`}
+            >
+              📱 Mobile App Development
+            </button>
+            <button
+              onClick={() => handleTabChange("website")}
+              className={`flex items-center gap-2 px-5 py-2.5 rounded-lg text-sm font-semibold transition-all duration-200 ${
+                activeTab === "website"
+                  ? "bg-[#2563EB] text-white shadow-lg shadow-blue-900/30"
+                  : "text-[#94A3B8] hover:text-white"
+              }`}
+            >
+              🌐 Website Development
+            </button>
+          </div>
+        </div>
+
+        {/* Tech stack pills */}
+        <div className="flex flex-wrap gap-2 justify-center mb-10">
+          {(activeTab === "mobile"
+            ? ["Flutter", "React Native", "Android", "iOS", "Firebase", "Supabase", "Stripe"]
+            : ["Next.js", "React", "WordPress", "Supabase", "PostgreSQL", "Vercel", "Stripe"]
+          ).map((tech) => (
+            <span key={tech} className="px-3 py-1 bg-[#0A1628] border border-[#1E3A5F] rounded-full text-xs text-[#94A3B8]">
+              {tech}
+            </span>
+          ))}
         </div>
 
         {/* Pricing grid */}
@@ -136,7 +279,6 @@ const ServicesSection = () => {
                   </div>
                 )}
 
-                {/* Badge + Icon */}
                 <div className="flex items-center justify-between">
                   <span className={`inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-medium border ${tier.badgeColor}`}>
                     {tier.badge}
@@ -146,7 +288,6 @@ const ServicesSection = () => {
                   </div>
                 </div>
 
-                {/* Tier info */}
                 <div>
                   <h3 className="text-2xl font-bold text-white mb-1">{tier.name}</h3>
                   <div className="text-3xl font-extrabold text-gradient-blue mb-1">{tier.price}</div>
@@ -158,7 +299,6 @@ const ServicesSection = () => {
                   {tier.idealFor}
                 </p>
 
-                {/* Included features */}
                 <div>
                   <button
                     className="flex items-center gap-1.5 text-sm font-semibold text-white mb-3 hover:text-[#2563EB] transition-colors"
@@ -185,7 +325,6 @@ const ServicesSection = () => {
                   )}
                 </div>
 
-                {/* CTA */}
                 <a
                   href={CALENDLY_URL}
                   target="_blank"

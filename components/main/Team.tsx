@@ -167,10 +167,10 @@ const Team = async () => {
               Our Team
             </h2> */}
             <p className="mt-2 text-3xl leading-8 font-extrabold tracking-tight text-white sm:text-4xl">
-              Meet the Experts
+              Meet the Team Behind Your Build
             </p>
             <p className="mt-4 max-w-2xl text-xl text-gray-400 lg:mx-auto">
-              Our team is the best team in the world.
+              Developers, designers, and a project manager who communicates clearly, delivers on time, and stays accountable from day one.
             </p>
           </div>
           <div className="mt-10 mb-12">

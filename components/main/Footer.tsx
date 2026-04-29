@@ -52,7 +52,9 @@ const getIcon = (iconName: string | null) => {
 const serviceLinks = [
   "Flutter App Development",
   "React Native Development",
-  "UI/UX Design for Mobile",
+  "Next.js Website Development",
+  "Dynamic + CMS Websites",
+  "UI/UX Design",
   "Backend Development",
   "App Store Submission",
   "Post-Launch Support",
@@ -171,7 +173,7 @@ const Footer = async () => {
               </li>
               <li>
                 <a
-                  href="https://calendly.com/kdrtech/strategy-call"
+                  href="https://calendly.com/developer-kdrtech-in/30min"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="text-sm text-[#94A3B8] hover:text-white transition-colors flex items-center gap-2"

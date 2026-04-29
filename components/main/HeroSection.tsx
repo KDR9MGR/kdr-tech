@@ -4,11 +4,11 @@ import { motion } from "framer-motion";
 import { CheckCircle, ChevronRight, ArrowRight } from "lucide-react";
 import Image from "next/image";
 
-const CALENDLY_URL = "https://calendly.com/kdrtech/strategy-call";
+const CALENDLY_URL = "https://calendly.com/developer-kdrtech-in/30min";
 
 const trustSignals = [
   "7+ Years Experience",
-  "50+ Apps Delivered",
+  "100+ Projects Delivered",
   "Clients in USA, UK, AU, CA",
   "30-Day Free Support",
   "Milestone Payments",
@@ -20,11 +20,10 @@ const HeroSection = () => {
       id="home"
       className="relative min-h-screen flex items-center pt-16 pb-12 overflow-hidden"
     >
-      {/* Background gradient */}
+      {/* Background */}
       <div className="absolute inset-0 pointer-events-none">
         <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[900px] h-[600px] bg-[#2563EB]/8 rounded-full blur-[120px]" />
         <div className="absolute bottom-0 right-0 w-[500px] h-[400px] bg-[#10B981]/5 rounded-full blur-[100px]" />
-        {/* Subtle grid */}
         <div
           className="absolute inset-0 opacity-[0.03]"
           style={{
@@ -55,19 +54,28 @@ const HeroSection = () => {
 
             {/* Headline */}
             <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-white leading-[1.1] tracking-tight">
-              We Build Mobile Apps That{" "}
-              <span className="text-gradient-blue">Launch, Scale,</span>{" "}
-              and{" "}
-              <span className="text-gradient-green">Sell.</span>
+              Mobile Apps & Websites That{" "}
+              <span className="text-gradient-blue">Launch Fast,</span>{" "}
+              Look Premium, and{" "}
+              <span className="text-gradient-green">Grow.</span>
             </h1>
 
             {/* Subheadline */}
             <p className="text-lg sm:text-xl text-[#94A3B8] leading-relaxed max-w-xl mx-auto lg:mx-0">
-              Flutter & React Native development for founders, startups, and
-              product teams. Fixed-price packages. Weekly updates.
+              Flutter, React Native, and Next.js development for founders,
+              startups, and businesses. Fixed-price packages. Weekly updates.
               English-speaking team. Projects from{" "}
-              <span className="text-white font-semibold">$500 to $10,000.</span>
+              <span className="text-white font-semibold">$400 to $10,000.</span>
             </p>
+
+            {/* Service pills */}
+            <div className="flex flex-wrap gap-2 justify-center lg:justify-start">
+              {["📱 Mobile Apps", "🌐 Websites", "⚡ CMS Platforms", "🛒 E-commerce"].map((s) => (
+                <span key={s} className="px-3 py-1.5 bg-[#0F2040] border border-[#1E3A5F] rounded-full text-xs text-[#94A3B8] font-medium">
+                  {s}
+                </span>
+              ))}
+            </div>
 
             {/* CTAs */}
             <div className="flex flex-col sm:flex-row gap-3 justify-center lg:justify-start">
@@ -81,10 +89,10 @@ const HeroSection = () => {
                 <ArrowRight className="w-5 h-5" />
               </a>
               <a
-                href="#work"
+                href="#services"
                 className="inline-flex items-center justify-center gap-2 px-7 py-4 bg-transparent border border-[#1E3A5F] hover:border-[#2563EB]/50 hover:bg-[#2563EB]/5 text-white font-semibold rounded-xl transition-all duration-200 text-base"
               >
-                View Our Work
+                See Packages & Pricing
                 <ChevronRight className="w-5 h-5" />
               </a>
             </div>
@@ -111,16 +119,14 @@ const HeroSection = () => {
             className="relative flex items-center justify-center lg:justify-end"
           >
             <div className="relative">
-              {/* Glow ring */}
               <div className="absolute inset-0 bg-[#2563EB]/15 rounded-full blur-3xl scale-110" />
 
-              {/* Logo container */}
               <div className="relative w-72 h-72 lg:w-96 lg:h-96 flex items-center justify-center">
                 <div className="absolute inset-0 rounded-full border border-[#1E3A5F]/60" />
                 <div className="absolute inset-6 rounded-full border border-[#2563EB]/20" />
                 <Image
                   src="/images/kdr-tech-logo.png"
-                  alt="KDR Tech — Mobile App Development"
+                  alt="KDR Tech — Mobile App & Website Development Agency"
                   width={220}
                   height={220}
                   className="relative z-10 drop-shadow-2xl"
@@ -128,14 +134,13 @@ const HeroSection = () => {
                 />
               </div>
 
-              {/* Floating stat cards */}
               <motion.div
                 animate={{ y: [0, -8, 0] }}
                 transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
                 className="absolute -top-4 -left-4 lg:-left-12 bg-[#0F2040] border border-[#1E3A5F] rounded-xl px-4 py-3 shadow-xl"
               >
-                <div className="text-2xl font-bold text-white">50+</div>
-                <div className="text-xs text-[#94A3B8]">Apps Delivered</div>
+                <div className="text-2xl font-bold text-white">100+</div>
+                <div className="text-xs text-[#94A3B8]">Projects Delivered</div>
               </motion.div>
 
               <motion.div
@@ -152,7 +157,7 @@ const HeroSection = () => {
                 transition={{ duration: 4, repeat: Infinity, ease: "easeInOut", delay: 1 }}
                 className="absolute top-1/2 -right-6 lg:-right-14 -translate-y-1/2 bg-[#0F2040] border border-[#1E3A5F] rounded-xl px-4 py-3 shadow-xl"
               >
-                <div className="text-2xl font-bold text-[#2563EB]">12+</div>
+                <div className="text-2xl font-bold text-[#2563EB]">15+</div>
                 <div className="text-xs text-[#94A3B8]">Countries</div>
               </motion.div>
             </div>

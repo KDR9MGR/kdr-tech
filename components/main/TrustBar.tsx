@@ -12,10 +12,12 @@ const countries = [
 const badges = [
   { label: "Flutter", icon: "⚡" },
   { label: "React Native", icon: "⚛️" },
+  { label: "Next.js", icon: "▲" },
   { label: "Google Play", icon: "▶" },
   { label: "App Store", icon: "🍎" },
   { label: "Stripe Payments", icon: "💳" },
   { label: "Firebase", icon: "🔥" },
+  { label: "Supabase", icon: "🗄️" },
 ];
 
 const TrustBar = () => {

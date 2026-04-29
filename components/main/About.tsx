@@ -1,38 +1,38 @@
 import React from "react";
 import { Globe2, Lock, Video, Smartphone, Headphones, FileCode2, ChevronRight } from "lucide-react";
 
-const CALENDLY_URL = "https://calendly.com/kdrtech/strategy-call";
+const CALENDLY_URL = "https://calendly.com/developer-kdrtech-in/30min";
 
 const differentiators = [
   {
     icon: Globe2,
     title: "English-Speaking Team",
-    description: "No language barriers, ever. Clear communication from day one.",
+    description: "No language barriers. Clear, direct communication from kickoff to launch — and after.",
   },
   {
     icon: Lock,
     title: "Milestone Payments",
-    description: "Pay only for approved work. Zero upfront risk.",
+    description: "Pay only for approved work. Money moves when you say it moves. Zero upfront risk.",
   },
   {
     icon: Video,
-    title: "Weekly Video Updates",
-    description: "See real progress every Friday. No black boxes.",
+    title: "Weekly Progress Updates",
+    description: "Every Friday you get a Loom video or Zoom call showing exactly what was built that week.",
   },
   {
     icon: Smartphone,
-    title: "Flutter + React Native",
-    description: "One codebase, both platforms — iOS and Android for the price of one.",
+    title: "Flutter, React Native & Next.js",
+    description: "One codebase for iOS and Android. Modern Next.js for websites. Best tools for every job.",
   },
   {
     icon: Headphones,
     title: "30–60 Day Free Support",
-    description: "We don't vanish post-launch. We stay until you're stable.",
+    description: "We don't vanish after delivery. We stay with you until everything is stable and live.",
   },
   {
     icon: FileCode2,
     title: "You Own Everything",
-    description: "Full source code, design files, no lock-in. Ever.",
+    description: "Full source code, Figma files, and documentation. No lock-in. No recurring fees.",
   },
 ];
 
@@ -45,33 +45,35 @@ const About = () => {
           {/* Left — Copy */}
           <div className="flex flex-col gap-6">
             <p className="text-sm font-semibold tracking-[0.2em] uppercase text-[#2563EB]">
-              About KDR Tech
+              Why KDR Tech
             </p>
             <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-white leading-tight">
-              We&apos;re Not an Agency That Disappears After Launch.
+              We&apos;re Your Tech Partner, Not Just a Vendor.
             </h2>
             <p className="text-[#94A3B8] leading-relaxed">
-              KDR Tech is a mobile app development agency built specifically to
-              serve founders and startups in the US, UK, Australia, and Canada.
+              KDR Tech is a full-service digital solutions agency built to serve
+              founders, startups, and growing businesses in the US, UK, Australia,
+              and Canada. We build mobile apps and websites — whichever your
+              business needs to grow.
             </p>
             <p className="text-[#94A3B8] leading-relaxed">
-              We specialize in Flutter and React Native — two technologies that
-              let us build one codebase for both iOS and Android, cutting your
-              costs and timeline in half without sacrificing quality.
+              For mobile, we specialize in Flutter and React Native — two
+              technologies that deliver one codebase for both iOS and Android,
+              cutting your cost and timeline in half without compromising quality.
+              For the web, we build fast, scalable Next.js applications with or
+              without a headless CMS.
             </p>
             <p className="text-[#94A3B8] leading-relaxed">
               Our team of 6 includes developers with 7+ years of hands-on
-              mobile experience, UI/UX designers trained in conversion-focused
-              design, and a project manager who sends you updates before you
-              have to ask.
+              experience, UI/UX designers trained in conversion-focused design, and
+              a project manager who sends updates before you have to ask.
             </p>
             <p className="text-[#94A3B8] leading-relaxed">
-              We don&apos;t outsource. We don&apos;t disappear mid-project. And
-              we don&apos;t bill you for work you haven&apos;t approved.
-            </p>
-            <p className="text-[#94A3B8] leading-relaxed">
-              We&apos;ve built fitness apps, logistics tools, health platforms,
-              and marketplaces — and every one of them launched on time.
+              We&apos;ve shipped fitness apps, logistics platforms, SaaS dashboards,
+              e-commerce stores, healthcare tools, and agency websites — and every
+              single one launched on time. We don&apos;t outsource, we don&apos;t
+              disappear mid-project, and we don&apos;t invoice for work you
+              haven&apos;t approved.
             </p>
 
             <div className="flex flex-col sm:flex-row gap-3 pt-2">
@@ -103,7 +105,7 @@ const About = () => {
                   className="bg-[#0F2040] border border-[#1E3A5F] rounded-xl p-5 hover:border-[#2563EB]/40 transition-all duration-200 card-glow"
                 >
                   <div className="w-9 h-9 rounded-lg bg-[#2563EB]/10 border border-[#2563EB]/20 flex items-center justify-center mb-3">
-                    <Icon className="w-4.5 h-4.5 text-[#2563EB]" style={{ width: "18px", height: "18px" }} />
+                    <Icon className="w-5 h-5 text-[#2563EB]" style={{ width: "18px", height: "18px" }} />
                   </div>
                   <h3 className="text-sm font-bold text-white mb-1">{item.title}</h3>
                   <p className="text-xs text-[#94A3B8] leading-relaxed">{item.description}</p>

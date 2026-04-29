@@ -25,7 +25,7 @@ interface CaseStudy {
   order_index: number;
 }
 
-const CALENDLY_URL = "https://calendly.com/kdrtech/strategy-call";
+const CALENDLY_URL = "https://calendly.com/developer-kdrtech-in/30min";
 
 export default function CaseStudiesSection() {
   const [caseStudies, setCaseStudies] = useState<CaseStudy[]>([]);

@@ -5,7 +5,7 @@ export async function POST(request: NextRequest) {
   const supabase = await createClient()
 
   const body = await request.json()
-  const { name, email, app_idea, budget_range, source } = body
+  const { name, email, app_idea, budget_range, project_type, source } = body
 
   if (!name || !email) {
     return NextResponse.json({ error: 'Name and email are required' }, { status: 400 })
@@ -13,7 +13,7 @@ export async function POST(request: NextRequest) {
 
   const { data, error } = await supabase
     .from('leads')
-    .insert([{ name, email, app_idea, budget_range, source: source || 'website' }])
+    .insert([{ name, email, app_idea, budget_range, project_type, source: source || 'website' }])
     .select()
     .single()
 

@@ -3,9 +3,9 @@ import React from "react";
 import { motion } from "framer-motion";
 
 const stats = [
-  { value: "7+", label: "Years Avg. Experience", sub: "Across our core team" },
-  { value: "50+", label: "Apps Delivered", sub: "iOS & Android, live in stores" },
-  { value: "12+", label: "Countries Served", sub: "Across 4 continents" },
+  { value: "7+", label: "Years Experience", sub: "Across our core team" },
+  { value: "100+", label: "Projects Delivered", sub: "Apps & websites, live worldwide" },
+  { value: "15+", label: "Countries Served", sub: "Across 4 continents" },
   { value: "94%", label: "Client Retention", sub: "Clients who return for v2" },
 ];
 
@@ -35,7 +35,6 @@ const StatsSection = () => {
           ))}
         </div>
 
-        {/* Trust badges */}
         <div className="mt-12 flex flex-wrap items-center justify-center gap-3">
           {[
             "✅ Contracts via DocuSign",
@@ -43,6 +42,7 @@ const StatsSection = () => {
             "💳 Stripe & Wise Payments",
             "📋 Source Code Ownership",
             "🌍 English-Speaking Team",
+            "📱 Apps & Websites",
           ].map((badge) => (
             <span
               key={badge}

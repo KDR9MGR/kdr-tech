@@ -48,7 +48,7 @@ const steps = [
     title: "Launch & Handoff",
     timeline: "Day of launch",
     description:
-      "We handle App Store and Google Play submission, configure your backend, hand over all source code, and stay available for 30–60 days post-launch. You own everything.",
+      "We handle App Store and Google Play submission (for apps) or Vercel deployment (for websites), configure your backend, hand over all source code, and stay available for 30–60 days post-launch. You own everything.",
   },
 ];
 
@@ -62,11 +62,11 @@ const ProcessSection = () => {
             How We Work
           </p>
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-white mb-4">
-            From Idea to App Store in 6 Clear Steps
+            From Idea to Live in 6 Clear Steps
           </h2>
           <p className="text-lg text-[#94A3B8] max-w-2xl mx-auto">
-            No black boxes. No guessing. You know exactly where your project
-            stands — every single day.
+            The same transparent process for every project — mobile app or website.
+            No black boxes. No surprises. You know exactly where your build stands every day.
           </p>
         </div>
 

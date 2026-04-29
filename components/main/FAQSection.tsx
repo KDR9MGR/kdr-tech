@@ -83,7 +83,7 @@ export default function FAQSection() {
             Book a free 30-minute call and we&apos;ll answer everything.
           </p>
           <a
-            href="https://calendly.com/kdrtech/strategy-call"
+            href="https://calendly.com/developer-kdrtech-in/30min"
             target="_blank"
             rel="noopener noreferrer"
             className="inline-flex items-center gap-2 px-6 py-3 bg-[#2563EB] hover:bg-[#1D4ED8] text-white font-semibold rounded-xl text-sm transition-colors"

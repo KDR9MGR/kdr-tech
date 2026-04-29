@@ -2,7 +2,7 @@
 import React, { useState } from "react";
 import { ArrowRight, CalendarDays, MessageCircle, CheckCircle, Loader2 } from "lucide-react";
 
-const CALENDLY_URL = "https://calendly.com/kdrtech/strategy-call";
+const CALENDLY_URL = "https://calendly.com/developer-kdrtech-in/30min";
 
 const budgetOptions = [
   "Under $1,000",
@@ -13,12 +13,22 @@ const budgetOptions = [
   "Not sure yet",
 ];
 
+const projectTypes = [
+  "Mobile App (iOS + Android)",
+  "Static Website",
+  "Dynamic Website",
+  "Website + CMS",
+  "E-commerce Store",
+  "Other / Not sure",
+];
+
 export default function LeadMagnetSection() {
   const [formData, setFormData] = useState({
     name: "",
     email: "",
     app_idea: "",
     budget_range: "",
+    project_type: "",
   });
   const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
 
@@ -39,7 +49,7 @@ export default function LeadMagnetSection() {
 
       if (res.ok) {
         setStatus("success");
-        setFormData({ name: "", email: "", app_idea: "", budget_range: "" });
+        setFormData({ name: "", email: "", app_idea: "", budget_range: "", project_type: "" });
       } else {
         setStatus("error");
       }
@@ -56,23 +66,23 @@ export default function LeadMagnetSection() {
           {/* Left — Copy */}
           <div className="flex flex-col gap-6">
             <p className="text-sm font-semibold tracking-[0.2em] uppercase text-[#2563EB]">
-              Get Started
+              Start Your Project
             </p>
             <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-white leading-tight">
-              Not Sure What Your App Will Cost?
+              Not Sure What Your Project Will Cost?
             </h2>
             <p className="text-lg text-[#94A3B8] leading-relaxed">
-              Tell us about your idea in 30 seconds. We&apos;ll send you a free,
-              honest MVP Roadmap — no sales pitch, no obligation. Just a clear
-              breakdown of what your app needs and what it&apos;ll cost.
+              Tell us about your idea in 60 seconds. We&apos;ll send you a free,
+              honest Project Roadmap — a clear breakdown of features, timeline,
+              and cost. No sales pitch, no obligation.
             </p>
 
             <ul className="space-y-3">
               {[
                 "Free response within 24 hours",
+                "Covers mobile apps and websites",
                 "Includes feature breakdown + cost estimate",
-                "No email spam, ever",
-                "No commitment required",
+                "No email spam, ever — no commitment required",
               ].map((item) => (
                 <li key={item} className="flex items-center gap-3 text-sm text-[#94A3B8]">
                   <CheckCircle className="w-5 h-5 text-[#10B981] flex-shrink-0" />
@@ -81,7 +91,6 @@ export default function LeadMagnetSection() {
               ))}
             </ul>
 
-            {/* Alternative CTAs */}
             <div className="flex flex-col sm:flex-row gap-3 pt-2">
               <a
                 href={CALENDLY_URL}
@@ -93,7 +102,7 @@ export default function LeadMagnetSection() {
                 Book a Free 30-Min Call
               </a>
               <a
-                href="https://wa.me/919136667294?text=Hi, I'd like to discuss a mobile app project."
+                href="https://wa.me/919136667294?text=Hi, I'd like to discuss a project with KDR Tech."
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-flex items-center justify-center gap-2 px-5 py-3 border border-[#25D366]/40 text-[#25D366] hover:bg-[#25D366]/10 font-semibold rounded-xl text-sm transition-colors"
@@ -113,7 +122,7 @@ export default function LeadMagnetSection() {
                 </div>
                 <h3 className="text-xl font-bold text-white">We&apos;re on it!</h3>
                 <p className="text-[#94A3B8] text-sm max-w-xs">
-                  You&apos;ll receive your free MVP Roadmap within 24 hours.
+                  You&apos;ll receive your free Project Roadmap within 24 hours.
                   Check your inbox (and spam, just in case).
                 </p>
                 <a
@@ -129,9 +138,9 @@ export default function LeadMagnetSection() {
               <form onSubmit={handleSubmit} className="flex flex-col gap-5">
                 <div>
                   <h3 className="text-xl font-bold text-white mb-1">
-                    Get Your Free MVP Roadmap
+                    Get Your Free Project Roadmap
                   </h3>
-                  <p className="text-sm text-[#94A3B8]">Delivered within 24 hours.</p>
+                  <p className="text-sm text-[#94A3B8]">Delivered within 24 hours. Apps and websites.</p>
                 </div>
 
                 <div className="flex flex-col gap-4">
@@ -165,12 +174,28 @@ export default function LeadMagnetSection() {
 
                   <div>
                     <label className="block text-sm font-medium text-[#E8ECF4] mb-1.5">
-                      Describe Your App Idea
+                      Project Type
+                    </label>
+                    <select
+                      value={formData.project_type}
+                      onChange={(e) => handleChange("project_type", e.target.value)}
+                      className="w-full px-4 py-3 bg-[#0A1628] border border-[#1E3A5F] rounded-xl text-white text-sm focus:outline-none focus:border-[#2563EB] transition-colors appearance-none cursor-pointer"
+                    >
+                      <option value="" className="bg-[#0A1628]">Select project type...</option>
+                      {projectTypes.map((opt) => (
+                        <option key={opt} value={opt} className="bg-[#0A1628]">{opt}</option>
+                      ))}
+                    </select>
+                  </div>
+
+                  <div>
+                    <label className="block text-sm font-medium text-[#E8ECF4] mb-1.5">
+                      Describe Your Project
                     </label>
                     <textarea
                       value={formData.app_idea}
                       onChange={(e) => handleChange("app_idea", e.target.value)}
-                      placeholder="e.g., A fitness app where coaches sell workout plans via subscription..."
+                      placeholder="e.g., A booking platform for personal trainers where clients can schedule sessions and pay online..."
                       rows={3}
                       className="w-full px-4 py-3 bg-[#0A1628] border border-[#1E3A5F] rounded-xl text-white placeholder-[#64748B] text-sm focus:outline-none focus:border-[#2563EB] transition-colors resize-none"
                     />
@@ -187,9 +212,7 @@ export default function LeadMagnetSection() {
                     >
                       <option value="" className="bg-[#0A1628]">Select a range...</option>
                       {budgetOptions.map((opt) => (
-                        <option key={opt} value={opt} className="bg-[#0A1628]">
-                          {opt}
-                        </option>
+                        <option key={opt} value={opt} className="bg-[#0A1628]">{opt}</option>
                       ))}
                     </select>
                   </div>
@@ -220,7 +243,7 @@ export default function LeadMagnetSection() {
                 </button>
 
                 <p className="text-xs text-[#64748B] text-center">
-                  No spam. No sales pitch. Just a clear, honest breakdown of what your app needs.
+                  No spam. No sales pitch. Just a clear, honest breakdown of what your project needs and what it&apos;ll cost.
                 </p>
               </form>
             )}
