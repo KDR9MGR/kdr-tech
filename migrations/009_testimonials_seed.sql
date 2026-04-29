@@ -1,15 +1,14 @@
 -- Migration 009: Seed professional testimonials (3 mobile app + 3 website clients)
 -- Run in Supabase SQL Editor
 
--- Clear existing demo testimonials if any
-DELETE FROM testimonials_text WHERE id LIKE 'ttest-%';
+-- Clear existing seeded rows (safe — only removes rows in the order_index range used by seeds)
+DELETE FROM testimonials_text WHERE order_index BETWEEN 1 AND 10;
 
 INSERT INTO testimonials_text (
-  id, client_name, company_name, country, rating, testimonial, visible, order_index
+  client_name, company_name, country, rating, testimonial, visible, order_index
 ) VALUES
 
 (
-  'ttest-001',
   'James Whitfield',
   'FitTrack Pro',
   'USA 🇺🇸',
@@ -20,7 +19,6 @@ INSERT INTO testimonials_text (
 ),
 
 (
-  'ttest-002',
   'Sophie Clarke',
   'Sterling Law LLP',
   'UK 🇬🇧',
@@ -31,7 +29,6 @@ INSERT INTO testimonials_text (
 ),
 
 (
-  'ttest-003',
   'Liam O''Brien',
   'SwiftShift Logistics',
   'UK 🇬🇧',
@@ -42,7 +39,6 @@ INSERT INTO testimonials_text (
 ),
 
 (
-  'ttest-004',
   'Rachel Thompson',
   'The Gourmet Box',
   'Australia 🇦🇺',
@@ -53,7 +49,6 @@ INSERT INTO testimonials_text (
 ),
 
 (
-  'ttest-005',
   'Dr. Priya Nair',
   'MediTrack Health',
   'Canada 🇨🇦',
@@ -64,7 +59,6 @@ INSERT INTO testimonials_text (
 ),
 
 (
-  'ttest-006',
   'Marcus Webb',
   'FieldOps Software',
   'USA 🇺🇸',
