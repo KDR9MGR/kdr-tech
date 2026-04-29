@@ -6,10 +6,12 @@ import { Star, Quote, Play } from 'lucide-react'
 interface TextTestimonial {
   id: string
   client_name: string
-  client_company: string | null
-  client_position: string | null
-  testimonial_text: string
+  company_name: string | null
+  project_name: string | null
+  testimonial: string
+  avatar_url: string | null
   rating: number | null
+  country: string | null
   visible: boolean
   order_index: number
 }
@@ -17,9 +19,11 @@ interface TextTestimonial {
 interface VideoTestimonial {
   id: string
   client_name: string
-  client_company: string | null
+  company_name: string | null
+  project_name: string | null
   video_url: string
   thumbnail_url: string | null
+  country: string | null
   visible: boolean
   order_index: number
 }
@@ -37,57 +41,109 @@ export default function TestimonialsShowcase() {
           fetch('/api/testimonials/text'),
           fetch('/api/testimonials/video'),
         ])
-
         const textData = await textRes.json()
         const videoData = await videoRes.json()
-
         setTextTestimonials(textData.filter((t: TextTestimonial) => t.visible))
         setVideoTestimonials(videoData.filter((v: VideoTestimonial) => v.visible))
-      } catch (error) {
-        console.error('Failed to load testimonials:', error)
+      } catch {
+        // no-op
       } finally {
         setLoading(false)
       }
     }
-
     fetchTestimonials()
   }, [])
 
-  if (loading) {
-    return null
-  }
-
-  if (textTestimonials.length === 0 && videoTestimonials.length === 0) {
+  if (loading || (textTestimonials.length === 0 && videoTestimonials.length === 0)) {
     return null
   }
 
   return (
-    <section className="w-full py-20 bg-transparent relative z-[10]">
-      <div className="max-w-[1400px] mx-auto px-4">
+    <section id="testimonials" className="w-full py-20 lg:py-28">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
-        <div className="text-center mb-16">
-          <h2 className="text-4xl md:text-5xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-purple-500 to-cyan-500 mb-4">
-            Client Testimonials
+        <div className="text-center mb-14">
+          <p className="text-sm font-semibold tracking-[0.2em] uppercase text-[#2563EB] mb-3">
+            Testimonials
+          </p>
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-white mb-4">
+            What Our Clients Say
           </h2>
-          <p className="text-gray-300 text-lg max-w-2xl mx-auto">
-            Don&apos;t just take our word for it - hear what our clients have to say about their experience working with us
+          <p className="text-lg text-[#94A3B8] max-w-2xl mx-auto">
+            We let our clients do the talking.
           </p>
         </div>
 
+        {/* Text Testimonials */}
+        {textTestimonials.length > 0 && (
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
+            {textTestimonials.map((testimonial) => (
+              <div
+                key={testimonial.id}
+                className="bg-[#0F2040] border border-[#1E3A5F] rounded-2xl p-6 hover:border-[#2563EB]/40 transition-all duration-200 card-glow flex flex-col"
+              >
+                {/* Rating */}
+                {testimonial.rating && (
+                  <div className="flex gap-1 mb-4">
+                    {Array.from({ length: 5 }).map((_, i) => (
+                      <Star
+                        key={i}
+                        className={`w-4 h-4 ${
+                          i < testimonial.rating!
+                            ? 'fill-yellow-400 text-yellow-400'
+                            : 'text-[#1E3A5F]'
+                        }`}
+                      />
+                    ))}
+                  </div>
+                )}
+
+                {/* Quote */}
+                <Quote className="w-8 h-8 text-[#2563EB] mb-3 opacity-40" />
+
+                {/* Text */}
+                <p className="text-[#94A3B8] mb-6 flex-1 leading-relaxed text-sm">
+                  &ldquo;{testimonial.testimonial}&rdquo;
+                </p>
+
+                {/* Client info */}
+                <div className="border-t border-[#1E3A5F] pt-4 flex items-center gap-3">
+                  {testimonial.avatar_url ? (
+                    <img
+                      src={testimonial.avatar_url}
+                      alt={testimonial.client_name}
+                      className="w-9 h-9 rounded-full object-cover"
+                    />
+                  ) : (
+                    <div className="w-9 h-9 rounded-full bg-[#2563EB]/10 border border-[#2563EB]/20 flex items-center justify-center text-sm font-bold text-[#2563EB]">
+                      {testimonial.client_name.charAt(0)}
+                    </div>
+                  )}
+                  <div>
+                    <p className="text-white font-semibold text-sm">{testimonial.client_name}</p>
+                    <p className="text-xs text-[#2563EB]">
+                      {testimonial.company_name || testimonial.project_name || ''}
+                      {testimonial.country && ` · ${testimonial.country}`}
+                    </p>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        )}
+
         {/* Video Testimonials */}
         {videoTestimonials.length > 0 && (
-          <div className="mb-16">
-            <h3 className="text-2xl font-bold text-white mb-8 text-center">
-              Video Testimonials
-            </h3>
+          <div>
+            <h3 className="text-xl font-bold text-white mb-6 text-center">Video Testimonials</h3>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
               {videoTestimonials.map((testimonial) => (
                 <div
                   key={testimonial.id}
-                  className="group relative bg-[#1A1A2E] border border-[#2A0E61] rounded-xl overflow-hidden hover:border-purple-500 transition-all duration-300 cursor-pointer"
+                  className="group relative bg-[#0F2040] border border-[#1E3A5F] rounded-2xl overflow-hidden hover:border-[#2563EB]/40 transition-all duration-200 cursor-pointer card-glow"
                   onClick={() => setSelectedVideo(testimonial.video_url)}
                 >
-                  <div className="relative aspect-video bg-[#030014]">
+                  <div className="relative aspect-video bg-[#0A1628]">
                     {testimonial.thumbnail_url ? (
                       <img
                         src={testimonial.thumbnail_url}
@@ -95,82 +151,23 @@ export default function TestimonialsShowcase() {
                         className="w-full h-full object-cover"
                       />
                     ) : (
-                      <div className="w-full h-full flex items-center justify-center bg-gradient-to-br from-purple-900/30 to-cyan-900/30">
-                        <Play className="w-16 h-16 text-purple-400" />
+                      <div className="w-full h-full flex items-center justify-center bg-gradient-to-br from-[#0F2040] to-[#0A1628]">
+                        <Play className="w-12 h-12 text-[#2563EB]/40" />
                       </div>
                     )}
-                    <div className="absolute inset-0 bg-black/40 group-hover:bg-black/60 transition-all flex items-center justify-center">
-                      <div className="w-16 h-16 rounded-full bg-gradient-to-r from-purple-500 to-cyan-500 flex items-center justify-center group-hover:scale-110 transition-transform">
-                        <Play className="w-8 h-8 text-white ml-1" />
+                    <div className="absolute inset-0 bg-black/40 group-hover:bg-black/50 transition-all flex items-center justify-center">
+                      <div className="w-14 h-14 rounded-full bg-[#2563EB] flex items-center justify-center group-hover:scale-110 transition-transform shadow-lg shadow-blue-900/40">
+                        <Play className="w-6 h-6 text-white ml-1" />
                       </div>
                     </div>
                   </div>
-                  <div className="p-6">
-                    <h4 className="text-lg font-semibold text-white mb-1">
-                      {testimonial.client_name}
-                    </h4>
-                    {testimonial.client_company && (
-                      <p className="text-sm text-purple-400">
-                        {testimonial.client_company}
-                      </p>
+                  <div className="p-5">
+                    <h4 className="text-base font-semibold text-white mb-0.5">{testimonial.client_name}</h4>
+                    {testimonial.company_name && (
+                      <p className="text-sm text-[#2563EB]">{testimonial.company_name}</p>
                     )}
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-        )}
-
-        {/* Text Testimonials */}
-        {textTestimonials.length > 0 && (
-          <div>
-            <h3 className="text-2xl font-bold text-white mb-8 text-center">
-              What Our Clients Say
-            </h3>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-              {textTestimonials.map((testimonial) => (
-                <div
-                  key={testimonial.id}
-                  className="bg-[#1A1A2E] border border-[#2A0E61] rounded-xl p-6 hover:border-purple-500 transition-all duration-300 flex flex-col"
-                >
-                  {/* Rating */}
-                  {testimonial.rating && (
-                    <div className="flex gap-1 mb-4">
-                      {Array.from({ length: 5 }).map((_, i) => (
-                        <Star
-                          key={i}
-                          className={`w-5 h-5 ${
-                            i < testimonial.rating!
-                              ? 'fill-yellow-400 text-yellow-400'
-                              : 'text-gray-600'
-                          }`}
-                        />
-                      ))}
-                    </div>
-                  )}
-
-                  {/* Quote Icon */}
-                  <Quote className="w-10 h-10 text-purple-500 mb-4 opacity-50" />
-
-                  {/* Testimonial Text */}
-                  <p className="text-gray-300 mb-6 flex-1 leading-relaxed">
-                    &quot;{testimonial.testimonial_text}&quot;
-                  </p>
-
-                  {/* Client Info */}
-                  <div className="border-t border-[#2A0E61] pt-4">
-                    <p className="text-white font-semibold">
-                      {testimonial.client_name}
-                    </p>
-                    {testimonial.client_position && testimonial.client_company && (
-                      <p className="text-sm text-purple-400">
-                        {testimonial.client_position} at {testimonial.client_company}
-                      </p>
-                    )}
-                    {!testimonial.client_position && testimonial.client_company && (
-                      <p className="text-sm text-purple-400">
-                        {testimonial.client_company}
-                      </p>
+                    {testimonial.country && (
+                      <p className="text-xs text-[#94A3B8] mt-0.5">{testimonial.country}</p>
                     )}
                   </div>
                 </div>
@@ -192,13 +189,13 @@ export default function TestimonialsShowcase() {
           >
             <button
               onClick={() => setSelectedVideo(null)}
-              className="absolute -top-12 right-0 text-white hover:text-purple-400 transition-colors text-xl font-bold"
+              className="absolute -top-12 right-0 text-white hover:text-[#2563EB] transition-colors font-semibold text-sm"
             >
               ✕ Close
             </button>
             <iframe
               src={selectedVideo}
-              className="w-full h-full rounded-lg"
+              className="w-full h-full rounded-xl"
               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
               allowFullScreen
             />

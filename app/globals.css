@@ -1,146 +1,87 @@
-@import url("https://fonts.googleapis.com/css2?family=Cedarville+Cursive&display=swap");
-@import url("https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800;900&display=swap");
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-
-
-
-.cursive {
-  font-family: "Cedarville Cursive", cursive;
-}
-.Welcome-text {
-  background: linear-gradient(
-      0deg,
-      rgba(255, 255, 255, 0.4),
-      rgba(255, 255, 255, 0.4)
-    ),
-    linear-gradient(90.01deg, #e59cff 0.01%, #ba9cff 50.01%, #9cb2ff 100%);
-  background-blend-mode: normal, screen;
-  -webkit-background-clip: text;
-  background-clip: text;
-  -webkit-text-fill-color: transparent;
-}
-.Welcome-box {
-  isolation: isolate;
-  overflow: hidden;
-  align-items: center;
-  -webkit-backdrop-filter: blur(6px);
-  backdrop-filter: blur(6px);
-  border-radius: 32px;
-  box-shadow: inset 0 -7px 11px #a48fff1f;
-  display: flex;
-
-  position: relative;
-  width: -moz-max-content;
-  width: max-content;
-  transition: 0.45s cubic-bezier(0.6, 0.6, 0, 1) box-shadow;
-}
-.fixed-header {
-  backdrop-filter: blur(10px);
-  background-color: rgba(255, 255, 255, 0.3);
-}
-
-.button-primary {
-  background: linear-gradient(
-      180deg,
-      rgba(60, 8, 126, 0) 0%,
-      rgba(60, 8, 126, 0.32) 100%
-    ),
-    rgba(113, 47, 255, 0.12);
-  box-shadow: inset 0 0 12px #bf97ff3d;
-}
-.button-primary:hover {
-  background: linear-gradient(
-      180deg,
-      rgba(60, 8, 126, 0) 0%,
-      rgba(60, 8, 126, 0.42) 100%
-    ),
-    rgba(113, 47, 255, 0.24);
-  box-shadow: inset 0 0 12px #bf97ff70;
-}
-
-/* Hide scrollbar for IE, Edge and Firefox */
-.scrollbar-hidden {
-  -ms-overflow-style: none; /* IE and Edge */
-  scrollbar-width: none; /* Firefox */
-}
-.scrollbar-hidden::-webkit-scrollbar {
-  display: none;
-}
-
-@keyframes glowing {
-  0% { box-shadow: 0 0 5px #ff0000, 0 0 25px #ff0000, 0 0 50px #ff0000, 0 0 200px #ff0000; }
-  50% { box-shadow: 0 0 10px #ff0000, 0 0 30px #ff0000, 0 0 60px #ff0000, 0 0 220px #ff0000; }
-  100% { box-shadow: 0 0 5px #ff0000, 0 0 25px #ff0000, 0 0 50px #ff0000, 0 0 200px #ff0000; }
-}
-
-.ring {
-  animation: glowing 2s infinite;
-  border-radius: 50%;
-}
-
 
 html {
   scroll-behavior: smooth;
 }
 
-/* Brand scroll animations */
+/* =====================================================
+   SCROLLBAR
+   ===================================================== */
+.scrollbar-hidden {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+.scrollbar-hidden::-webkit-scrollbar {
+  display: none;
+}
+
+/* =====================================================
+   APP LOGOS / BRAND SCROLL ANIMATIONS
+   ===================================================== */
 @keyframes scroll-left {
-  0% {
-    transform: translateX(0);
-  }
-  100% {
-    transform: translateX(-33.333%);
-  }
+  0%   { transform: translateX(0); }
+  100% { transform: translateX(-33.333%); }
 }
 
 @keyframes scroll-right {
-  0% {
-    transform: translateX(-33.333%);
-  }
-  100% {
-    transform: translateX(0);
-  }
+  0%   { transform: translateX(-33.333%); }
+  100% { transform: translateX(0); }
 }
 
-.animate-scroll-left {
-  animation: scroll-left 30s linear infinite;
-}
+.animate-scroll-left  { animation: scroll-left  30s linear infinite; }
+.animate-scroll-right { animation: scroll-right 30s linear infinite; }
 
-.animate-scroll-right {
-  animation: scroll-right 30s linear infinite;
-}
-
-/* App logos scroll animation - continuous infinite scroll */
 @keyframes scroll-left-continuous {
-  0% {
-    transform: translateX(0);
-  }
-  100% {
-    transform: translateX(-33.333%);
-  }
+  0%   { transform: translateX(0); }
+  100% { transform: translateX(-33.333%); }
 }
 
 @keyframes scroll-right-continuous {
-  0% {
-    transform: translateX(-33.333%);
-  }
-  100% {
-    transform: translateX(0);
-  }
+  0%   { transform: translateX(-33.333%); }
+  100% { transform: translateX(0); }
 }
 
-.animate-scroll-left-continuous {
-  animation: scroll-left-continuous 20s linear infinite;
+.animate-scroll-left-continuous  { animation: scroll-left-continuous  20s linear infinite; }
+.animate-scroll-right-continuous { animation: scroll-right-continuous 20s linear infinite; }
+
+/* =====================================================
+   FADE-IN UTILITY
+   ===================================================== */
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(24px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.animate-fade-in-up { animation: fadeInUp 0.6s ease forwards; }
+
+/* =====================================================
+   GRADIENT TEXT UTILITY
+   ===================================================== */
+.text-gradient-blue {
+  background: linear-gradient(135deg, #2563EB 0%, #38BDF8 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
 
-.animate-scroll-right-continuous {
-  animation: scroll-right-continuous 20s linear infinite;
+.text-gradient-green {
+  background: linear-gradient(135deg, #10B981 0%, #34D399 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
 
+/* =====================================================
+   CARD GLOW ON HOVER
+   ===================================================== */
+.card-glow:hover {
+  box-shadow: 0 0 0 1px rgba(37, 99, 235, 0.4), 0 8px 32px rgba(37, 99, 235, 0.12);
+}
 
-
+/* =====================================================
+   SHADCN / RADIX CSS VARIABLES
+   ===================================================== */
 @layer base {
   :root {
     --background: 0 0% 100%;
@@ -169,6 +110,7 @@ html {
     --chart-5: 27 87% 67%;
     --radius: 0.5rem;
   }
+
   .dark {
     --background: 0 0% 3.9%;
     --foreground: 0 0% 98%;
@@ -197,13 +139,7 @@ html {
   }
 }
 
-
-
 @layer base {
-  * {
-    @apply border-border;
-  }
-  body {
-    @apply bg-background text-foreground;
-  }
+  * { @apply border-border; }
+  body { @apply bg-background text-foreground; }
 }

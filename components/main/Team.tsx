@@ -1,5 +1,4 @@
 import React from "react";
-import Head from "next/head";
 import ProfileCard from "../sub/ProfileCard";
 import { createClient } from "@/lib/supabase/server";
 
@@ -161,48 +160,7 @@ const Team = async () => {
 
   return (
     <>
-      <Head>
-        <title>
-          Our Team - Expert Flutter, Android, and Mobile Application Developers
-        </title>
-        <meta
-          name="description"
-          content="Meet our team of expert Flutter developers, Android developers, and mobile application developers. Our team has extensive experience in delivering high-quality projects."
-        />
-        <meta
-          name="keywords"
-          content="Flutter developer, Android developer, mobile application developer, UI/UX designer, backend developer, project manager"
-        />
-        <meta name="robots" content="index, follow" />
-        <meta
-          property="og:title"
-          content="Our Team - Expert Flutter, Android, and Mobile Application Developers"
-        />
-        <meta
-          property="og:description"
-          content="Meet our team of expert Flutter developers, Android developers, and mobile application developers. Our team has extensive experience in delivering high-quality projects."
-        />
-        <meta property="og:type" content="website" />
-        <meta property="og:url" content="https://www.kdrtech.in/team" />
-        <meta
-          property="og:image"
-          content="https://www.kdrtech.in/images/team.jpg"
-        />
-        <meta name="twitter:card" content="summary_large_image" />
-        <meta
-          name="twitter:title"
-          content="Our Team - Expert Flutter, Android, and Mobile Application Developers"
-        />
-        <meta
-          name="twitter:description"
-          content="Meet our team of expert Flutter developers, Android developers, and mobile application developers. Our team has extensive experience in delivering high-quality projects."
-        />
-        <meta
-          name="twitter:image"
-          content="https://www.kdrtech.in/images/team.jpg"
-        />
-      </Head>
-      <div id='Team' className="py-12 pb-24 bg-gray-900">
+      <div id="team" className="py-12 pb-24 bg-[#060F1E]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center">
             {/* <h2 className="text-base text-indigo-600 font-semibold tracking-wide uppercase">

@@ -147,8 +147,8 @@ function ScrollingRow({ apps, direction }: ScrollingRowProps) {
       </div>
 
       {/* Gradient overlays for seamless edges */}
-      <div className="absolute top-0 left-0 w-32 h-full bg-gradient-to-r from-[#030014] to-transparent pointer-events-none z-10" />
-      <div className="absolute top-0 right-0 w-32 h-full bg-gradient-to-l from-[#030014] to-transparent pointer-events-none z-10" />
+      <div className="absolute top-0 left-0 w-32 h-full bg-gradient-to-r from-[#0A1628] to-transparent pointer-events-none z-10" />
+      <div className="absolute top-0 right-0 w-32 h-full bg-gradient-to-l from-[#0A1628] to-transparent pointer-events-none z-10" />
     </div>
   )
 }

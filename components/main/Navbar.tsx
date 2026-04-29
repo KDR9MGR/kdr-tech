@@ -1,106 +1,159 @@
 "use client";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Image from "next/image";
-import { FaBars, FaTimes } from "react-icons/fa";
 import Link from "next/link";
+import { Menu, X, ChevronRight } from "lucide-react";
+
+const navLinks = [
+  { href: "#services", label: "Services" },
+  { href: "#work", label: "Work" },
+  { href: "#process", label: "Process" },
+  { href: "#about", label: "About" },
+  { href: "#team", label: "Team" },
+  { href: "#faq", label: "FAQ" },
+];
+
+const CALENDLY_URL = "https://calendly.com/kdrtech/strategy-call";
 
 const Navbar = () => {
-  const [isDrawerOpen, setIsDrawerOpen] = useState(false);
+  const [isOpen, setIsOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
 
-  const toggleDrawer = () => {
-    setIsDrawerOpen(!isDrawerOpen);
-  };
+  useEffect(() => {
+    const handleScroll = () => setScrolled(window.scrollY > 20);
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
 
   return (
-    <div className="w-full fixed top-0 shadow-lg z-50">
-      <div className="w-full h-[65px] flex items-center justify-between px-6 md:px-10 bg-white bg-opacity-5 backdrop-blur-md">
-        <Link href="#home" className="flex items-center" passHref>
-          <Image
-            src="/images/kdr-tech-logo.png"
-            alt="logo"
-            width={40}
-            height={40}
-            className="cursor-pointer"
-          />
-        </Link>
+    <nav
+      className={`w-full fixed top-0 z-50 transition-all duration-300 ${
+        scrolled
+          ? "bg-[#0A1628]/95 backdrop-blur-md shadow-lg shadow-black/20 border-b border-[#1E3A5F]"
+          : "bg-transparent"
+      }`}
+    >
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="flex items-center justify-between h-16 lg:h-18">
 
-        <div className="absolute left-1/2 transform -translate-x-1/2">
-          <span className="font-bold text-center text-white">KDR TECH</span>
-        </div>
+          {/* Logo */}
+          <Link href="/" className="flex items-center gap-2.5 group">
+            <Image
+              src="/images/kdr-tech-logo.png"
+              alt="KDR Tech"
+              width={36}
+              height={36}
+              className="rounded-md"
+            />
+            <div className="flex flex-col leading-none">
+              <span className="font-bold text-white text-base tracking-wide">KDR Tech</span>
+              <span className="text-[10px] text-[#94A3B8] font-medium tracking-wider uppercase">
+                Mobile Apps
+              </span>
+            </div>
+          </Link>
 
-        <div className="hidden md:flex space-x-6">
-          <Link
-            href="#about"
-            className="text-white hover:text-gray-600"
-            passHref
-          >
-            About
-          </Link>
-          <Link
-            href="#Team"
-            className="text-white hover:text-gray-600"
-            passHref
-          >
-            Experts
-          </Link>
-          <Link
-            href="#market"
-            className="text-white hover:text-gray-600"
-            passHref
-          >
-            Market Place
-          </Link>
-          <Link
-            href="#projects"
-            className="text-white hover:text-gray-600"
-            passHref
-          >
-            Projects
-          </Link>
-        </div>
+          {/* Desktop Nav Links */}
+          <div className="hidden lg:flex items-center gap-1">
+            {navLinks.map((link) => (
+              <a
+                key={link.href}
+                href={link.href}
+                className="px-4 py-2 text-sm font-medium text-[#94A3B8] hover:text-white rounded-md hover:bg-white/5 transition-all duration-150"
+              >
+                {link.label}
+              </a>
+            ))}
+          </div>
 
-        <div className="md:hidden flex items-center">
-          <button onClick={toggleDrawer} className="text-white z-50">
-            {isDrawerOpen ? <FaTimes size={24} /> : <FaBars size={24} />}
+          {/* Desktop CTA */}
+          <div className="hidden lg:flex items-center gap-3">
+            <a
+              href="https://wa.me/919136667294?text=Hi, I'd like to discuss a mobile app project."
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-sm font-medium text-[#94A3B8] hover:text-white transition-colors"
+            >
+              WhatsApp
+            </a>
+            <a
+              href={CALENDLY_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-1.5 px-5 py-2.5 bg-[#2563EB] hover:bg-[#1D4ED8] text-white text-sm font-semibold rounded-lg transition-colors shadow-lg shadow-blue-900/30"
+            >
+              Book a Free Call
+              <ChevronRight className="w-4 h-4" />
+            </a>
+          </div>
+
+          {/* Mobile Hamburger */}
+          <button
+            onClick={() => setIsOpen(!isOpen)}
+            className="lg:hidden text-white p-2 rounded-md hover:bg-white/5 transition-colors"
+            aria-label="Toggle menu"
+          >
+            {isOpen ? <X size={22} /> : <Menu size={22} />}
           </button>
         </div>
       </div>
 
+      {/* Mobile Drawer */}
       <div
-        className={`fixed inset-0 w-full h-full bg-gray-800 bg-opacity-75 z-[150] transform ${
-          isDrawerOpen ? "translate-x-0" : "translate-x-full"
-        } transition-transform duration-300 ease-in-out`}
+        className={`lg:hidden fixed inset-0 z-[200] transition-all duration-300 ${
+          isOpen ? "opacity-100 pointer-events-auto" : "opacity-0 pointer-events-none"
+        }`}
       >
-        <div className="absolute top-4 right-4 z-50">
-          <button onClick={toggleDrawer} className="text-white">
-            <FaTimes size={24} />
-          </button>
-        </div>
-        <div className="flex flex-col items-center justify-center h-full">
-          <a
-            href="#about"
-            className="text-white text-2xl mb-4"
-            onClick={toggleDrawer}
-          >
-            About
-          </a>
-          <a
-            href="#team"
-            className="text-white text-2xl mb-4"
-            onClick={toggleDrawer}
-          >
-            Experts
-          </a>
-          <a
-            href="#market"
-            className="text-white text-2xl mb-4"
-            onClick={toggleDrawer}
-          >
-            Market Place
-          </a>
+        <div
+          className="absolute inset-0 bg-black/60 backdrop-blur-sm"
+          onClick={() => setIsOpen(false)}
+        />
+        <div
+          className={`absolute right-0 top-0 h-full w-72 bg-[#0F2040] border-l border-[#1E3A5F] shadow-2xl transform transition-transform duration-300 ${
+            isOpen ? "translate-x-0" : "translate-x-full"
+          }`}
+        >
+          <div className="flex items-center justify-between p-5 border-b border-[#1E3A5F]">
+            <span className="font-bold text-white text-lg">KDR Tech</span>
+            <button onClick={() => setIsOpen(false)} className="text-[#94A3B8] hover:text-white">
+              <X size={20} />
+            </button>
+          </div>
+          <div className="flex flex-col p-4 gap-1">
+            {navLinks.map((link) => (
+              <a
+                key={link.href}
+                href={link.href}
+                onClick={() => setIsOpen(false)}
+                className="px-4 py-3 text-[#94A3B8] hover:text-white hover:bg-white/5 rounded-lg text-base font-medium transition-colors"
+              >
+                {link.label}
+              </a>
+            ))}
+          </div>
+          <div className="p-4 border-t border-[#1E3A5F] mt-auto absolute bottom-0 left-0 right-0 flex flex-col gap-3">
+            <a
+              href="https://wa.me/919136667294?text=Hi, I'd like to discuss a mobile app project."
+              target="_blank"
+              rel="noopener noreferrer"
+              onClick={() => setIsOpen(false)}
+              className="flex items-center justify-center gap-2 px-4 py-3 border border-[#1E3A5F] rounded-lg text-white text-sm font-medium hover:bg-white/5 transition-colors"
+            >
+              💬 Chat on WhatsApp
+            </a>
+            <a
+              href={CALENDLY_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              onClick={() => setIsOpen(false)}
+              className="flex items-center justify-center gap-2 px-4 py-3 bg-[#2563EB] hover:bg-[#1D4ED8] rounded-lg text-white text-sm font-semibold transition-colors"
+            >
+              📅 Book a Free Call
+            </a>
+          </div>
         </div>
       </div>
-    </div>
+    </nav>
   );
 };
 
