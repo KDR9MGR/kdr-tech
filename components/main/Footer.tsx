@@ -92,33 +92,40 @@ const Footer = async () => {
               <div className="flex flex-col leading-none">
                 <span className="font-bold text-white text-base">KDR Tech</span>
                 <span className="text-[10px] text-[#94A3B8] tracking-wider uppercase">
-                  Mobile Apps
+                  Digital Agency
                 </span>
               </div>
             </Link>
             <p className="text-sm text-[#94A3B8] leading-relaxed max-w-xs">
-              Building apps that launch, scale, and sell — for founders across
-              the globe.
+              Building mobile apps and websites that launch, scale, and sell — for founders across the globe.
             </p>
-            {socialLinks.length > 0 && (
-              <div className="flex items-center gap-3">
-                {socialLinks.map((link) => {
-                  const Icon = getIcon(link.icon_name);
-                  return (
-                    <a
-                      key={link.id}
-                      href={link.url}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      aria-label={link.title}
-                      className="w-9 h-9 flex items-center justify-center rounded-lg bg-[#0F2040] border border-[#1E3A5F] text-[#94A3B8] hover:text-white hover:border-[#2563EB]/50 transition-all"
-                    >
-                      {Icon}
-                    </a>
-                  );
-                })}
-              </div>
-            )}
+            <div className="flex items-center gap-3">
+              {/* Static Instagram link — always shown */}
+              <a
+                href="https://www.instagram.com/app_developer_kdr/"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Instagram"
+                className="w-9 h-9 flex items-center justify-center rounded-lg bg-[#0F2040] border border-[#1E3A5F] text-[#94A3B8] hover:text-white hover:border-[#2563EB]/50 transition-all"
+              >
+                <RxInstagramLogo className="w-4 h-4" />
+              </a>
+              {socialLinks.filter(l => l.icon_name?.toLowerCase() !== 'instagram').map((link) => {
+                const Icon = getIcon(link.icon_name);
+                return (
+                  <a
+                    key={link.id}
+                    href={link.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label={link.title}
+                    className="w-9 h-9 flex items-center justify-center rounded-lg bg-[#0F2040] border border-[#1E3A5F] text-[#94A3B8] hover:text-white hover:border-[#2563EB]/50 transition-all"
+                  >
+                    {Icon}
+                  </a>
+                );
+              })}
+            </div>
           </div>
 
           {/* Col 2 — Services */}
@@ -157,8 +164,8 @@ const Footer = async () => {
             <h4 className="text-sm font-bold text-white uppercase tracking-wider mb-5">Contact</h4>
             <ul className="space-y-3 mb-6">
               <li>
-                <a href="mailto:hello@kdrtech.in" className="text-sm text-[#94A3B8] hover:text-white transition-colors flex items-center gap-2">
-                  📧 hello@kdrtech.in
+                <a href="mailto:developer.kdrtech.in@gmail.com" className="text-sm text-[#94A3B8] hover:text-white transition-colors flex items-center gap-2">
+                  📧 developer.kdrtech.in@gmail.com
                 </a>
               </li>
               <li>
