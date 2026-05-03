@@ -2,7 +2,7 @@
 
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
-import { Home, Users, FileText, MessageSquare, LogOut, AppWindow, Link2, Briefcase, HelpCircle, BarChart2 } from 'lucide-react'
+import { Home, Users, FileText, MessageSquare, LogOut, AppWindow, Link2, Briefcase, HelpCircle, BarChart2, FolderKanban, TicketCheck, TrendingUp } from 'lucide-react'
 import { createClient } from '@/lib/supabase/client'
 import { useRouter } from 'next/navigation'
 import { Button } from '@/components/ui/button'
@@ -17,6 +17,9 @@ const navItems = [
   { href: '/admin/faqs', icon: HelpCircle, label: 'FAQs' },
   { href: '/admin/showcase', icon: AppWindow, label: 'App Showcase' },
   { href: '/admin/footer-links', icon: Link2, label: 'Footer Links' },
+  { href: '/admin/projects', icon: FolderKanban, label: 'Projects' },
+  { href: '/admin/tickets', icon: TicketCheck, label: 'Tickets' },
+  { href: '/admin/deals', icon: TrendingUp, label: 'Deals' },
 ]
 
 export default function AdminSidebar() {

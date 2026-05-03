@@ -4,57 +4,37 @@ import { redirect } from 'next/navigation'
 import Link from 'next/link'
 import { ArrowLeft, Ticket, Clock, CheckCircle2, Star } from 'lucide-react'
 
-const volumeData = [8, 12, 7, 15, 11, 9, 14, 10, 18, 13, 16, 12]
-const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
-
-const newTickets = [
-  { id: '#T-209', subject: 'App not loading on iOS 17', client: 'James W.', sla: '8h left' },
-  { id: '#T-208', subject: 'Payment gateway error on checkout', client: 'Rachel T.', sla: '4h left' },
-  { id: '#T-207', subject: 'Add team member to admin', client: 'New Lead', sla: '12h left' },
-]
-
-const inProgress = [
-  { id: '#T-206', subject: 'Push notification delay on Android', client: 'Liam O.', assigned: 'Arbaz K.' },
-  { id: '#T-205', subject: 'CMS image upload 500 error', client: 'Sophie C.', assigned: 'Abdul R.' },
-]
-
-const resolved = [
-  { id: '#T-204', subject: 'App Store review feedback', client: 'Marcus W.', resolved: '2h ago', rating: 5 },
-  { id: '#T-203', subject: 'Stripe webhook config', client: 'Priya N.', resolved: '1d ago', rating: 5 },
-  { id: '#T-202', subject: 'Figma file access', client: 'James W.', resolved: '2d ago', rating: 4 },
-]
-
-const tags = ['App Crash', 'Payment Issue', 'Auth Bug', 'Performance', 'CMS Error', 'Submission Delay', 'UI Bug']
-
-function LineChart({ data, color = '#8B5CF6' }: { data: number[]; color?: string }) {
-  const max = Math.max(...data, 1)
-  const w = 300, h = 80
-  const pts = data.map((v, i) => `${(i / (data.length - 1)) * w},${h - (v / max) * (h - 8)}`).join(' ')
-  const id = `lg-sup-${color.replace('#', '')}`
-  return (
-    <svg viewBox={`0 0 ${w} ${h}`} className="w-full h-20" preserveAspectRatio="none">
-      <defs>
-        <linearGradient id={id} x1="0" y1="0" x2="0" y2="1">
-          <stop offset="0%" stopColor={color} stopOpacity="0.2" />
-          <stop offset="100%" stopColor={color} stopOpacity="0" />
-        </linearGradient>
-      </defs>
-      <polygon fill={`url(#${id})`} points={`0,${h} ${pts} ${w},${h}`} />
-      <polyline fill="none" stroke={color} strokeWidth="2" strokeLinejoin="round" points={pts} />
-    </svg>
-  )
-}
-
 export default async function SupportDashboard() {
   const supabase = await createClient()
   const { data: { user } } = await supabase.auth.getUser()
   if (!user) redirect('/admin/login')
 
+  const { data: tickets } = await supabase
+    .from('support_tickets')
+    .select('*')
+    .order('created_at', { ascending: false })
+
+  const list = tickets || []
+  const newTickets = list.filter(t => t.status === 'new')
+  const inProgress = list.filter(t => t.status === 'in_progress')
+  const resolved = list.filter(t => t.status === 'resolved' || t.status === 'closed')
+  const rated = list.filter(t => t.rating != null)
+  const avgRating = rated.length > 0
+    ? (rated.reduce((s, t) => s + (t.rating || 0), 0) / rated.length).toFixed(1)
+    : 'N/A'
+
+  const priorityColor: Record<string, string> = {
+    low: 'text-gray-400',
+    medium: 'text-blue-400',
+    high: 'text-orange-400',
+    urgent: 'text-red-400',
+  }
+
   const metrics = [
-    { label: 'New Tickets', value: newTickets.length, change: 'Needs attention', icon: Ticket, color: 'text-purple-400' },
-    { label: 'In Progress', value: inProgress.length, change: '2 assigned', icon: Clock, color: 'text-purple-400' },
-    { label: 'Resolved (30d)', value: 34, change: '+12 vs last', icon: CheckCircle2, color: 'text-purple-400' },
-    { label: 'CSAT Score', value: '4.9 / 5', change: 'Based on 28 ratings', icon: Star, color: 'text-purple-400' },
+    { label: 'New Tickets', value: newTickets.length, change: 'Needs attention', icon: Ticket },
+    { label: 'In Progress', value: inProgress.length, change: 'Being worked on', icon: Clock },
+    { label: 'Resolved', value: resolved.length, change: 'Closed tickets', icon: CheckCircle2 },
+    { label: 'CSAT Score', value: avgRating === 'N/A' ? 'N/A' : `${avgRating} / 5`, change: `${rated.length} ratings`, icon: Star },
   ]
 
   return (
@@ -69,7 +49,9 @@ export default async function SupportDashboard() {
             <h1 className="text-2xl font-bold text-white">Support Dashboard</h1>
             <p className="text-sm text-gray-400">Tickets, SLAs, satisfaction, and retention signals</p>
           </div>
-          <span className="ml-auto text-xs bg-purple-500/10 text-purple-400 border border-purple-500/20 px-3 py-1 rounded-full font-medium">Live</span>
+          <Link href="/admin/tickets" className="ml-auto text-xs bg-purple-500/10 text-purple-400 border border-purple-500/20 px-3 py-1 rounded-full font-medium hover:bg-purple-500/20 transition-colors">
+            Manage Tickets →
+          </Link>
         </div>
 
         <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
@@ -79,7 +61,7 @@ export default async function SupportDashboard() {
               <div key={m.label} className="bg-[#1A1A2E] border border-[#2A0E61] rounded-xl p-5">
                 <div className="flex items-center justify-between mb-3">
                   <span className="text-xs text-gray-400 font-medium">{m.label}</span>
-                  <Icon className={`w-4 h-4 ${m.color}`} />
+                  <Icon className="w-4 h-4 text-purple-400" />
                 </div>
                 <div className="text-2xl font-bold text-white">{m.value}</div>
                 <div className="text-xs text-purple-400 mt-1">{m.change}</div>
@@ -88,24 +70,27 @@ export default async function SupportDashboard() {
           })}
         </div>
 
-        {/* Ticket columns */}
+        {/* Ticket kanban */}
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-4">
           {/* New */}
           <div className="bg-[#1A1A2E] border border-[#2A0E61] rounded-xl p-5">
             <div className="flex items-center gap-2 mb-4">
               <div className="w-2 h-2 rounded-full bg-red-400 animate-pulse" />
               <h3 className="font-bold text-white text-sm">New ({newTickets.length})</h3>
-              <span className="ml-auto text-xs text-red-400">Urgent</span>
+              <Link href="/admin/tickets/new" className="ml-auto text-xs text-red-400 hover:underline">+ Add</Link>
             </div>
             <div className="space-y-3">
-              {newTickets.map((t) => (
+              {newTickets.length === 0 ? (
+                <p className="text-xs text-gray-600 text-center py-4">No new tickets</p>
+              ) : newTickets.map((t: any) => (
                 <div key={t.id} className="p-3 bg-[#030014] border border-red-500/10 rounded-lg">
                   <div className="flex items-center justify-between mb-1">
-                    <span className="text-xs text-gray-500 font-mono">{t.id}</span>
-                    <span className="text-xs text-red-400">{t.sla}</span>
+                    <span className={`text-xs font-medium capitalize ${priorityColor[t.priority] || 'text-gray-400'}`}>{t.priority}</span>
+                    <span className="text-xs text-gray-500">{t.sla_hours}h SLA</span>
                   </div>
                   <p className="text-sm text-white font-medium leading-snug">{t.subject}</p>
-                  <p className="text-xs text-gray-500 mt-1">{t.client}</p>
+                  <p className="text-xs text-gray-500 mt-1">{t.client_name}</p>
+                  <Link href={`/admin/tickets/${t.id}/edit`} className="text-xs text-purple-400 hover:underline mt-1 inline-block">Edit →</Link>
                 </div>
               ))}
             </div>
@@ -118,14 +103,17 @@ export default async function SupportDashboard() {
               <h3 className="font-bold text-white text-sm">In Progress ({inProgress.length})</h3>
             </div>
             <div className="space-y-3">
-              {inProgress.map((t) => (
+              {inProgress.length === 0 ? (
+                <p className="text-xs text-gray-600 text-center py-4">Nothing in progress</p>
+              ) : inProgress.map((t: any) => (
                 <div key={t.id} className="p-3 bg-[#030014] border border-amber-500/10 rounded-lg">
                   <div className="flex items-center justify-between mb-1">
-                    <span className="text-xs text-gray-500 font-mono">{t.id}</span>
-                    <span className="text-xs text-amber-400">→ {t.assigned}</span>
+                    <span className={`text-xs font-medium capitalize ${priorityColor[t.priority] || 'text-gray-400'}`}>{t.priority}</span>
+                    {t.assigned_to && <span className="text-xs text-amber-400">→ {t.assigned_to}</span>}
                   </div>
                   <p className="text-sm text-white font-medium leading-snug">{t.subject}</p>
-                  <p className="text-xs text-gray-500 mt-1">{t.client}</p>
+                  <p className="text-xs text-gray-500 mt-1">{t.client_name}</p>
+                  <Link href={`/admin/tickets/${t.id}/edit`} className="text-xs text-purple-400 hover:underline mt-1 inline-block">Edit →</Link>
                 </div>
               ))}
             </div>
@@ -138,63 +126,65 @@ export default async function SupportDashboard() {
               <h3 className="font-bold text-white text-sm">Resolved ({resolved.length})</h3>
             </div>
             <div className="space-y-3">
-              {resolved.map((t) => (
+              {resolved.length === 0 ? (
+                <p className="text-xs text-gray-600 text-center py-4">No resolved tickets</p>
+              ) : resolved.slice(0, 5).map((t: any) => (
                 <div key={t.id} className="p-3 bg-[#030014] border border-emerald-500/10 rounded-lg">
-                  <div className="flex items-center justify-between mb-1">
-                    <span className="text-xs text-gray-500 font-mono">{t.id}</span>
-                    <span className="text-xs text-gray-500">{t.resolved}</span>
-                  </div>
                   <p className="text-sm text-white font-medium leading-snug">{t.subject}</p>
-                  <div className="flex items-center gap-0.5 mt-1">
-                    {Array.from({ length: t.rating }).map((_, i) => (
-                      <Star key={i} className="w-3 h-3 fill-amber-400 text-amber-400" />
-                    ))}
-                  </div>
+                  <p className="text-xs text-gray-500 mt-1">{t.client_name}</p>
+                  {t.rating && (
+                    <div className="flex items-center gap-0.5 mt-1">
+                      {Array.from({ length: t.rating }).map((_: any, i: number) => (
+                        <Star key={i} className="w-3 h-3 fill-amber-400 text-amber-400" />
+                      ))}
+                    </div>
+                  )}
                 </div>
               ))}
             </div>
           </div>
         </div>
 
+        {/* Summary stats */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-          {/* Volume trend */}
           <div className="bg-[#1A1A2E] border border-[#2A0E61] rounded-xl p-5">
-            <div className="flex items-center justify-between mb-4">
-              <div>
-                <h3 className="font-bold text-white">Support Volume</h3>
-                <p className="text-xs text-gray-400">Tickets per month — 2025</p>
-              </div>
-              <span className="text-sm font-bold text-purple-400">135 total</span>
-            </div>
-            <LineChart data={volumeData} color="#8B5CF6" />
-            <div className="flex justify-between mt-2">
-              {months.map(m => <span key={m} className="text-[10px] text-gray-600">{m}</span>)}
-            </div>
+            <h3 className="font-bold text-white mb-4">Ticket Breakdown by Priority</h3>
+            {['urgent', 'high', 'medium', 'low'].map(pri => {
+              const count = list.filter(t => t.priority === pri).length
+              const pct = list.length > 0 ? Math.round((count / list.length) * 100) : 0
+              return (
+                <div key={pri} className="mb-3">
+                  <div className="flex justify-between text-xs mb-1">
+                    <span className={`capitalize font-medium ${priorityColor[pri] || 'text-gray-400'}`}>{pri}</span>
+                    <span className="text-white">{count} ({pct}%)</span>
+                  </div>
+                  <div className="w-full h-2 bg-[#030014] rounded-full">
+                    <div className="h-full bg-gradient-to-r from-purple-500 to-cyan-500 rounded-full" style={{ width: `${pct}%` }} />
+                  </div>
+                </div>
+              )
+            })}
           </div>
 
-          {/* Recurring issue tags */}
           <div className="bg-[#1A1A2E] border border-[#2A0E61] rounded-xl p-5">
-            <h3 className="font-bold text-white mb-4">Recurring Issue Tags</h3>
-            <div className="flex flex-wrap gap-2 mb-6">
-              {tags.map((tag) => (
-                <span key={tag} className="px-3 py-1.5 bg-purple-500/10 border border-purple-500/20 rounded-full text-xs text-purple-300 font-medium">
-                  {tag}
-                </span>
+            <h3 className="font-bold text-white mb-4">Quick Stats</h3>
+            <div className="space-y-3">
+              {[
+                { label: 'Total Tickets', value: list.length },
+                { label: 'Open (New + In Progress)', value: newTickets.length + inProgress.length },
+                { label: 'Resolution Rate', value: list.length > 0 ? `${Math.round((resolved.length / list.length) * 100)}%` : 'N/A' },
+                { label: 'Avg. Client Rating', value: avgRating === 'N/A' ? 'N/A' : `${avgRating} / 5` },
+              ].map(s => (
+                <div key={s.label} className="flex justify-between text-sm">
+                  <span className="text-gray-400">{s.label}</span>
+                  <span className="text-white font-semibold">{s.value}</span>
+                </div>
               ))}
             </div>
-            <div className="space-y-2">
-              <div className="flex justify-between text-sm">
-                <span className="text-gray-400">Avg. first response time</span>
-                <span className="text-white font-semibold">1h 24m</span>
-              </div>
-              <div className="flex justify-between text-sm">
-                <span className="text-gray-400">Avg. resolution time</span>
-                <span className="text-white font-semibold">6h 12m</span>
-              </div>
-              <div className="flex justify-between text-sm">
-                <span className="text-gray-400">SLA breach rate</span>
-                <span className="text-emerald-400 font-semibold">0.8%</span>
-              </div>
+            <div className="mt-4 pt-4 border-t border-[#2A0E61]">
+              <Link href="/admin/tickets/new" className="block text-center text-sm text-purple-400 hover:underline">
+                + Log a new support ticket
+              </Link>
             </div>
           </div>
         </div>
