@@ -1,7 +1,7 @@
 'use client'
 
 import { useEffect, useState } from 'react'
-import { Star, Quote, Play } from 'lucide-react'
+import { Star, Quote, Volume2, VolumeX } from 'lucide-react'
 
 interface TextTestimonial {
   id: string
@@ -28,11 +28,92 @@ interface VideoTestimonial {
   order_index: number
 }
 
+// Extract YouTube video ID from any YouTube URL format
+function getYouTubeId(url: string): string | null {
+  const patterns = [
+    /youtube\.com\/shorts\/([a-zA-Z0-9_-]{11})/,
+    /youtube\.com\/watch\?v=([a-zA-Z0-9_-]{11})/,
+    /youtu\.be\/([a-zA-Z0-9_-]{11})/,
+    /youtube\.com\/embed\/([a-zA-Z0-9_-]{11})/,
+  ]
+  for (const re of patterns) {
+    const m = url.match(re)
+    if (m) return m[1]
+  }
+  return null
+}
+
+function getVimeoId(url: string): string | null {
+  const m = url.match(/vimeo\.com\/(\d+)/)
+  return m ? m[1] : null
+}
+
+function isShorts(url: string): boolean {
+  return url.includes('/shorts/')
+}
+
+function getEmbedUrl(url: string, muted: boolean): string {
+  const ytId = getYouTubeId(url)
+  if (ytId) {
+    const muteParam = muted ? '&mute=1' : '&mute=0'
+    return `https://www.youtube.com/embed/${ytId}?autoplay=1${muteParam}&loop=1&playlist=${ytId}&playsinline=1&rel=0&modestbranding=1`
+  }
+  const vimeoId = getVimeoId(url)
+  if (vimeoId) {
+    const muteParam = muted ? '&muted=1' : '&muted=0'
+    return `https://player.vimeo.com/video/${vimeoId}?autoplay=1${muteParam}&loop=1&background=0`
+  }
+  return url
+}
+
+function VideoCard({ testimonial }: { testimonial: VideoTestimonial }) {
+  const [muted, setMuted] = useState(true)
+  const portrait = isShorts(testimonial.video_url)
+  const embedUrl = getEmbedUrl(testimonial.video_url, muted)
+
+  return (
+    <div className={`group relative bg-[#0F2040] border border-[#1E3A5F] rounded-2xl overflow-hidden hover:border-[#2563EB]/40 transition-all duration-200 card-glow flex flex-col ${portrait ? 'max-w-[320px] mx-auto' : ''}`}>
+      {/* Video embed */}
+      <div className={`relative w-full bg-[#0A1628] ${portrait ? 'aspect-[9/16]' : 'aspect-video'}`}>
+        <iframe
+          key={`${testimonial.id}-${muted}`}
+          src={embedUrl}
+          className="absolute inset-0 w-full h-full"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+          allowFullScreen
+        />
+
+        {/* Mute/unmute toggle */}
+        <button
+          onClick={() => setMuted(prev => !prev)}
+          className="absolute bottom-3 right-3 z-10 w-9 h-9 rounded-full bg-black/70 hover:bg-black/90 flex items-center justify-center transition-all border border-white/10 backdrop-blur-sm"
+          title={muted ? 'Unmute' : 'Mute'}
+        >
+          {muted
+            ? <VolumeX className="w-4 h-4 text-white" />
+            : <Volume2 className="w-4 h-4 text-white" />
+          }
+        </button>
+      </div>
+
+      {/* Client info */}
+      <div className="p-4">
+        <h4 className="text-base font-semibold text-white mb-0.5">{testimonial.client_name}</h4>
+        {testimonial.company_name && (
+          <p className="text-sm text-[#2563EB]">{testimonial.company_name}</p>
+        )}
+        {testimonial.country && (
+          <p className="text-xs text-[#94A3B8] mt-0.5">{testimonial.country}</p>
+        )}
+      </div>
+    </div>
+  )
+}
+
 export default function TestimonialsShowcase() {
   const [textTestimonials, setTextTestimonials] = useState<TextTestimonial[]>([])
   const [videoTestimonials, setVideoTestimonials] = useState<VideoTestimonial[]>([])
   const [loading, setLoading] = useState(true)
-  const [selectedVideo, setSelectedVideo] = useState<string | null>(null)
 
   useEffect(() => {
     const fetchTestimonials = async () => {
@@ -74,15 +155,29 @@ export default function TestimonialsShowcase() {
           </p>
         </div>
 
+        {/* Video Testimonials — shown first if present */}
+        {videoTestimonials.length > 0 && (
+          <div className="mb-14">
+            <div className={`grid gap-6 ${
+              videoTestimonials.every(v => isShorts(v.video_url))
+                ? 'grid-cols-1 sm:grid-cols-2 lg:grid-cols-3'
+                : 'grid-cols-1 md:grid-cols-2 lg:grid-cols-3'
+            }`}>
+              {videoTestimonials.map((testimonial) => (
+                <VideoCard key={testimonial.id} testimonial={testimonial} />
+              ))}
+            </div>
+          </div>
+        )}
+
         {/* Text Testimonials */}
         {textTestimonials.length > 0 && (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {textTestimonials.map((testimonial) => (
               <div
                 key={testimonial.id}
                 className="bg-[#0F2040] border border-[#1E3A5F] rounded-2xl p-6 hover:border-[#2563EB]/40 transition-all duration-200 card-glow flex flex-col"
               >
-                {/* Rating */}
                 {testimonial.rating && (
                   <div className="flex gap-1 mb-4">
                     {Array.from({ length: 5 }).map((_, i) => (
@@ -97,16 +192,10 @@ export default function TestimonialsShowcase() {
                     ))}
                   </div>
                 )}
-
-                {/* Quote */}
                 <Quote className="w-8 h-8 text-[#2563EB] mb-3 opacity-40" />
-
-                {/* Text */}
                 <p className="text-[#94A3B8] mb-6 flex-1 leading-relaxed text-sm">
                   &ldquo;{testimonial.testimonial}&rdquo;
                 </p>
-
-                {/* Client info */}
                 <div className="border-t border-[#1E3A5F] pt-4 flex items-center gap-3">
                   {testimonial.avatar_url ? (
                     <img
@@ -131,77 +220,7 @@ export default function TestimonialsShowcase() {
             ))}
           </div>
         )}
-
-        {/* Video Testimonials */}
-        {videoTestimonials.length > 0 && (
-          <div>
-            <h3 className="text-xl font-bold text-white mb-6 text-center">Video Testimonials</h3>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-              {videoTestimonials.map((testimonial) => (
-                <div
-                  key={testimonial.id}
-                  className="group relative bg-[#0F2040] border border-[#1E3A5F] rounded-2xl overflow-hidden hover:border-[#2563EB]/40 transition-all duration-200 cursor-pointer card-glow"
-                  onClick={() => setSelectedVideo(testimonial.video_url)}
-                >
-                  <div className="relative aspect-video bg-[#0A1628]">
-                    {testimonial.thumbnail_url ? (
-                      <img
-                        src={testimonial.thumbnail_url}
-                        alt={testimonial.client_name}
-                        className="w-full h-full object-cover"
-                      />
-                    ) : (
-                      <div className="w-full h-full flex items-center justify-center bg-gradient-to-br from-[#0F2040] to-[#0A1628]">
-                        <Play className="w-12 h-12 text-[#2563EB]/40" />
-                      </div>
-                    )}
-                    <div className="absolute inset-0 bg-black/40 group-hover:bg-black/50 transition-all flex items-center justify-center">
-                      <div className="w-14 h-14 rounded-full bg-[#2563EB] flex items-center justify-center group-hover:scale-110 transition-transform shadow-lg shadow-blue-900/40">
-                        <Play className="w-6 h-6 text-white ml-1" />
-                      </div>
-                    </div>
-                  </div>
-                  <div className="p-5">
-                    <h4 className="text-base font-semibold text-white mb-0.5">{testimonial.client_name}</h4>
-                    {testimonial.company_name && (
-                      <p className="text-sm text-[#2563EB]">{testimonial.company_name}</p>
-                    )}
-                    {testimonial.country && (
-                      <p className="text-xs text-[#94A3B8] mt-0.5">{testimonial.country}</p>
-                    )}
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-        )}
       </div>
-
-      {/* Video Modal */}
-      {selectedVideo && (
-        <div
-          className="fixed inset-0 bg-black/90 z-[100] flex items-center justify-center p-4"
-          onClick={() => setSelectedVideo(null)}
-        >
-          <div
-            className="relative w-full max-w-4xl aspect-video"
-            onClick={(e) => e.stopPropagation()}
-          >
-            <button
-              onClick={() => setSelectedVideo(null)}
-              className="absolute -top-12 right-0 text-white hover:text-[#2563EB] transition-colors font-semibold text-sm"
-            >
-              ✕ Close
-            </button>
-            <iframe
-              src={selectedVideo}
-              className="w-full h-full rounded-xl"
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-              allowFullScreen
-            />
-          </div>
-        </div>
-      )}
     </section>
   )
 }
