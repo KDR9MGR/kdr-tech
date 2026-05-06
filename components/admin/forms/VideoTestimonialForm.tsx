@@ -14,7 +14,7 @@ interface VideoTestimonialFormProps {
   initialData?: {
     id: string
     client_name: string
-    client_company: string | null
+    company_name: string | null
     video_url: string
     thumbnail_url: string | null
     visible: boolean
@@ -29,7 +29,7 @@ export default function VideoTestimonialForm({ initialData, isEdit = false }: Vi
   const [loading, setLoading] = useState(false)
   const [formData, setFormData] = useState({
     client_name: initialData?.client_name || '',
-    client_company: initialData?.client_company || '',
+    company_name: initialData?.company_name || '',
     video_url: initialData?.video_url || '',
     thumbnail_url: initialData?.thumbnail_url || '',
     visible: initialData?.visible ?? true,
@@ -125,13 +125,13 @@ export default function VideoTestimonialForm({ initialData, isEdit = false }: Vi
           </div>
 
           <div className="space-y-2">
-            <Label htmlFor="client_company" className="text-white">
+            <Label htmlFor="company_name" className="text-white">
               Company
             </Label>
             <Input
-              id="client_company"
-              value={formData.client_company}
-              onChange={(e) => handleChange('client_company', e.target.value)}
+              id="company_name"
+              value={formData.company_name}
+              onChange={(e) => handleChange('company_name', e.target.value)}
               className="bg-[#030014] border-[#2A0E61] text-white"
               placeholder="Enter company name"
             />

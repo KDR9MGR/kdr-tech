@@ -9,7 +9,7 @@ import { useToast } from '@/hooks/use-toast'
 interface VideoTestimonial {
   id: string
   client_name: string
-  client_company: string | null
+  company_name: string | null
   video_url: string
   thumbnail_url: string | null
   visible: boolean
