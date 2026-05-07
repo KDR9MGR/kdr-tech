@@ -28,7 +28,6 @@ interface VideoTestimonial {
   order_index: number
 }
 
-// Extract YouTube video ID from any YouTube URL format
 function getYouTubeId(url: string): string | null {
   const patterns = [
     /youtube\.com\/shorts\/([a-zA-Z0-9_-]{11})/,
@@ -66,15 +65,14 @@ function getEmbedUrl(url: string, muted: boolean): string {
   return url
 }
 
-function VideoCard({ testimonial }: { testimonial: VideoTestimonial }) {
+function VideoCard({ testimonial, portrait }: { testimonial: VideoTestimonial; portrait: boolean }) {
   const [muted, setMuted] = useState(true)
-  const portrait = isShorts(testimonial.video_url)
   const embedUrl = getEmbedUrl(testimonial.video_url, muted)
 
   return (
-    <div className={`group relative bg-[#0F2040] border border-[#1E3A5F] rounded-2xl overflow-hidden hover:border-[#2563EB]/40 transition-all duration-200 card-glow flex flex-col ${portrait ? 'max-w-[320px] mx-auto' : ''}`}>
-      {/* Video embed */}
-      <div className={`relative w-full bg-[#0A1628] ${portrait ? 'aspect-[9/16]' : 'aspect-video'}`}>
+    <div className="group relative bg-[#0a0f1e] border border-[#1E3A5F] rounded-2xl overflow-hidden hover:border-[#2563EB]/50 transition-all duration-300 flex flex-col shadow-xl shadow-black/40">
+      {/* Video */}
+      <div className={`relative w-full bg-black ${portrait ? 'aspect-[9/16]' : 'aspect-video'}`}>
         <iframe
           key={`${testimonial.id}-${muted}`}
           src={embedUrl}
@@ -82,11 +80,10 @@ function VideoCard({ testimonial }: { testimonial: VideoTestimonial }) {
           allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
           allowFullScreen
         />
-
-        {/* Mute/unmute toggle */}
+        {/* Mute toggle */}
         <button
           onClick={() => setMuted(prev => !prev)}
-          className="absolute bottom-3 right-3 z-10 w-9 h-9 rounded-full bg-black/70 hover:bg-black/90 flex items-center justify-center transition-all border border-white/10 backdrop-blur-sm"
+          className="absolute top-3 right-3 z-10 w-9 h-9 rounded-full bg-black/70 hover:bg-black flex items-center justify-center transition-all border border-white/10 backdrop-blur-sm"
           title={muted ? 'Unmute' : 'Mute'}
         >
           {muted
@@ -96,15 +93,21 @@ function VideoCard({ testimonial }: { testimonial: VideoTestimonial }) {
         </button>
       </div>
 
-      {/* Client info */}
-      <div className="p-4">
-        <h4 className="text-base font-semibold text-white mb-0.5">{testimonial.client_name}</h4>
-        {testimonial.company_name && (
-          <p className="text-sm text-[#2563EB]">{testimonial.company_name}</p>
-        )}
-        {testimonial.country && (
-          <p className="text-xs text-[#94A3B8] mt-0.5">{testimonial.country}</p>
-        )}
+      {/* Client info bar */}
+      <div className="px-4 py-3 flex items-center gap-3 border-t border-[#1E3A5F]">
+        <div className="w-8 h-8 rounded-full bg-[#2563EB]/20 border border-[#2563EB]/30 flex items-center justify-center text-xs font-bold text-[#2563EB] flex-shrink-0">
+          {testimonial.client_name.charAt(0)}
+        </div>
+        <div className="min-w-0">
+          <p className="text-sm font-semibold text-white truncate">{testimonial.client_name}</p>
+          {(testimonial.company_name || testimonial.country) && (
+            <p className="text-xs text-[#2563EB] truncate">
+              {testimonial.company_name || ''}
+              {testimonial.company_name && testimonial.country ? ' · ' : ''}
+              {testimonial.country || ''}
+            </p>
+          )}
+        </div>
       </div>
     </div>
   )
@@ -139,9 +142,14 @@ export default function TestimonialsShowcase() {
     return null
   }
 
+  // Separate portrait (Shorts) from landscape videos
+  const portraitVideos = videoTestimonials.filter(v => isShorts(v.video_url))
+  const landscapeVideos = videoTestimonials.filter(v => !isShorts(v.video_url))
+
   return (
     <section id="testimonials" className="w-full py-20 lg:py-28">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+
         {/* Section Header */}
         <div className="text-center mb-14">
           <p className="text-sm font-semibold tracking-[0.2em] uppercase text-[#2563EB] mb-3">
@@ -155,24 +163,33 @@ export default function TestimonialsShowcase() {
           </p>
         </div>
 
-        {/* Video Testimonials — shown first if present */}
-        {videoTestimonials.length > 0 && (
-          <div className="mb-14">
-            <div className={`grid gap-6 ${
-              videoTestimonials.every(v => isShorts(v.video_url))
-                ? 'grid-cols-1 sm:grid-cols-2 lg:grid-cols-3'
-                : 'grid-cols-1 md:grid-cols-2 lg:grid-cols-3'
-            }`}>
-              {videoTestimonials.map((testimonial) => (
-                <VideoCard key={testimonial.id} testimonial={testimonial} />
-              ))}
-            </div>
+        {/* Landscape videos — 2 col wide grid */}
+        {landscapeVideos.length > 0 && (
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+            {landscapeVideos.map(v => (
+              <VideoCard key={v.id} testimonial={v} portrait={false} />
+            ))}
+          </div>
+        )}
+
+        {/* Portrait / Shorts videos — 3 col narrow grid */}
+        {portraitVideos.length > 0 && (
+          <div className={`grid gap-5 mb-8 ${
+            portraitVideos.length === 1
+              ? 'grid-cols-1 max-w-xs mx-auto'
+              : portraitVideos.length === 2
+              ? 'grid-cols-2 max-w-lg mx-auto'
+              : 'grid-cols-2 sm:grid-cols-3 lg:grid-cols-4'
+          }`}>
+            {portraitVideos.map(v => (
+              <VideoCard key={v.id} testimonial={v} portrait />
+            ))}
           </div>
         )}
 
         {/* Text Testimonials */}
         {textTestimonials.length > 0 && (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-10">
             {textTestimonials.map((testimonial) => (
               <div
                 key={testimonial.id}
