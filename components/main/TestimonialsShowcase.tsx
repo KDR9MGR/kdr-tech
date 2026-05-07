@@ -1,6 +1,6 @@
 'use client'
 
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { Star, Quote, Volume2, VolumeX } from 'lucide-react'
 
 interface TextTestimonial {
@@ -28,61 +28,41 @@ interface VideoTestimonial {
   order_index: number
 }
 
-function getYouTubeId(url: string): string | null {
-  const patterns = [
-    /youtube\.com\/shorts\/([a-zA-Z0-9_-]{11})/,
-    /youtube\.com\/watch\?v=([a-zA-Z0-9_-]{11})/,
-    /youtu\.be\/([a-zA-Z0-9_-]{11})/,
-    /youtube\.com\/embed\/([a-zA-Z0-9_-]{11})/,
-  ]
-  for (const re of patterns) {
-    const m = url.match(re)
-    if (m) return m[1]
-  }
-  return null
+function isPortrait(url: string): boolean {
+  // Heuristic: Supabase-stored vertical videos often have "portrait" or "shorts" in path
+  // Default to landscape; admin can control this via aspect ratio of uploaded video
+  return url.includes('portrait') || url.includes('shorts') || url.includes('vertical')
 }
 
-function getVimeoId(url: string): string | null {
-  const m = url.match(/vimeo\.com\/(\d+)/)
-  return m ? m[1] : null
-}
-
-function isShorts(url: string): boolean {
-  return url.includes('/shorts/')
-}
-
-function getEmbedUrl(url: string, muted: boolean): string {
-  const ytId = getYouTubeId(url)
-  if (ytId) {
-    const muteParam = muted ? '&mute=1' : '&mute=0'
-    return `https://www.youtube.com/embed/${ytId}?autoplay=1${muteParam}&loop=1&playlist=${ytId}&playsinline=1&rel=0&modestbranding=1`
-  }
-  const vimeoId = getVimeoId(url)
-  if (vimeoId) {
-    const muteParam = muted ? '&muted=1' : '&muted=0'
-    return `https://player.vimeo.com/video/${vimeoId}?autoplay=1${muteParam}&loop=1&background=0`
-  }
-  return url
-}
-
-function VideoCard({ testimonial, portrait }: { testimonial: VideoTestimonial; portrait: boolean }) {
+function VideoCard({ testimonial }: { testimonial: VideoTestimonial }) {
+  const videoRef = useRef<HTMLVideoElement>(null)
   const [muted, setMuted] = useState(true)
-  const embedUrl = getEmbedUrl(testimonial.video_url, muted)
+  const portrait = isPortrait(testimonial.video_url)
+
+  const toggleMute = () => {
+    if (!videoRef.current) return
+    videoRef.current.muted = !videoRef.current.muted
+    setMuted(videoRef.current.muted)
+  }
 
   return (
     <div className="group relative bg-[#0a0f1e] border border-[#1E3A5F] rounded-2xl overflow-hidden hover:border-[#2563EB]/50 transition-all duration-300 flex flex-col shadow-xl shadow-black/40">
-      {/* Video */}
+      {/* Native video */}
       <div className={`relative w-full bg-black ${portrait ? 'aspect-[9/16]' : 'aspect-video'}`}>
-        <iframe
-          key={`${testimonial.id}-${muted}`}
-          src={embedUrl}
-          className="absolute inset-0 w-full h-full"
-          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-          allowFullScreen
+        <video
+          ref={videoRef}
+          src={testimonial.video_url}
+          poster={testimonial.thumbnail_url || undefined}
+          autoPlay
+          muted
+          loop
+          playsInline
+          className="absolute inset-0 w-full h-full object-cover"
         />
+
         {/* Mute toggle */}
         <button
-          onClick={() => setMuted(prev => !prev)}
+          onClick={toggleMute}
           className="absolute top-3 right-3 z-10 w-9 h-9 rounded-full bg-black/70 hover:bg-black flex items-center justify-center transition-all border border-white/10 backdrop-blur-sm"
           title={muted ? 'Unmute' : 'Mute'}
         >
@@ -93,7 +73,7 @@ function VideoCard({ testimonial, portrait }: { testimonial: VideoTestimonial; p
         </button>
       </div>
 
-      {/* Client info bar */}
+      {/* Client info */}
       <div className="px-4 py-3 flex items-center gap-3 border-t border-[#1E3A5F]">
         <div className="w-8 h-8 rounded-full bg-[#2563EB]/20 border border-[#2563EB]/30 flex items-center justify-center text-xs font-bold text-[#2563EB] flex-shrink-0">
           {testimonial.client_name.charAt(0)}
@@ -142,9 +122,8 @@ export default function TestimonialsShowcase() {
     return null
   }
 
-  // Separate portrait (Shorts) from landscape videos
-  const portraitVideos = videoTestimonials.filter(v => isShorts(v.video_url))
-  const landscapeVideos = videoTestimonials.filter(v => !isShorts(v.video_url))
+  const portraitVideos = videoTestimonials.filter(v => isPortrait(v.video_url))
+  const landscapeVideos = videoTestimonials.filter(v => !isPortrait(v.video_url))
 
   return (
     <section id="testimonials" className="w-full py-20 lg:py-28">
@@ -163,16 +142,16 @@ export default function TestimonialsShowcase() {
           </p>
         </div>
 
-        {/* Landscape videos — 2 col wide grid */}
+        {/* Landscape videos — 2-col wide grid */}
         {landscapeVideos.length > 0 && (
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
             {landscapeVideos.map(v => (
-              <VideoCard key={v.id} testimonial={v} portrait={false} />
+              <VideoCard key={v.id} testimonial={v} />
             ))}
           </div>
         )}
 
-        {/* Portrait / Shorts videos — 3 col narrow grid */}
+        {/* Portrait videos — narrow column grid */}
         {portraitVideos.length > 0 && (
           <div className={`grid gap-5 mb-8 ${
             portraitVideos.length === 1
@@ -182,7 +161,7 @@ export default function TestimonialsShowcase() {
               : 'grid-cols-2 sm:grid-cols-3 lg:grid-cols-4'
           }`}>
             {portraitVideos.map(v => (
-              <VideoCard key={v.id} testimonial={v} portrait />
+              <VideoCard key={v.id} testimonial={v} />
             ))}
           </div>
         )}
@@ -198,14 +177,7 @@ export default function TestimonialsShowcase() {
                 {testimonial.rating && (
                   <div className="flex gap-1 mb-4">
                     {Array.from({ length: 5 }).map((_, i) => (
-                      <Star
-                        key={i}
-                        className={`w-4 h-4 ${
-                          i < testimonial.rating!
-                            ? 'fill-yellow-400 text-yellow-400'
-                            : 'text-[#1E3A5F]'
-                        }`}
-                      />
+                      <Star key={i} className={`w-4 h-4 ${i < testimonial.rating! ? 'fill-yellow-400 text-yellow-400' : 'text-[#1E3A5F]'}`} />
                     ))}
                   </div>
                 )}
@@ -215,11 +187,8 @@ export default function TestimonialsShowcase() {
                 </p>
                 <div className="border-t border-[#1E3A5F] pt-4 flex items-center gap-3">
                   {testimonial.avatar_url ? (
-                    <img
-                      src={testimonial.avatar_url}
-                      alt={testimonial.client_name}
-                      className="w-9 h-9 rounded-full object-cover"
-                    />
+                    <img src={testimonial.avatar_url} alt={testimonial.client_name}
+                      className="w-9 h-9 rounded-full object-cover" />
                   ) : (
                     <div className="w-9 h-9 rounded-full bg-[#2563EB]/10 border border-[#2563EB]/20 flex items-center justify-center text-sm font-bold text-[#2563EB]">
                       {testimonial.client_name.charAt(0)}
