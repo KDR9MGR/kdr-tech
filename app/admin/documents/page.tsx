@@ -91,6 +91,11 @@ export default function DocumentsPage() {
     fetchDocuments()
   }, [fetchDocuments])
 
+  const handlePreview = async (doc: Document) => {
+    setSelectedDoc(doc)
+    setIsPreviewOpen(true)
+  }
+
   const onDrop = useCallback(async (acceptedFiles: File[]) => {
     if (acceptedFiles.length === 0) return
 
@@ -105,7 +110,10 @@ export default function DocumentsPage() {
 
       const { error: uploadError, data } = await supabase.storage
         .from('documents')
-        .upload(filePath, file)
+        .upload(filePath, file, {
+          contentType: file.type || (ext === 'html' ? 'text/html' : undefined),
+          upsert: true
+        })
 
       if (uploadError) throw uploadError
 
@@ -169,7 +177,10 @@ export default function DocumentsPage() {
 
       const { error: uploadError } = await supabase.storage
         .from('documents')
-        .upload(filePath, file)
+        .upload(filePath, file, {
+          contentType: 'text/html',
+          upsert: true
+        })
 
       if (uploadError) throw uploadError
 
@@ -428,10 +439,7 @@ export default function DocumentsPage() {
                               <Button
                                 variant="ghost"
                                 size="icon"
-                                onClick={() => {
-                                  setSelectedDoc(doc)
-                                  setIsPreviewOpen(true)
-                                }}
+                                onClick={() => handlePreview(doc)}
                                 className="text-gray-400 hover:text-purple-400 hover:bg-[#030014]"
                               >
                                 <Eye className="w-4 h-4" />
@@ -442,7 +450,11 @@ export default function DocumentsPage() {
                                 asChild
                                 className="text-gray-400 hover:text-white hover:bg-[#030014]"
                               >
-                                <a href={doc.file_url} target="_blank" rel="noopener noreferrer">
+                                <a 
+                                  href={doc.file_type.includes('html') ? `/api/documents/${doc.id}/view` : doc.file_url} 
+                                  target="_blank" 
+                                  rel="noopener noreferrer"
+                                >
                                   <ExternalLink className="w-4 h-4" />
                                 </a>
                               </Button>
@@ -481,9 +493,10 @@ export default function DocumentsPage() {
           <div className="flex-1 bg-white overflow-hidden">
             {selectedDoc && (
               <iframe 
-                src={selectedDoc.file_url} 
+                src={selectedDoc.file_type.includes('html') ? `/api/documents/${selectedDoc.id}/view` : selectedDoc.file_url} 
                 className="w-full h-full border-none"
                 title={selectedDoc.name}
+                sandbox="allow-scripts allow-modals allow-popups allow-forms"
               />
             )}
           </div>
