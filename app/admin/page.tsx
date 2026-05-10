@@ -1,7 +1,7 @@
 import { createClient } from '@/lib/supabase/server'
 import { redirect } from 'next/navigation'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
-import { Users, FileText, MessageSquare, TrendingUp } from 'lucide-react'
+import { Users, FileText, MessageSquare, TrendingUp, File } from 'lucide-react'
 import AdminSidebar from '@/components/admin/AdminSidebar'
 
 export default async function AdminDashboard() {
@@ -16,10 +16,10 @@ export default async function AdminDashboard() {
   }
 
   // Get counts for dashboard stats
-  const [teamCount, blogCount, videoTestimonialsCount, textTestimonialsCount] = await Promise.all([
+  const [teamCount, blogCount, documentCount, textTestimonialsCount] = await Promise.all([
     supabase.from('team_members').select('id', { count: 'exact', head: true }),
     supabase.from('blog_posts').select('id', { count: 'exact', head: true }).eq('status', 'published'),
-    supabase.from('testimonials_video').select('id', { count: 'exact', head: true }).eq('visible', true),
+    supabase.from('documents').select('id', { count: 'exact', head: true }),
     supabase.from('testimonials_text').select('id', { count: 'exact', head: true }).eq('visible', true),
   ])
 
@@ -39,10 +39,10 @@ export default async function AdminDashboard() {
       color: 'from-cyan-500 to-cyan-600',
     },
     {
-      title: 'Video Testimonials',
-      value: videoTestimonialsCount.count || 0,
-      icon: MessageSquare,
-      description: 'Active testimonials',
+      title: 'Documents',
+      value: documentCount.count || 0,
+      icon: File,
+      description: 'Assets & Snippets',
       color: 'from-blue-500 to-blue-600',
     },
     {

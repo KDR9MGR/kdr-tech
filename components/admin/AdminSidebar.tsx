@@ -2,7 +2,7 @@
 
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
-import { Home, Users, FileText, MessageSquare, LogOut, AppWindow, Link2, Briefcase, HelpCircle, BarChart2, FolderKanban, TicketCheck, TrendingUp, File } from 'lucide-react'
+import { Home, Users, FileText, MessageSquare, LogOut, AppWindow, Link2, Briefcase, HelpCircle, BarChart2, FolderKanban, TicketCheck, TrendingUp, File as FileIcon } from 'lucide-react'
 import { createClient } from '@/lib/supabase/client'
 import { useRouter } from 'next/navigation'
 import { Button } from '@/components/ui/button'
@@ -10,7 +10,7 @@ import { Button } from '@/components/ui/button'
 const navItems = [
   { href: '/admin', icon: Home, label: 'Dashboard' },
   { href: '/admin/analytics', icon: BarChart2, label: 'Analytics' },
-  { href: '/admin/documents', icon: File, label: 'Documents' },
+  { href: '/admin/documents', icon: FileIcon, label: 'Documents' },
   { href: '/admin/team', icon: Users, label: 'Team' },
   { href: '/admin/blog', icon: FileText, label: 'Blog' },
   { href: '/admin/case-studies', icon: Briefcase, label: 'Case Studies' },
