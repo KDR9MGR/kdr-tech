@@ -44,6 +44,7 @@ const Navbar = () => {
               width={36}
               height={36}
               className="rounded-md"
+              priority
             />
             <div className="flex flex-col leading-none">
               <span className="font-bold text-white text-base tracking-wide">KDR Tech</span>

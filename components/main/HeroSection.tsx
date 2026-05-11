@@ -22,8 +22,8 @@ const HeroSection = () => {
     >
       {/* Background */}
       <div className="absolute inset-0 pointer-events-none">
-        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[900px] h-[600px] bg-[#2563EB]/8 rounded-full blur-[120px]" />
-        <div className="absolute bottom-0 right-0 w-[500px] h-[400px] bg-[#10B981]/5 rounded-full blur-[100px]" />
+        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[900px] h-[600px] bg-[#2563EB]/8 rounded-full blur-[80px] lg:blur-[120px]" />
+        <div className="absolute bottom-0 right-0 w-[500px] h-[400px] bg-[#10B981]/5 rounded-full blur-[60px] lg:blur-[100px]" />
         <div
           className="absolute inset-0 opacity-[0.03]"
           style={{

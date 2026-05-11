@@ -1,6 +1,7 @@
 'use client'
 
 import { useEffect, useState } from 'react'
+import Image from 'next/image'
 
 interface App {
   id: string
@@ -115,13 +116,12 @@ function ScrollingRow({ apps, direction }: ScrollingRowProps) {
             title={app.app_name}
           >
             <div className="relative w-32 h-32 flex items-center justify-center">
-              <img
+              <Image
                 src={app.logo_url}
                 alt={app.app_name}
-                className="max-w-full max-h-full object-contain"
-                onError={(e) => {
-                  e.currentTarget.src = 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="128" height="128"%3E%3Crect fill="%23333" width="128" height="128"/%3E%3Ctext fill="%23666" x="50%25" y="50%25" dominant-baseline="middle" text-anchor="middle" font-size="12"%3E' + encodeURIComponent(app.app_name) + '%3C/text%3E%3C/svg%3E'
-                }}
+                fill
+                className="object-contain p-2"
+                sizes="128px"
               />
             </div>
             <div className="mt-3 text-center">

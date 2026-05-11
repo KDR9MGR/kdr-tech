@@ -8,9 +8,12 @@ import * as random from "maath/random/dist/maath-random.esm";
 
 const StarBackground = (props: any) => {
   const ref = useRef<any>(null);
-  const [sphere] = useState(() =>
-    random.inSphere(new Float32Array(5000), { radius: 1.2 })
-  );
+  const [sphere] = useState(() => {
+    // Reduce star count on mobile for better performance
+    const isMobile = typeof window !== 'undefined' && window.innerWidth < 768;
+    const count = isMobile ? 2000 : 5000;
+    return random.inSphere(new Float32Array(count), { radius: 1.2 });
+  });
 
   useFrame((state, delta) => {
     if (ref.current) {
