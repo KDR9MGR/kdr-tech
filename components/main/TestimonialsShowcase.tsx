@@ -1,6 +1,7 @@
 'use client'
 
 import { useEffect, useRef, useState } from 'react'
+import Image from 'next/image'
 import { Star, Quote, Volume2, VolumeX } from 'lucide-react'
 
 interface TextTestimonial {
@@ -237,8 +238,15 @@ export default function TestimonialsShowcase() {
                 </p>
                 <div className="border-t border-[#1E3A5F] pt-4 flex items-center gap-3">
                   {testimonial.avatar_url ? (
-                    <img src={testimonial.avatar_url} alt={testimonial.client_name}
-                      className="w-9 h-9 rounded-full object-cover" />
+                    <div className="relative w-9 h-9">
+                      <Image
+                        src={testimonial.avatar_url}
+                        alt={testimonial.client_name}
+                        fill
+                        className="rounded-full object-cover"
+                        unoptimized
+                      />
+                    </div>
                   ) : (
                     <div className="w-9 h-9 rounded-full bg-[#2563EB]/10 border border-[#2563EB]/20 flex items-center justify-center text-sm font-bold text-[#2563EB]">
                       {testimonial.client_name.charAt(0)}

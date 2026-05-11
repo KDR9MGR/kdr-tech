@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react'
 import { useRouter } from 'next/navigation'
+import Image from 'next/image'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
@@ -145,14 +146,13 @@ export default function AppShowcaseForm({ initialData, isEdit = false }: AppShow
               placeholder="https://example.com/logo.png"
             />
             {formData.logo_url && (
-              <div className="mt-2">
-                <img
+              <div className="mt-2 relative w-24 h-24">
+                <Image
                   src={formData.logo_url}
                   alt="Logo preview"
-                  className="w-24 h-24 rounded object-cover border border-[#2A0E61]"
-                  onError={(e) => {
-                    e.currentTarget.src = 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="100" height="100"%3E%3Crect fill="%23333" width="100" height="100"/%3E%3Ctext fill="%23666" x="50%25" y="50%25" dominant-baseline="middle" text-anchor="middle"%3ENo Image%3C/text%3E%3C/svg%3E'
-                  }}
+                  fill
+                  className="rounded object-cover border border-[#2A0E61]"
+                  unoptimized
                 />
               </div>
             )}

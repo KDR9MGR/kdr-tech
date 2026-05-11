@@ -2,6 +2,7 @@
 
 import { useState, useRef } from 'react'
 import { useRouter } from 'next/navigation'
+import Image from 'next/image'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
@@ -221,8 +222,15 @@ export default function VideoTestimonialForm({ initialData, isEdit = false }: Vi
             )}
           </div>
           {formData.thumbnail_url && (
-            <img src={formData.thumbnail_url} alt="Thumbnail"
-              className="w-48 h-auto rounded-lg border border-[#2A0E61]" />
+            <div className="relative w-48 h-27 aspect-video">
+              <Image
+                src={formData.thumbnail_url}
+                alt="Thumbnail"
+                fill
+                className="rounded-lg border border-[#2A0E61] object-cover"
+                unoptimized
+              />
+            </div>
           )}
         </CardContent>
       </Card>
