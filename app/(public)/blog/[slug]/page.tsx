@@ -3,6 +3,7 @@ import { notFound } from 'next/navigation'
 import { format } from 'date-fns'
 import { Calendar, User, ArrowLeft } from 'lucide-react'
 import Link from 'next/link'
+import Image from 'next/image'
 
 export const dynamic = 'force-dynamic'
 
@@ -85,10 +86,12 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
         {/* Featured Image */}
         {post.featured_image && (
           <div className="relative h-96 rounded-lg overflow-hidden mb-8">
-            <img
+            <Image
               src={post.featured_image}
               alt={post.title}
-              className="w-full h-full object-cover"
+              fill
+              className="object-cover"
+              unoptimized
             />
           </div>
         )}

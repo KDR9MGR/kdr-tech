@@ -1,4 +1,5 @@
 import Link from 'next/link'
+import Image from 'next/image'
 import { format } from 'date-fns'
 import { Calendar, User, ArrowRight } from 'lucide-react'
 import { createClient } from '@/lib/supabase/server'
@@ -91,10 +92,12 @@ export default async function BlogPage() {
                 {/* Featured Image */}
                 {post.featured_image && (
                   <div className="relative h-48 overflow-hidden">
-                    <img
+                    <Image
                       src={post.featured_image}
                       alt={post.title}
-                      className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
+                      fill
+                      className="object-cover group-hover:scale-110 transition-transform duration-300"
+                      unoptimized
                     />
                   </div>
                 )}

@@ -2,6 +2,7 @@
 
 import { useEffect, useState, useCallback } from 'react'
 import Link from 'next/link'
+import Image from 'next/image'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table'
@@ -198,25 +199,31 @@ export default function ShowcasePage() {
                     <TableBody>
                       {apps.map((app) => (
                         <TableRow key={app.id} className="border-[#2A0E61] hover:bg-[#030014]">
-                          <TableCell>
-                            <img
-                              src={app.logo_url}
-                              alt={app.app_name}
-                              className="w-12 h-12 rounded object-cover"
-                            />
-                          </TableCell>
                           <TableCell className="text-white font-medium">
-                            <div>{app.app_name}</div>
-                            {app.app_url && (
-                              <a
-                                href={app.app_url}
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                className="text-xs text-purple-400 hover:underline"
-                              >
-                                View App
-                              </a>
-                            )}
+                            <div className="flex items-center gap-3">
+                              <div className="relative w-10 h-10">
+                                <Image
+                                  src={app.logo_url}
+                                  alt={app.app_name}
+                                  fill
+                                  className="rounded object-contain"
+                                  unoptimized
+                                />
+                              </div>
+                              <div>
+                                <div>{app.app_name}</div>
+                                {app.app_url && (
+                                  <a
+                                    href={app.app_url}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    className="text-xs text-purple-400 hover:underline"
+                                  >
+                                    View App
+                                  </a>
+                                )}
+                              </div>
+                            </div>
                           </TableCell>
                           <TableCell className="text-gray-300">
                             {app.category || '-'}
