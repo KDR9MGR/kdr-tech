@@ -44,12 +44,11 @@ const Navbar = () => {
               width={36}
               height={36}
               className="rounded-md"
-              priority
             />
             <div className="flex flex-col leading-none">
               <span className="font-bold text-white text-base tracking-wide">KDR Tech</span>
               <span className="text-[10px] text-[#94A3B8] font-medium tracking-wider uppercase">
-                Digital Agency
+                Mobile Apps
               </span>
             </div>
           </Link>

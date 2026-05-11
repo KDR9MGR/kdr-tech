@@ -75,37 +75,8 @@ function getEmbedUrl(url: string, muted: boolean): string {
 function VideoCard({ testimonial }: { testimonial: VideoTestimonial }) {
   const videoRef = useRef<HTMLVideoElement>(null)
   const [muted, setMuted] = useState(true)
-  const [isVisible, setIsVisible] = useState(false)
-  const containerRef = useRef<HTMLDivElement>(null)
   const portrait = isPortrait(testimonial.video_url)
   const direct = isDirectVideo(testimonial.video_url)
-
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        setIsVisible(entry.isIntersecting)
-      },
-      { threshold: 0.1 }
-    )
-
-    if (containerRef.current) {
-      observer.observe(containerRef.current)
-    }
-
-    return () => observer.disconnect()
-  }, [])
-
-  useEffect(() => {
-    if (direct && videoRef.current) {
-      if (isVisible) {
-        videoRef.current.play().catch(() => {
-          // Autoplay might be blocked
-        })
-      } else {
-        videoRef.current.pause()
-      }
-    }
-  }, [isVisible, direct])
 
   const toggleMute = () => {
     if (direct && videoRef.current) {
@@ -117,34 +88,27 @@ function VideoCard({ testimonial }: { testimonial: VideoTestimonial }) {
   }
 
   return (
-    <div ref={containerRef} className="group relative bg-[#0a0f1e] border border-[#1E3A5F] rounded-2xl overflow-hidden hover:border-[#2563EB]/50 transition-all duration-300 flex flex-col shadow-xl shadow-black/40">
+    <div className="group relative bg-[#0a0f1e] border border-[#1E3A5F] rounded-2xl overflow-hidden hover:border-[#2563EB]/50 transition-all duration-300 flex flex-col shadow-xl shadow-black/40">
       <div className={`relative w-full bg-black ${portrait ? 'aspect-[9/16]' : 'aspect-video'}`}>
         {direct ? (
           <video
             ref={videoRef}
             src={testimonial.video_url}
             poster={testimonial.thumbnail_url || undefined}
+            autoPlay
             muted
             loop
             playsInline
-            preload="metadata"
             className="absolute inset-0 w-full h-full object-cover"
           />
         ) : (
-          isVisible ? (
-            <iframe
-              key={`${testimonial.id}-${muted}`}
-              src={getEmbedUrl(testimonial.video_url, muted)}
-              className="absolute inset-0 w-full h-full"
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-              allowFullScreen
-              loading="lazy"
-            />
-          ) : (
-            <div className="absolute inset-0 flex items-center justify-center bg-[#0a0f1e]">
-              <div className="w-12 h-12 rounded-full border-2 border-[#2563EB]/20 border-t-[#2563EB] animate-spin" />
-            </div>
-          )
+          <iframe
+            key={`${testimonial.id}-${muted}`}
+            src={getEmbedUrl(testimonial.video_url, muted)}
+            className="absolute inset-0 w-full h-full"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowFullScreen
+          />
         )}
 
         {/* Mute toggle */}

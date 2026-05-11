@@ -88,7 +88,6 @@ const Footer = async () => {
                 width={36}
                 height={36}
                 className="rounded-md"
-                loading="lazy"
               />
               <div className="flex flex-col leading-none">
                 <span className="font-bold text-white text-base">KDR Tech</span>
