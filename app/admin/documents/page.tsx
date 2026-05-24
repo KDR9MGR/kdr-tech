@@ -169,7 +169,8 @@ export default function DocumentsPage() {
     try {
       // 1. Create a blob from the content
       const blob = new Blob([snippetContent], { type: 'text/html' })
-      const file = new File([blob], `${snippetName}.html`, { type: 'text/html' })
+      // Use the blob directly for upload instead of creating a new File object
+      // which can cause type issues in some environments
       
       // 2. Upload to Supabase Storage
       const fileName = `${Date.now()}-${Math.random().toString(36).substring(7)}.html`
@@ -177,7 +178,7 @@ export default function DocumentsPage() {
 
       const { error: uploadError } = await supabase.storage
         .from('documents')
-        .upload(filePath, file, {
+        .upload(filePath, blob, {
           contentType: 'text/html',
           upsert: true
         })

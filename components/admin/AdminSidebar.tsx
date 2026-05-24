@@ -9,8 +9,8 @@ import { Button } from '@/components/ui/button'
 
 const navItems = [
   { href: '/admin', icon: Home, label: 'Dashboard' },
-  { href: '/admin/documents', icon: FileIcon, label: 'Documents' },
   { href: '/admin/analytics', icon: BarChart2, label: 'Analytics' },
+  { href: '/admin/documents', icon: FileIcon, label: 'Documents' },
   { href: '/admin/team', icon: Users, label: 'Team' },
   { href: '/admin/blog', icon: FileText, label: 'Blog' },
   { href: '/admin/case-studies', icon: Briefcase, label: 'Case Studies' },

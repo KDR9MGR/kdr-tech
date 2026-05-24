@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from 'react'
 import Link from 'next/link'
+import Image from 'next/image'
 import { useRouter } from 'next/navigation'
 import { createClient } from '@/lib/supabase/client'
 import { Button } from '@/components/ui/button'
@@ -170,12 +171,20 @@ export default function TeamListPage() {
                     <TableRow key={member.id} className="border-[#2A0E61] hover:bg-[#030014]">
                       <TableCell className="text-white font-medium">
                         <div className="flex items-center gap-3">
-                          {member.photo_url && (
-                            <img
-                              src={member.photo_url}
-                              alt={member.full_name}
-                              className="w-10 h-10 rounded-full object-cover"
-                            />
+                          {member.photo_url ? (
+                            <div className="relative w-10 h-10">
+                              <Image
+                                src={member.photo_url}
+                                alt={member.full_name}
+                                fill
+                                className="rounded-full object-cover"
+                                unoptimized
+                              />
+                            </div>
+                          ) : (
+                            <div className="w-10 h-10 rounded-full bg-[#2A0E61] flex items-center justify-center text-xs font-bold text-purple-400">
+                              {member.full_name.charAt(0)}
+                            </div>
                           )}
                           {member.full_name}
                         </div>
