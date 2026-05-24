@@ -9,69 +9,61 @@ interface App {
   app_url: string | null
   description: string | null
   category: string | null
-  scroll_direction: string
-  scroll_speed: number
   visible: boolean
   order_index: number
 }
 
 export default function AppShowcase() {
-  const [leftApps, setLeftApps] = useState<App[]>([])
-  const [rightApps, setRightApps] = useState<App[]>([])
+  const [apps, setApps] = useState<App[]>([])
+  const [scrollSpeed, setScrollSpeed] = useState(30)
   const [loading, setLoading] = useState(true)
 
   useEffect(() => {
-    const fetchApps = async () => {
+    const fetchData = async () => {
       try {
-        const response = await fetch('/api/showcase')
-        const data = await response.json()
+        const [appsRes, settingsRes] = await Promise.all([
+          fetch('/api/showcase'),
+          fetch('/api/settings'),
+        ])
+        const appsData: App[] = await appsRes.json()
+        const settings = await settingsRes.json()
 
-        // Split apps by scroll direction
-        const left = data.filter((app: App) => app.scroll_direction === 'left')
-        const right = data.filter((app: App) => app.scroll_direction === 'right')
+        setApps(appsData)
 
-        setLeftApps(left)
-        setRightApps(right)
+        if (settings.showcase_scroll_speed) {
+          setScrollSpeed(parseInt(settings.showcase_scroll_speed))
+        }
       } catch (error) {
-        console.error('Failed to load apps:', error)
+        console.error('Failed to load showcase data:', error)
       } finally {
         setLoading(false)
       }
     }
 
-    fetchApps()
+    fetchData()
   }, [])
 
-  if (loading) {
-    return null
-  }
-
-  if (leftApps.length === 0 && rightApps.length === 0) {
+  if (loading || apps.length === 0) {
     return null
   }
 
   return (
-    <section className="w-full py-20 bg-transparent relative z-[10]">
+    <section className="w-full py-24 relative z-[10]">
       <div className="max-w-[1400px] mx-auto px-4">
-        <div className="text-center mb-12">
-          <h2 className="text-4xl md:text-5xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-purple-500 to-cyan-500 mb-4">
-            Our Portfolio
-          </h2>
-          <p className="text-gray-300 text-lg">
-            Apps we&apos;ve built for our clients
+        {/* Header */}
+        <div className="text-center mb-16">
+          <p className="text-xs font-semibold tracking-[0.3em] uppercase text-purple-400 mb-3">
+            Our Work
           </p>
+          <h2 className="text-3xl md:text-4xl font-light text-white mb-3">
+            Portfolio
+          </h2>
+          <div className="w-12 h-[1px] bg-gradient-to-r from-transparent via-purple-500 to-transparent mx-auto" />
         </div>
 
-        <div className="space-y-8">
-          {/* Left to Right Scroll Row */}
-          {leftApps.length > 0 && (
-            <ScrollingRow apps={leftApps} direction="left" />
-          )}
-
-          {/* Right to Left Scroll Row */}
-          {rightApps.length > 0 && (
-            <ScrollingRow apps={rightApps} direction="right" />
-          )}
+        <div className="space-y-6">
+          <ScrollingRow apps={apps} direction="left" speed={scrollSpeed} />
+          <ScrollingRow apps={apps} direction="right" speed={scrollSpeed} />
         </div>
       </div>
     </section>
@@ -81,13 +73,10 @@ export default function AppShowcase() {
 interface ScrollingRowProps {
   apps: App[]
   direction: 'left' | 'right'
+  speed: number
 }
 
-function ScrollingRow({ apps, direction }: ScrollingRowProps) {
-  // Global scroll speed setting (in seconds)
-  const GLOBAL_SCROLL_SPEED = 30
-
-  // Duplicate apps array for seamless infinite scroll
+function ScrollingRow({ apps, direction, speed }: ScrollingRowProps) {
   const duplicatedApps = [...apps, ...apps, ...apps]
 
   const handleLogoClick = (app: App) => {
@@ -97,11 +86,11 @@ function ScrollingRow({ apps, direction }: ScrollingRowProps) {
   }
 
   return (
-    <div className="relative overflow-hidden">
+    <div className="relative overflow-hidden group">
       <div
-        className={`flex gap-8 ${direction === 'left' ? 'animate-scroll-left' : 'animate-scroll-right'}`}
+        className={`flex gap-4 ${direction === 'left' ? 'animate-scroll-left' : 'animate-scroll-right'}`}
         style={{
-          animationDuration: `${GLOBAL_SCROLL_SPEED}s`,
+          animationDuration: `${speed}s`,
           width: 'fit-content',
         }}
       >
@@ -109,46 +98,29 @@ function ScrollingRow({ apps, direction }: ScrollingRowProps) {
           <div
             key={`${app.id}-${index}`}
             onClick={() => handleLogoClick(app)}
-            className={`flex-shrink-0 bg-[#1A1A2E] border border-[#2A0E61] rounded-lg p-6 transition-all duration-300 hover:scale-105 hover:border-purple-500/50 hover:shadow-lg hover:shadow-purple-500/20 ${
+            className={`flex-shrink-0 relative flex flex-col items-center justify-center gap-3 w-28 md:w-36 rounded-2xl bg-white/[0.03] backdrop-blur-sm border border-white/[0.06] py-6 transition-all duration-500 hover:bg-white/[0.07] hover:border-white/[0.15] hover:scale-[1.03] ${
               app.app_url ? 'cursor-pointer' : ''
             }`}
             title={app.app_name}
           >
-            <div className="relative w-32 h-32 flex items-center justify-center">
-              <img
-                src={app.logo_url}
-                alt={app.app_name}
-                className="max-w-full max-h-full object-contain"
-                onError={(e) => {
-                  e.currentTarget.src = 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="128" height="128"%3E%3Crect fill="%23333" width="128" height="128"/%3E%3Ctext fill="%23666" x="50%25" y="50%25" dominant-baseline="middle" text-anchor="middle" font-size="12"%3E' + encodeURIComponent(app.app_name) + '%3C/text%3E%3C/svg%3E'
-                }}
-              />
-            </div>
-            <div className="mt-3 text-center">
-              <p className="text-white font-medium text-sm truncate">
-                {app.app_name}
-              </p>
-              {app.category && (
-                <p className="text-gray-400 text-xs mt-1 truncate">
-                  {app.category}
-                </p>
-              )}
-              {app.app_url && (
-                <div className="mt-2 flex items-center justify-center gap-1 text-xs text-purple-400">
-                  <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
-                  </svg>
-                  <span>Visit App</span>
-                </div>
-              )}
-            </div>
+            <img
+              src={app.logo_url}
+              alt={app.app_name}
+              className="w-14 h-14 md:w-18 md:h-18 object-contain opacity-80 grayscale-[30%] transition-all duration-500 hover:opacity-100 hover:grayscale-0"
+              onError={(e) => {
+                e.currentTarget.src = 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="128" height="128"%3E%3Crect fill="%23222" rx="16" width="128" height="128"/%3E%3Ctext fill="%23555" x="50%25" y="50%25" dominant-baseline="middle" text-anchor="middle" font-size="11"%3E' + encodeURIComponent(app.app_name) + '%3C/text%3E%3C/svg%3E'
+              }}
+            />
+            <span className="text-[11px] md:text-xs text-gray-400 font-medium tracking-wide truncate max-w-[90%]">
+              {app.app_name}
+            </span>
           </div>
         ))}
       </div>
 
-      {/* Gradient overlays for seamless edges */}
-      <div className="absolute top-0 left-0 w-32 h-full bg-gradient-to-r from-[#0A1628] to-transparent pointer-events-none z-10" />
-      <div className="absolute top-0 right-0 w-32 h-full bg-gradient-to-l from-[#0A1628] to-transparent pointer-events-none z-10" />
+      {/* Fade edges */}
+      <div className="absolute top-0 left-0 w-24 md:w-40 h-full bg-gradient-to-r from-[#0A1628] to-transparent pointer-events-none z-10" />
+      <div className="absolute top-0 right-0 w-24 md:w-40 h-full bg-gradient-to-l from-[#0A1628] to-transparent pointer-events-none z-10" />
     </div>
   )
 }

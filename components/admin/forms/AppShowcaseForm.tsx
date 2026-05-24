@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 import { useRouter } from 'next/navigation'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
@@ -19,8 +19,6 @@ interface AppShowcaseFormProps {
     app_url: string | null
     description: string | null
     category: string | null
-    scroll_direction: string
-    scroll_speed: number
     visible: boolean
     order_index: number
   }
@@ -37,8 +35,6 @@ export default function AppShowcaseForm({ initialData, isEdit = false }: AppShow
     app_url: initialData?.app_url || '',
     description: initialData?.description || '',
     category: initialData?.category || '',
-    scroll_direction: initialData?.scroll_direction || 'left',
-    scroll_speed: initialData?.scroll_speed || 20,
     visible: initialData?.visible ?? true,
     order_index: initialData?.order_index || 999,
   })
@@ -199,41 +195,6 @@ export default function AppShowcaseForm({ initialData, isEdit = false }: AppShow
               className="bg-[#030014] border-[#2A0E61] text-white min-h-[100px]"
               placeholder="Brief description of the app"
             />
-          </div>
-        </CardContent>
-      </Card>
-
-      <Card className="bg-[#1A1A2E] border-[#2A0E61]">
-        <CardHeader>
-          <CardTitle className="text-white">Scroll Settings</CardTitle>
-          <CardDescription className="text-gray-400">
-            Configure how the app logo scrolls
-          </CardDescription>
-        </CardHeader>
-        <CardContent className="space-y-4">
-          <div className="space-y-2">
-            <Label htmlFor="scroll_direction" className="text-white">
-              Scroll Direction
-            </Label>
-            <Select
-              value={formData.scroll_direction}
-              onValueChange={(value) => handleChange('scroll_direction', value)}
-            >
-              <SelectTrigger className="bg-[#030014] border-[#2A0E61] text-white">
-                <SelectValue />
-              </SelectTrigger>
-              <SelectContent className="bg-[#1A1A2E] border-[#2A0E61]">
-                <SelectItem value="left" className="text-white">
-                  Left to Right
-                </SelectItem>
-                <SelectItem value="right" className="text-white">
-                  Right to Left
-                </SelectItem>
-              </SelectContent>
-            </Select>
-            <p className="text-xs text-gray-400">
-              Scroll speed is controlled globally (currently set to 30 seconds per cycle)
-            </p>
           </div>
         </CardContent>
       </Card>

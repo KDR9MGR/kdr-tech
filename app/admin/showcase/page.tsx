@@ -5,7 +5,9 @@ import Link from 'next/link'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table'
-import { Plus, Edit, Trash2, Eye, EyeOff, ArrowRight, ArrowLeft, Copy } from 'lucide-react'
+import { Input } from '@/components/ui/input'
+import { Label } from '@/components/ui/label'
+import { Plus, Edit, Trash2, Eye, EyeOff, Copy, Settings } from 'lucide-react'
 import { useToast } from '@/hooks/use-toast'
 import AdminSidebar from '@/components/admin/AdminSidebar'
 
@@ -16,8 +18,6 @@ interface App {
   app_url: string | null
   description: string | null
   category: string | null
-  scroll_direction: string
-  scroll_speed: number
   visible: boolean
   order_index: number
 }
@@ -25,19 +25,27 @@ interface App {
 export default function ShowcasePage() {
   const [apps, setApps] = useState<App[]>([])
   const [loading, setLoading] = useState(true)
+  const [scrollSpeed, setScrollSpeed] = useState(30)
+  const [savingSpeed, setSavingSpeed] = useState(false)
   const { toast } = useToast()
 
   const fetchApps = useCallback(async () => {
     setLoading(true)
     try {
-      // Add cache-busting query parameter to force fresh data
-      const response = await fetch(`/api/showcase?admin=true&t=${Date.now()}`)
-      const data = await response.json()
-      setApps(data)
+      const [appsRes, settingsRes] = await Promise.all([
+        fetch(`/api/showcase?admin=true&t=${Date.now()}`),
+        fetch('/api/settings'),
+      ])
+      const appsData = await appsRes.json()
+      const settingsData = await settingsRes.json()
+      setApps(appsData)
+      if (settingsData.showcase_scroll_speed) {
+        setScrollSpeed(parseInt(settingsData.showcase_scroll_speed))
+      }
     } catch (error) {
       toast({
         title: 'Error',
-        description: 'Failed to load apps',
+        description: 'Failed to load data',
         variant: 'destructive',
       })
     } finally {
@@ -105,9 +113,7 @@ export default function ShowcasePage() {
         app_url: app.app_url,
         description: app.description,
         category: app.category,
-        scroll_direction: app.scroll_direction,
-        scroll_speed: app.scroll_speed,
-        visible: false, // Set to hidden by default
+        visible: false,
         order_index: app.order_index + 1,
       }
 
@@ -133,13 +139,39 @@ export default function ShowcasePage() {
     }
   }
 
+  const saveScrollSpeed = async () => {
+    setSavingSpeed(true)
+    try {
+      const response = await fetch('/api/settings', {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ showcase_scroll_speed: scrollSpeed }),
+      })
+
+      if (response.ok) {
+        toast({
+          title: 'Success',
+          description: `Scroll speed set to ${scrollSpeed}s`,
+        })
+      }
+    } catch (error) {
+      toast({
+        title: 'Error',
+        description: 'Failed to save scroll speed',
+        variant: 'destructive',
+      })
+    } finally {
+      setSavingSpeed(false)
+    }
+  }
+
   if (loading) {
     return (
       <div className="flex min-h-screen bg-[#030014]">
         <AdminSidebar />
         <main className="flex-1 p-8">
           <div className="flex items-center justify-center h-64">
-            <p className="text-gray-400">Loading apps...</p>
+            <p className="text-gray-400">Loading...</p>
           </div>
         </main>
       </div>
@@ -154,7 +186,7 @@ export default function ShowcasePage() {
           <div className="flex items-center justify-between">
             <div>
               <h1 className="text-3xl font-bold text-white mb-2">App Showcase</h1>
-              <p className="text-gray-400">Manage completed apps with scrolling logos</p>
+              <p className="text-gray-400">Manage apps — each entry appears on both scrolling strips</p>
             </div>
             <Link href="/admin/showcase/new">
               <Button className="bg-gradient-to-r from-purple-500 to-cyan-500 hover:from-purple-600 hover:to-cyan-600">
@@ -164,11 +196,52 @@ export default function ShowcasePage() {
             </Link>
           </div>
 
+          {/* Scroll Speed Control */}
+          <Card className="bg-[#1A1A2E] border-[#2A0E61]">
+            <CardHeader>
+              <CardTitle className="text-white flex items-center gap-2">
+                <Settings className="w-4 h-4" />
+                Scroll Speed
+              </CardTitle>
+              <CardDescription className="text-gray-400">
+                Controls the speed of both strips globally (seconds per full cycle)
+              </CardDescription>
+            </CardHeader>
+            <CardContent>
+              <div className="flex items-end gap-4">
+                <div className="space-y-2 flex-1 max-w-xs">
+                  <Label htmlFor="scroll_speed" className="text-white">
+                    Speed (seconds)
+                  </Label>
+                  <Input
+                    id="scroll_speed"
+                    type="number"
+                    min={5}
+                    max={120}
+                    value={scrollSpeed}
+                    onChange={(e) => setScrollSpeed(parseInt(e.target.value) || 30)}
+                    className="bg-[#030014] border-[#2A0E61] text-white"
+                  />
+                  <p className="text-xs text-gray-400">
+                    Lower = faster, higher = slower. Recommended: 20–60s
+                  </p>
+                </div>
+                <Button
+                  onClick={saveScrollSpeed}
+                  disabled={savingSpeed}
+                  className="bg-gradient-to-r from-purple-500 to-cyan-500 hover:from-purple-600 hover:to-cyan-600"
+                >
+                  {savingSpeed ? 'Saving...' : 'Save Speed'}
+                </Button>
+              </div>
+            </CardContent>
+          </Card>
+
           <Card className="bg-[#1A1A2E] border-[#2A0E61]">
             <CardHeader>
               <CardTitle className="text-white">All Apps</CardTitle>
               <CardDescription className="text-gray-400">
-                {apps.length} app{apps.length !== 1 ? 's' : ''} total
+                {apps.length} app{apps.length !== 1 ? 's' : ''} total — shown on both strips
               </CardDescription>
             </CardHeader>
             <CardContent>
@@ -190,7 +263,6 @@ export default function ShowcasePage() {
                         <TableHead className="text-gray-400">Logo</TableHead>
                         <TableHead className="text-gray-400">App Name</TableHead>
                         <TableHead className="text-gray-400">Category</TableHead>
-                        <TableHead className="text-gray-400">Scroll</TableHead>
                         <TableHead className="text-gray-400">Status</TableHead>
                         <TableHead className="text-gray-400 text-right">Actions</TableHead>
                       </TableRow>
@@ -220,16 +292,6 @@ export default function ShowcasePage() {
                           </TableCell>
                           <TableCell className="text-gray-300">
                             {app.category || '-'}
-                          </TableCell>
-                          <TableCell className="text-gray-300">
-                            <div className="flex items-center gap-1">
-                              {app.scroll_direction === 'left' ? (
-                                <ArrowLeft className="w-4 h-4" />
-                              ) : (
-                                <ArrowRight className="w-4 h-4" />
-                              )}
-                              <span className="capitalize">{app.scroll_direction}</span>
-                            </div>
                           </TableCell>
                           <TableCell>
                             <button

@@ -13,8 +13,6 @@ interface App {
   app_url: string | null
   description: string | null
   category: string | null
-  scroll_direction: string
-  scroll_speed: number
   visible: boolean
   order_index: number
 }
