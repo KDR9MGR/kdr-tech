@@ -202,9 +202,11 @@ const Footer = async () => {
           <p className="text-sm text-[#64748B]">
             © {new Date().getFullYear()} KDR Tech. All rights reserved.
           </p>
-          <div className="flex items-center gap-5 text-sm text-[#64748B]">
-            <a href="/privacy-policy" className="hover:text-white transition-colors">Privacy Policy</a>
-            <a href="/terms" className="hover:text-white transition-colors">Terms of Service</a>
+          <div className="flex flex-wrap items-center gap-x-5 gap-y-2 text-sm text-[#64748B]">
+            <a href="/contact-us" className="hover:text-white transition-colors">Contact Us</a>
+            <a href="/terms-and-conditions" className="hover:text-white transition-colors">Terms &amp; Conditions</a>
+            <a href="/refund-and-cancellation-policy" className="hover:text-white transition-colors">Refund Policy</a>
+            <a href="/shipping-and-delivery-policy" className="hover:text-white transition-colors">Shipping Policy</a>
           </div>
         </div>
       </div>
