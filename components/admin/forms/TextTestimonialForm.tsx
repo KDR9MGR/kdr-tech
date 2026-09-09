@@ -288,7 +288,7 @@ export default function TextTestimonialForm({ initialData, isEdit = false }: Tex
         <Button
           type="submit"
           disabled={loading}
-          className="bg-gradient-to-r from-purple-500 to-cyan-500 hover:from-purple-600 hover:to-cyan-600"
+          className="bg-gradient-to-r from-brand-indigo to-brand-magenta hover:from-brand-indigo-hover hover:to-brand-magenta-hover"
         >
           <Save className="w-4 h-4 mr-2" />
           {loading ? 'Saving...' : isEdit ? 'Update Testimonial' : 'Create Testimonial'}

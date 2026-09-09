@@ -41,7 +41,7 @@ const ProfileCard: React.FC<ProfileCardProps> = ({ image, name, role, descriptio
         <p className="mt-2 text-sm text-gray-400">{description}</p>
         <p className="mt-2 text-sm text-indigo-400">{quote}</p>
         {profileUrl && (
-          <p className="mt-2 text-xs text-purple-400 flex items-center gap-1">
+          <p className="mt-2 text-xs text-brand-magenta flex items-center gap-1">
             <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
             </svg>

@@ -211,15 +211,15 @@ export default async function ExecutiveDashboard() {
               ))}
             </div>
             <div className="mt-4 grid grid-cols-3 gap-3">
-              <Link href="/admin/projects" className="text-center p-3 bg-[#030014] rounded-lg hover:bg-purple-500/10 transition-colors">
+              <Link href="/admin/projects" className="text-center p-3 bg-[#030014] rounded-lg hover:bg-brand-magenta/10 transition-colors">
                 <div className="text-lg font-bold text-white">{projects.length}</div>
                 <div className="text-[10px] text-gray-500">Projects</div>
               </Link>
-              <Link href="/admin/tickets" className="text-center p-3 bg-[#030014] rounded-lg hover:bg-purple-500/10 transition-colors">
+              <Link href="/admin/tickets" className="text-center p-3 bg-[#030014] rounded-lg hover:bg-brand-magenta/10 transition-colors">
                 <div className="text-lg font-bold text-white">{tickets.length}</div>
                 <div className="text-[10px] text-gray-500">Tickets</div>
               </Link>
-              <Link href="/admin/deals" className="text-center p-3 bg-[#030014] rounded-lg hover:bg-purple-500/10 transition-colors">
+              <Link href="/admin/deals" className="text-center p-3 bg-[#030014] rounded-lg hover:bg-brand-magenta/10 transition-colors">
                 <div className="text-lg font-bold text-white">{deals.length}</div>
                 <div className="text-[10px] text-gray-500">Deals</div>
               </Link>

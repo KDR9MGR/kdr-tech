@@ -28,7 +28,7 @@ export default async function CaseStudiesAdminPage() {
           <p className="text-gray-400 mt-1">Manage portfolio case studies shown on the public site</p>
         </div>
         <Link href="/admin/case-studies/new">
-          <Button className="bg-gradient-to-r from-purple-500 to-cyan-500 hover:from-purple-600 hover:to-cyan-600">
+          <Button className="bg-gradient-to-r from-brand-indigo to-brand-magenta hover:from-brand-indigo-hover hover:to-brand-magenta-hover">
             <Plus className="w-4 h-4 mr-2" />Add Case Study
           </Button>
         </Link>
@@ -40,7 +40,7 @@ export default async function CaseStudiesAdminPage() {
           <h3 className="text-xl font-semibold text-white mb-2">No case studies yet</h3>
           <p className="text-gray-400 mb-6">Add your first portfolio case study to display on the public site.</p>
           <Link href="/admin/case-studies/new">
-            <Button className="bg-gradient-to-r from-purple-500 to-cyan-500">
+            <Button className="bg-gradient-to-r from-brand-indigo to-brand-magenta">
               <Plus className="w-4 h-4 mr-2" />Add First Case Study
             </Button>
           </Link>

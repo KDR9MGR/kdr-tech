@@ -28,7 +28,7 @@ export default function TiptapEditor({ content, onChange, placeholder }: TiptapE
       Link.configure({
         openOnClick: false,
         HTMLAttributes: {
-          class: 'text-purple-400 underline',
+          class: 'text-brand-magenta underline',
         },
       }),
       Image.configure({
@@ -82,7 +82,7 @@ export default function TiptapEditor({ content, onChange, placeholder }: TiptapE
           size="sm"
           variant="ghost"
           onClick={() => editor.chain().focus().toggleBold().run()}
-          className={editor.isActive('bold') ? 'bg-purple-500/20 text-purple-400' : 'text-gray-400'}
+          className={editor.isActive('bold') ? 'bg-brand-magenta/20 text-brand-magenta' : 'text-gray-400'}
         >
           <Bold className="w-4 h-4" />
         </Button>
@@ -91,7 +91,7 @@ export default function TiptapEditor({ content, onChange, placeholder }: TiptapE
           size="sm"
           variant="ghost"
           onClick={() => editor.chain().focus().toggleItalic().run()}
-          className={editor.isActive('italic') ? 'bg-purple-500/20 text-purple-400' : 'text-gray-400'}
+          className={editor.isActive('italic') ? 'bg-brand-magenta/20 text-brand-magenta' : 'text-gray-400'}
         >
           <Italic className="w-4 h-4" />
         </Button>
@@ -100,7 +100,7 @@ export default function TiptapEditor({ content, onChange, placeholder }: TiptapE
           size="sm"
           variant="ghost"
           onClick={() => editor.chain().focus().toggleUnderline().run()}
-          className={editor.isActive('underline') ? 'bg-purple-500/20 text-purple-400' : 'text-gray-400'}
+          className={editor.isActive('underline') ? 'bg-brand-magenta/20 text-brand-magenta' : 'text-gray-400'}
         >
           <UnderlineIcon className="w-4 h-4" />
         </Button>
@@ -109,7 +109,7 @@ export default function TiptapEditor({ content, onChange, placeholder }: TiptapE
           size="sm"
           variant="ghost"
           onClick={() => editor.chain().focus().toggleStrike().run()}
-          className={editor.isActive('strike') ? 'bg-purple-500/20 text-purple-400' : 'text-gray-400'}
+          className={editor.isActive('strike') ? 'bg-brand-magenta/20 text-brand-magenta' : 'text-gray-400'}
         >
           <Strikethrough className="w-4 h-4" />
         </Button>
@@ -118,7 +118,7 @@ export default function TiptapEditor({ content, onChange, placeholder }: TiptapE
           size="sm"
           variant="ghost"
           onClick={() => editor.chain().focus().toggleCode().run()}
-          className={editor.isActive('code') ? 'bg-purple-500/20 text-purple-400' : 'text-gray-400'}
+          className={editor.isActive('code') ? 'bg-brand-magenta/20 text-brand-magenta' : 'text-gray-400'}
         >
           <Code className="w-4 h-4" />
         </Button>
@@ -131,7 +131,7 @@ export default function TiptapEditor({ content, onChange, placeholder }: TiptapE
           size="sm"
           variant="ghost"
           onClick={() => editor.chain().focus().toggleHeading({ level: 1 }).run()}
-          className={editor.isActive('heading', { level: 1 }) ? 'bg-purple-500/20 text-purple-400' : 'text-gray-400'}
+          className={editor.isActive('heading', { level: 1 }) ? 'bg-brand-magenta/20 text-brand-magenta' : 'text-gray-400'}
         >
           <Heading1 className="w-4 h-4" />
         </Button>
@@ -140,7 +140,7 @@ export default function TiptapEditor({ content, onChange, placeholder }: TiptapE
           size="sm"
           variant="ghost"
           onClick={() => editor.chain().focus().toggleHeading({ level: 2 }).run()}
-          className={editor.isActive('heading', { level: 2 }) ? 'bg-purple-500/20 text-purple-400' : 'text-gray-400'}
+          className={editor.isActive('heading', { level: 2 }) ? 'bg-brand-magenta/20 text-brand-magenta' : 'text-gray-400'}
         >
           <Heading2 className="w-4 h-4" />
         </Button>
@@ -149,7 +149,7 @@ export default function TiptapEditor({ content, onChange, placeholder }: TiptapE
           size="sm"
           variant="ghost"
           onClick={() => editor.chain().focus().toggleHeading({ level: 3 }).run()}
-          className={editor.isActive('heading', { level: 3 }) ? 'bg-purple-500/20 text-purple-400' : 'text-gray-400'}
+          className={editor.isActive('heading', { level: 3 }) ? 'bg-brand-magenta/20 text-brand-magenta' : 'text-gray-400'}
         >
           <Heading3 className="w-4 h-4" />
         </Button>
@@ -162,7 +162,7 @@ export default function TiptapEditor({ content, onChange, placeholder }: TiptapE
           size="sm"
           variant="ghost"
           onClick={() => editor.chain().focus().toggleBulletList().run()}
-          className={editor.isActive('bulletList') ? 'bg-purple-500/20 text-purple-400' : 'text-gray-400'}
+          className={editor.isActive('bulletList') ? 'bg-brand-magenta/20 text-brand-magenta' : 'text-gray-400'}
         >
           <List className="w-4 h-4" />
         </Button>
@@ -171,7 +171,7 @@ export default function TiptapEditor({ content, onChange, placeholder }: TiptapE
           size="sm"
           variant="ghost"
           onClick={() => editor.chain().focus().toggleOrderedList().run()}
-          className={editor.isActive('orderedList') ? 'bg-purple-500/20 text-purple-400' : 'text-gray-400'}
+          className={editor.isActive('orderedList') ? 'bg-brand-magenta/20 text-brand-magenta' : 'text-gray-400'}
         >
           <ListOrdered className="w-4 h-4" />
         </Button>
@@ -180,7 +180,7 @@ export default function TiptapEditor({ content, onChange, placeholder }: TiptapE
           size="sm"
           variant="ghost"
           onClick={() => editor.chain().focus().toggleBlockquote().run()}
-          className={editor.isActive('blockquote') ? 'bg-purple-500/20 text-purple-400' : 'text-gray-400'}
+          className={editor.isActive('blockquote') ? 'bg-brand-magenta/20 text-brand-magenta' : 'text-gray-400'}
         >
           <Quote className="w-4 h-4" />
         </Button>
@@ -193,7 +193,7 @@ export default function TiptapEditor({ content, onChange, placeholder }: TiptapE
           size="sm"
           variant="ghost"
           onClick={() => editor.chain().focus().setTextAlign('left').run()}
-          className={editor.isActive({ textAlign: 'left' }) ? 'bg-purple-500/20 text-purple-400' : 'text-gray-400'}
+          className={editor.isActive({ textAlign: 'left' }) ? 'bg-brand-magenta/20 text-brand-magenta' : 'text-gray-400'}
         >
           <AlignLeft className="w-4 h-4" />
         </Button>
@@ -202,7 +202,7 @@ export default function TiptapEditor({ content, onChange, placeholder }: TiptapE
           size="sm"
           variant="ghost"
           onClick={() => editor.chain().focus().setTextAlign('center').run()}
-          className={editor.isActive({ textAlign: 'center' }) ? 'bg-purple-500/20 text-purple-400' : 'text-gray-400'}
+          className={editor.isActive({ textAlign: 'center' }) ? 'bg-brand-magenta/20 text-brand-magenta' : 'text-gray-400'}
         >
           <AlignCenter className="w-4 h-4" />
         </Button>
@@ -211,7 +211,7 @@ export default function TiptapEditor({ content, onChange, placeholder }: TiptapE
           size="sm"
           variant="ghost"
           onClick={() => editor.chain().focus().setTextAlign('right').run()}
-          className={editor.isActive({ textAlign: 'right' }) ? 'bg-purple-500/20 text-purple-400' : 'text-gray-400'}
+          className={editor.isActive({ textAlign: 'right' }) ? 'bg-brand-magenta/20 text-brand-magenta' : 'text-gray-400'}
         >
           <AlignRight className="w-4 h-4" />
         </Button>
@@ -224,7 +224,7 @@ export default function TiptapEditor({ content, onChange, placeholder }: TiptapE
           size="sm"
           variant="ghost"
           onClick={addLink}
-          className={editor.isActive('link') ? 'bg-purple-500/20 text-purple-400' : 'text-gray-400'}
+          className={editor.isActive('link') ? 'bg-brand-magenta/20 text-brand-magenta' : 'text-gray-400'}
         >
           <LinkIcon className="w-4 h-4" />
         </Button>

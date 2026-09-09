@@ -127,7 +127,7 @@ export default function TeamListPage() {
           <p className="text-gray-400">Manage your team members</p>
         </div>
         <Link href="/admin/team/new">
-          <Button className="bg-gradient-to-r from-purple-500 to-cyan-500 hover:from-purple-600 hover:to-cyan-600">
+          <Button className="bg-gradient-to-r from-brand-indigo to-brand-magenta hover:from-brand-indigo-hover hover:to-brand-magenta-hover">
             <Plus className="w-4 h-4 mr-2" />
             Add Team Member
           </Button>
@@ -182,7 +182,7 @@ export default function TeamListPage() {
                               />
                             </div>
                           ) : (
-                            <div className="w-10 h-10 rounded-full bg-[#2A0E61] flex items-center justify-center text-xs font-bold text-purple-400">
+                            <div className="w-10 h-10 rounded-full bg-[#2A0E61] flex items-center justify-center text-xs font-bold text-brand-magenta">
                               {member.full_name.charAt(0)}
                             </div>
                           )}

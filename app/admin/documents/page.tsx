@@ -396,7 +396,7 @@ export default function DocumentsPage() {
                     <Button 
                       onClick={handleSaveSnippet} 
                       disabled={isSavingSnippet}
-                      className="w-full bg-gradient-to-r from-purple-500 to-cyan-500 hover:from-purple-600 hover:to-cyan-600 text-white"
+                      className="w-full bg-gradient-to-r from-brand-indigo to-brand-magenta hover:from-brand-indigo-hover hover:to-brand-magenta-hover text-white"
                     >
                       {isSavingSnippet ? 'Saving...' : 'Save & Preview'}
                     </Button>
@@ -406,7 +406,7 @@ export default function DocumentsPage() {
 
               <Dialog open={isUploadDialogOpen} onOpenChange={setIsUploadDialogOpen}>
                 <DialogTrigger asChild>
-                  <Button className="bg-gradient-to-r from-purple-500 to-cyan-500 hover:from-purple-600 hover:to-cyan-600 text-white">
+                  <Button className="bg-gradient-to-r from-brand-indigo to-brand-magenta hover:from-brand-indigo-hover hover:to-brand-magenta-hover text-white">
                     <Plus className="w-4 h-4 mr-2" />
                     Upload File
                   </Button>
@@ -422,19 +422,19 @@ export default function DocumentsPage() {
                     {...getRootProps()}
                     className={`mt-4 border-2 border-dashed rounded-xl p-10 flex flex-col items-center justify-center transition-colors cursor-pointer ${
                       isDragActive 
-                        ? 'border-purple-500 bg-purple-500/10' 
-                        : 'border-[#2A0E61] hover:border-purple-500/50 bg-[#030014]'
+                        ? 'border-brand-magenta bg-brand-magenta/10' 
+                        : 'border-[#2A0E61] hover:border-brand-magenta/50 bg-[#030014]'
                     }`}
                   >
                     <input {...getInputProps()} />
                     {uploading ? (
                       <div className="flex flex-col items-center gap-2">
-                        <Loader2 className="w-10 h-10 text-purple-500 animate-spin" />
+                        <Loader2 className="w-10 h-10 text-brand-magenta animate-spin" />
                         <p className="text-sm text-gray-400">Uploading...</p>
                       </div>
                     ) : (
                       <>
-                        <Upload className={`w-10 h-10 mb-4 ${isDragActive ? 'text-purple-500' : 'text-gray-500'}`} />
+                        <Upload className={`w-10 h-10 mb-4 ${isDragActive ? 'text-brand-magenta' : 'text-gray-500'}`} />
                         <p className="text-sm text-center text-gray-400">
                           {isDragActive ? 'Drop the file here' : 'Drag & drop or click to upload'}
                         </p>
@@ -464,7 +464,7 @@ export default function DocumentsPage() {
             <CardContent>
               {loading ? (
                 <div className="flex justify-center py-10">
-                  <Loader2 className="w-8 h-8 text-purple-500 animate-spin" />
+                  <Loader2 className="w-8 h-8 text-brand-magenta animate-spin" />
                 </div>
               ) : filteredDocuments.length === 0 ? (
                 <div className="text-center py-20 text-gray-500">
@@ -474,7 +474,7 @@ export default function DocumentsPage() {
                     <Button 
                       variant="link" 
                       onClick={() => setSearchQuery('')}
-                      className="text-purple-400"
+                      className="text-brand-magenta"
                     >
                       Clear search
                     </Button>
@@ -497,8 +497,8 @@ export default function DocumentsPage() {
                         <TableRow key={doc.id} className="border-[#2A0E61] hover:bg-[#2A0E61]/20">
                           <TableCell className="font-medium text-white">
                             <div className="flex items-center gap-3">
-                              <div className="p-2 rounded bg-purple-500/10">
-                                <File className="w-4 h-4 text-purple-400" />
+                              <div className="p-2 rounded bg-brand-magenta/10">
+                                <File className="w-4 h-4 text-brand-magenta" />
                               </div>
                               <span className="truncate max-w-[200px] md:max-w-[400px]">
                                 {doc.name}
@@ -520,7 +520,7 @@ export default function DocumentsPage() {
                                 variant="ghost"
                                 size="icon"
                                 onClick={() => handlePreview(doc)}
-                                className="text-gray-400 hover:text-purple-400 hover:bg-[#030014]"
+                                className="text-gray-400 hover:text-brand-magenta hover:bg-[#030014]"
                               >
                                 <Eye className="w-4 h-4" />
                               </Button>
@@ -584,7 +584,7 @@ export default function DocumentsPage() {
                 sandbox="allow-scripts allow-modals allow-popups allow-forms"
               />
             ) : (
-              <Loader2 className="w-8 h-8 text-purple-500 animate-spin" />
+              <Loader2 className="w-8 h-8 text-brand-magenta animate-spin" />
             )}
           </div>
         </DialogContent>

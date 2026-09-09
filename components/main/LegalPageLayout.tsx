@@ -19,13 +19,13 @@ export default function LegalPageLayout({
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
         <Link
           href="/"
-          className="inline-flex items-center gap-2 text-gray-400 hover:text-purple-400 transition-colors mb-8"
+          className="inline-flex items-center gap-2 text-gray-400 hover:text-brand-magenta transition-colors mb-8"
         >
           <ArrowLeft className="w-4 h-4" />
           <span>Back to Home</span>
         </Link>
 
-        <h1 className="text-4xl sm:text-5xl font-bold mb-4 bg-gradient-to-r from-purple-400 to-cyan-500 bg-clip-text text-transparent">
+        <h1 className="text-4xl sm:text-5xl font-bold mb-4 text-gradient-blue">
           {title}
         </h1>
 
@@ -41,7 +41,7 @@ export default function LegalPageLayout({
           [&_h3]:text-lg [&_h3]:font-semibold [&_h3]:text-white [&_h3]:mt-6 [&_h3]:mb-2
           [&_p]:mb-4
           [&_ul]:list-disc [&_ul]:pl-6 [&_ul]:space-y-2 [&_ul]:mb-4
-          [&_a]:text-purple-400 [&_a]:hover:underline
+          [&_a]:text-brand-magenta [&_a]:hover:underline
           [&_strong]:text-white [&_strong]:font-semibold"
         >
           {children}

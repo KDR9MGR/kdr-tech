@@ -105,7 +105,7 @@ export default function BlogListPage() {
           <p className="text-gray-400">Manage your blog content</p>
         </div>
         <Link href="/admin/blog/new">
-          <Button className="bg-gradient-to-r from-purple-500 to-cyan-500 hover:from-purple-600 hover:to-cyan-600">
+          <Button className="bg-gradient-to-r from-brand-indigo to-brand-magenta hover:from-brand-indigo-hover hover:to-brand-magenta-hover">
             <Plus className="w-4 h-4 mr-2" />
             Create Post
           </Button>
@@ -116,21 +116,21 @@ export default function BlogListPage() {
         <Button
           variant={filter === 'all' ? 'default' : 'outline'}
           onClick={() => setFilter('all')}
-          className={filter === 'all' ? 'bg-gradient-to-r from-purple-500 to-cyan-500' : 'border-[#2A0E61] text-white hover:bg-[#030014]'}
+          className={filter === 'all' ? 'bg-gradient-to-r from-brand-indigo to-brand-magenta' : 'border-[#2A0E61] text-white hover:bg-[#030014]'}
         >
           All Posts
         </Button>
         <Button
           variant={filter === 'published' ? 'default' : 'outline'}
           onClick={() => setFilter('published')}
-          className={filter === 'published' ? 'bg-gradient-to-r from-purple-500 to-cyan-500' : 'border-[#2A0E61] text-white hover:bg-[#030014]'}
+          className={filter === 'published' ? 'bg-gradient-to-r from-brand-indigo to-brand-magenta' : 'border-[#2A0E61] text-white hover:bg-[#030014]'}
         >
           Published
         </Button>
         <Button
           variant={filter === 'draft' ? 'default' : 'outline'}
           onClick={() => setFilter('draft')}
-          className={filter === 'draft' ? 'bg-gradient-to-r from-purple-500 to-cyan-500' : 'border-[#2A0E61] text-white hover:bg-[#030014]'}
+          className={filter === 'draft' ? 'bg-gradient-to-r from-brand-indigo to-brand-magenta' : 'border-[#2A0E61] text-white hover:bg-[#030014]'}
         >
           Drafts
         </Button>

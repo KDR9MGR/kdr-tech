@@ -391,7 +391,7 @@ export default function TeamMemberForm({ initialData, isEdit = false }: TeamMemb
         <Button
           type="submit"
           disabled={loading}
-          className="bg-gradient-to-r from-purple-500 to-cyan-500 hover:from-purple-600 hover:to-cyan-600"
+          className="bg-gradient-to-r from-brand-indigo to-brand-magenta hover:from-brand-indigo-hover hover:to-brand-magenta-hover"
         >
           {loading && <Loader2 className="w-4 h-4 mr-2 animate-spin" />}
           {isEdit ? 'Update Team Member' : 'Create Team Member'}

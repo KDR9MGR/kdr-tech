@@ -152,7 +152,7 @@ export default function FAQForm({ initialData, isEdit = false }: FAQFormProps) {
         <Button type="button" variant="outline" onClick={() => router.push('/admin/faqs')}
           className="border-[#2A0E61] text-white hover:bg-[#030014]">Cancel</Button>
         <Button type="submit" disabled={loading}
-          className="bg-gradient-to-r from-purple-500 to-cyan-500 hover:from-purple-600 hover:to-cyan-600">
+          className="bg-gradient-to-r from-brand-indigo to-brand-magenta hover:from-brand-indigo-hover hover:to-brand-magenta-hover">
           <Save className="w-4 h-4 mr-2" />
           {loading ? 'Saving...' : isEdit ? 'Update FAQ' : 'Create FAQ'}
         </Button>

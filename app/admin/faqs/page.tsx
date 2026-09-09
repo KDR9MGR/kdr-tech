@@ -28,7 +28,7 @@ export default async function FAQsAdminPage() {
           <p className="text-gray-400 mt-1">Manage frequently asked questions shown on the public site</p>
         </div>
         <Link href="/admin/faqs/new">
-          <Button className="bg-gradient-to-r from-purple-500 to-cyan-500 hover:from-purple-600 hover:to-cyan-600">
+          <Button className="bg-gradient-to-r from-brand-indigo to-brand-magenta hover:from-brand-indigo-hover hover:to-brand-magenta-hover">
             <Plus className="w-4 h-4 mr-2" />Add FAQ
           </Button>
         </Link>
@@ -40,7 +40,7 @@ export default async function FAQsAdminPage() {
           <h3 className="text-xl font-semibold text-white mb-2">No FAQs yet</h3>
           <p className="text-gray-400 mb-6">Add frequently asked questions to build trust with potential clients.</p>
           <Link href="/admin/faqs/new">
-            <Button className="bg-gradient-to-r from-purple-500 to-cyan-500">
+            <Button className="bg-gradient-to-r from-brand-indigo to-brand-magenta">
               <Plus className="w-4 h-4 mr-2" />Add First FAQ
             </Button>
           </Link>

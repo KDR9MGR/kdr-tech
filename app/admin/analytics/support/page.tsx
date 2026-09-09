@@ -49,7 +49,7 @@ export default async function SupportDashboard() {
             <h1 className="text-2xl font-bold text-white">Support Dashboard</h1>
             <p className="text-sm text-gray-400">Tickets, SLAs, satisfaction, and retention signals</p>
           </div>
-          <Link href="/admin/tickets" className="ml-auto text-xs bg-purple-500/10 text-purple-400 border border-purple-500/20 px-3 py-1 rounded-full font-medium hover:bg-purple-500/20 transition-colors">
+          <Link href="/admin/tickets" className="ml-auto text-xs bg-brand-magenta/10 text-brand-magenta border border-brand-magenta/20 px-3 py-1 rounded-full font-medium hover:bg-brand-magenta/20 transition-colors">
             Manage Tickets →
           </Link>
         </div>
@@ -61,10 +61,10 @@ export default async function SupportDashboard() {
               <div key={m.label} className="bg-[#1A1A2E] border border-[#2A0E61] rounded-xl p-5">
                 <div className="flex items-center justify-between mb-3">
                   <span className="text-xs text-gray-400 font-medium">{m.label}</span>
-                  <Icon className="w-4 h-4 text-purple-400" />
+                  <Icon className="w-4 h-4 text-brand-magenta" />
                 </div>
                 <div className="text-2xl font-bold text-white">{m.value}</div>
-                <div className="text-xs text-purple-400 mt-1">{m.change}</div>
+                <div className="text-xs text-brand-magenta mt-1">{m.change}</div>
               </div>
             )
           })}
@@ -90,7 +90,7 @@ export default async function SupportDashboard() {
                   </div>
                   <p className="text-sm text-white font-medium leading-snug">{t.subject}</p>
                   <p className="text-xs text-gray-500 mt-1">{t.client_name}</p>
-                  <Link href={`/admin/tickets/${t.id}/edit`} className="text-xs text-purple-400 hover:underline mt-1 inline-block">Edit →</Link>
+                  <Link href={`/admin/tickets/${t.id}/edit`} className="text-xs text-brand-magenta hover:underline mt-1 inline-block">Edit →</Link>
                 </div>
               ))}
             </div>
@@ -113,7 +113,7 @@ export default async function SupportDashboard() {
                   </div>
                   <p className="text-sm text-white font-medium leading-snug">{t.subject}</p>
                   <p className="text-xs text-gray-500 mt-1">{t.client_name}</p>
-                  <Link href={`/admin/tickets/${t.id}/edit`} className="text-xs text-purple-400 hover:underline mt-1 inline-block">Edit →</Link>
+                  <Link href={`/admin/tickets/${t.id}/edit`} className="text-xs text-brand-magenta hover:underline mt-1 inline-block">Edit →</Link>
                 </div>
               ))}
             </div>
@@ -159,7 +159,7 @@ export default async function SupportDashboard() {
                     <span className="text-white">{count} ({pct}%)</span>
                   </div>
                   <div className="w-full h-2 bg-[#030014] rounded-full">
-                    <div className="h-full bg-gradient-to-r from-purple-500 to-cyan-500 rounded-full" style={{ width: `${pct}%` }} />
+                    <div className="h-full bg-gradient-to-r from-brand-indigo to-brand-magenta rounded-full" style={{ width: `${pct}%` }} />
                   </div>
                 </div>
               )
@@ -182,7 +182,7 @@ export default async function SupportDashboard() {
               ))}
             </div>
             <div className="mt-4 pt-4 border-t border-[#2A0E61]">
-              <Link href="/admin/tickets/new" className="block text-center text-sm text-purple-400 hover:underline">
+              <Link href="/admin/tickets/new" className="block text-center text-sm text-brand-magenta hover:underline">
                 + Log a new support ticket
               </Link>
             </div>

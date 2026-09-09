@@ -186,11 +186,11 @@ export default function TestimonialsPage() {
 
           <Tabs defaultValue="video" className="space-y-6">
             <TabsList className="bg-[#1A1A2E] border border-[#2A0E61]">
-              <TabsTrigger value="video" className="data-[state=active]:bg-purple-500/20 data-[state=active]:text-purple-400">
+              <TabsTrigger value="video" className="data-[state=active]:bg-brand-magenta/20 data-[state=active]:text-brand-magenta">
                 <Video className="w-4 h-4 mr-2" />
                 Video Testimonials
               </TabsTrigger>
-              <TabsTrigger value="text" className="data-[state=active]:bg-purple-500/20 data-[state=active]:text-purple-400">
+              <TabsTrigger value="text" className="data-[state=active]:bg-brand-magenta/20 data-[state=active]:text-brand-magenta">
                 <FileText className="w-4 h-4 mr-2" />
                 Text Testimonials
               </TabsTrigger>
@@ -201,7 +201,7 @@ export default function TestimonialsPage() {
               <div className="flex items-center justify-between">
                 <p className="text-gray-400">{videoTestimonials.length} video testimonials</p>
                 <Link href="/admin/testimonials/video/new">
-                  <Button className="bg-gradient-to-r from-purple-500 to-cyan-500 hover:from-purple-600 hover:to-cyan-600">
+                  <Button className="bg-gradient-to-r from-brand-indigo to-brand-magenta hover:from-brand-indigo-hover hover:to-brand-magenta-hover">
                     <Plus className="w-4 h-4 mr-2" />
                     Add Video Testimonial
                   </Button>
@@ -251,7 +251,7 @@ export default function TestimonialsPage() {
                                 href={testimonial.video_url}
                                 target="_blank"
                                 rel="noopener noreferrer"
-                                className="text-purple-400 hover:underline"
+                                className="text-brand-magenta hover:underline"
                               >
                                 {testimonial.video_url}
                               </a>
@@ -304,7 +304,7 @@ export default function TestimonialsPage() {
               <div className="flex items-center justify-between">
                 <p className="text-gray-400">{textTestimonials.length} text testimonials</p>
                 <Link href="/admin/testimonials/text/new">
-                  <Button className="bg-gradient-to-r from-purple-500 to-cyan-500 hover:from-purple-600 hover:to-cyan-600">
+                  <Button className="bg-gradient-to-r from-brand-indigo to-brand-magenta hover:from-brand-indigo-hover hover:to-brand-magenta-hover">
                     <Plus className="w-4 h-4 mr-2" />
                     Add Text Testimonial
                   </Button>

@@ -77,7 +77,7 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
         {/* Back Button */}
         <Link
           href="/blog"
-          className="inline-flex items-center gap-2 text-gray-400 hover:text-purple-400 transition-colors mb-8"
+          className="inline-flex items-center gap-2 text-gray-400 hover:text-brand-magenta transition-colors mb-8"
         >
           <ArrowLeft className="w-4 h-4" />
           <span>Back to Blog</span>
@@ -98,13 +98,13 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
 
         {/* Category */}
         {post.category && (
-          <span className="inline-block px-3 py-1 text-xs font-medium bg-purple-500/20 text-purple-400 rounded-full mb-4">
+          <span className="inline-block px-3 py-1 text-xs font-medium bg-brand-magenta/20 text-brand-magenta rounded-full mb-4">
             {post.category}
           </span>
         )}
 
         {/* Title */}
-        <h1 className="text-5xl font-bold mb-6 bg-gradient-to-r from-purple-400 to-cyan-500 bg-clip-text text-transparent">
+        <h1 className="text-5xl font-bold mb-6 text-gradient-blue">
           {post.title}
         </h1>
 
@@ -124,7 +124,7 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
 
         {/* Content */}
         <div
-          className="prose prose-invert prose-lg max-w-none prose-headings:text-white prose-p:text-gray-300 prose-a:text-purple-400 prose-strong:text-white prose-code:text-purple-400"
+          className="prose prose-invert prose-lg max-w-none prose-headings:text-white prose-p:text-gray-300 prose-a:text-brand-magenta prose-strong:text-white prose-code:text-brand-magenta"
           dangerouslySetInnerHTML={{ __html: post.content }}
         />
       </div>

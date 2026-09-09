@@ -189,7 +189,7 @@ export default function ShowcasePage() {
               <p className="text-gray-400">Manage apps — each entry appears on both scrolling strips</p>
             </div>
             <Link href="/admin/showcase/new">
-              <Button className="bg-gradient-to-r from-purple-500 to-cyan-500 hover:from-purple-600 hover:to-cyan-600">
+              <Button className="bg-gradient-to-r from-brand-indigo to-brand-magenta hover:from-brand-indigo-hover hover:to-brand-magenta-hover">
                 <Plus className="w-4 h-4 mr-2" />
                 Add App
               </Button>
@@ -229,7 +229,7 @@ export default function ShowcasePage() {
                 <Button
                   onClick={saveScrollSpeed}
                   disabled={savingSpeed}
-                  className="bg-gradient-to-r from-purple-500 to-cyan-500 hover:from-purple-600 hover:to-cyan-600"
+                  className="bg-gradient-to-r from-brand-indigo to-brand-magenta hover:from-brand-indigo-hover hover:to-brand-magenta-hover"
                 >
                   {savingSpeed ? 'Saving...' : 'Save Speed'}
                 </Button>
@@ -284,7 +284,7 @@ export default function ShowcasePage() {
                                 href={app.app_url}
                                 target="_blank"
                                 rel="noopener noreferrer"
-                                className="text-xs text-purple-400 hover:underline"
+                                className="text-xs text-brand-magenta hover:underline"
                               >
                                 View App
                               </a>
@@ -312,7 +312,7 @@ export default function ShowcasePage() {
                                 variant="outline"
                                 size="sm"
                                 onClick={() => handleDuplicate(app)}
-                                className="border-[#2A0E61] text-cyan-400 hover:bg-[#030014]"
+                                className="border-[#2A0E61] text-brand-magenta hover:bg-[#030014]"
                                 title="Duplicate app"
                               >
                                 <Copy className="w-3 h-3" />

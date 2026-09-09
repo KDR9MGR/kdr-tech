@@ -48,7 +48,7 @@ export default async function DealsAdminPage() {
             <p className="text-gray-400 mt-1">Track deals from first contact to close</p>
           </div>
           <Link href="/admin/deals/new">
-            <Button className="bg-gradient-to-r from-purple-500 to-cyan-500 hover:from-purple-600 hover:to-cyan-600">
+            <Button className="bg-gradient-to-r from-brand-indigo to-brand-magenta hover:from-brand-indigo-hover hover:to-brand-magenta-hover">
               <Plus className="w-4 h-4 mr-2" />Add Deal
             </Button>
           </Link>
@@ -73,7 +73,7 @@ export default async function DealsAdminPage() {
             <h3 className="text-xl font-semibold text-white mb-2">No deals yet</h3>
             <p className="text-gray-400 mb-6">Add your first deal to start tracking your pipeline.</p>
             <Link href="/admin/deals/new">
-              <Button className="bg-gradient-to-r from-purple-500 to-cyan-500">
+              <Button className="bg-gradient-to-r from-brand-indigo to-brand-magenta">
                 <Plus className="w-4 h-4 mr-2" />Add Deal
               </Button>
             </Link>

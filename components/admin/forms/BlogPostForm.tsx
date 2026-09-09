@@ -111,7 +111,7 @@ export default function BlogPostForm({ initialData, isEdit = false }: BlogPostFo
           type="button"
           onClick={(e) => handleSubmit(e, 'published')}
           disabled={loading}
-          className="bg-gradient-to-r from-purple-500 to-cyan-500 hover:from-purple-600 hover:to-cyan-600"
+          className="bg-gradient-to-r from-brand-indigo to-brand-magenta hover:from-brand-indigo-hover hover:to-brand-magenta-hover"
         >
           <Save className="w-4 h-4 mr-2" />
           {isEdit ? 'Update & Publish' : 'Publish'}
@@ -158,7 +158,7 @@ export default function BlogPostForm({ initialData, isEdit = false }: BlogPostFo
               onChange={(e) => handleChange('excerpt', e.target.value)}
               placeholder="Short description of the blog post"
               rows={3}
-              className="flex w-full rounded-md border border-[#2A0E61] bg-[#030014] px-3 py-2 text-sm text-white placeholder:text-gray-500 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent"
+              className="flex w-full rounded-md border border-[#2A0E61] bg-[#030014] px-3 py-2 text-sm text-white placeholder:text-gray-500 focus:outline-none focus:ring-2 focus:ring-brand-magenta focus:border-transparent"
             />
           </div>
 
@@ -220,7 +220,7 @@ export default function BlogPostForm({ initialData, isEdit = false }: BlogPostFo
                 onChange={(e) => handleChange('meta_description', e.target.value)}
                 placeholder="SEO description (defaults to excerpt)"
                 rows={2}
-                className="flex w-full rounded-md border border-[#2A0E61] bg-[#030014] px-3 py-2 text-sm text-white placeholder:text-gray-500 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent"
+                className="flex w-full rounded-md border border-[#2A0E61] bg-[#030014] px-3 py-2 text-sm text-white placeholder:text-gray-500 focus:outline-none focus:ring-2 focus:ring-brand-magenta focus:border-transparent"
               />
             </div>
           </div>

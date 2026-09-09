@@ -56,7 +56,7 @@ export default function AdminSidebar() {
               href={item.href}
               className={`flex items-center gap-3 px-4 py-3 rounded-lg transition-all ${
                 isActive
-                  ? 'bg-gradient-to-r from-purple-500/20 to-cyan-500/20 text-white border border-purple-500/30'
+                  ? 'bg-gradient-to-r from-brand-indigo/20 to-brand-magenta/20 text-white border border-brand-magenta/30'
                   : 'text-gray-400 hover:text-white hover:bg-[#030014]'
               }`}
             >

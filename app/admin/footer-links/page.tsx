@@ -117,7 +117,7 @@ export default function FooterLinksPage() {
             </div>
             <Button
               onClick={() => router.push('/admin/footer-links/new')}
-              className="bg-gradient-to-r from-purple-500 to-cyan-500 hover:from-purple-600 hover:to-cyan-600"
+              className="bg-gradient-to-r from-brand-indigo to-brand-magenta hover:from-brand-indigo-hover hover:to-brand-magenta-hover"
             >
               <Plus className="w-4 h-4 mr-2" />
               Add Footer Link
@@ -163,7 +163,7 @@ export default function FooterLinksPage() {
                             href={link.url}
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="flex items-center gap-1 hover:text-purple-400"
+                            className="flex items-center gap-1 hover:text-brand-magenta"
                           >
                             {link.url}
                             <ExternalLink className="w-3 h-3" />

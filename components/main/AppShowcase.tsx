@@ -52,13 +52,13 @@ export default function AppShowcase() {
       <div className="max-w-[1400px] mx-auto px-4">
         {/* Header */}
         <div className="text-center mb-16">
-          <p className="text-xs font-semibold tracking-[0.3em] uppercase text-purple-400 mb-3">
+          <p className="text-xs font-semibold tracking-[0.3em] uppercase text-brand-magenta mb-3">
             Our Work
           </p>
           <h2 className="text-3xl md:text-4xl font-light text-white mb-3">
             Portfolio
           </h2>
-          <div className="w-12 h-[1px] bg-gradient-to-r from-transparent via-purple-500 to-transparent mx-auto" />
+          <div className="w-12 h-[1px] bg-gradient-to-r from-transparent via-brand-magenta to-transparent mx-auto" />
         </div>
 
         <div className="space-y-6">

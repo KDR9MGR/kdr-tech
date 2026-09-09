@@ -68,7 +68,7 @@ export default async function BlogPage() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <div className="text-center mb-16">
-          <h1 className="text-5xl font-bold mb-4 bg-gradient-to-r from-purple-400 to-cyan-500 bg-clip-text text-transparent">
+          <h1 className="text-5xl font-bold mb-4 text-gradient-blue">
             Our Blog
           </h1>
           <p className="text-xl text-gray-400 max-w-2xl mx-auto">
@@ -87,7 +87,7 @@ export default async function BlogPage() {
               <Link
                 key={post.id}
                 href={`/blog/${post.slug}`}
-                className="group bg-[#1A1A2E] border border-[#2A0E61] rounded-lg overflow-hidden hover:border-purple-500 transition-all duration-300"
+                className="group bg-[#1A1A2E] border border-[#2A0E61] rounded-lg overflow-hidden hover:border-brand-magenta transition-all duration-300"
               >
                 {/* Featured Image */}
                 {post.featured_image && (
@@ -105,13 +105,13 @@ export default async function BlogPage() {
                 <div className="p-6 space-y-4">
                   {/* Category */}
                   {post.category && (
-                    <span className="inline-block px-3 py-1 text-xs font-medium bg-purple-500/20 text-purple-400 rounded-full">
+                    <span className="inline-block px-3 py-1 text-xs font-medium bg-brand-magenta/20 text-brand-magenta rounded-full">
                       {post.category}
                     </span>
                   )}
 
                   {/* Title */}
-                  <h2 className="text-xl font-bold text-white group-hover:text-purple-400 transition-colors line-clamp-2">
+                  <h2 className="text-xl font-bold text-white group-hover:text-brand-magenta transition-colors line-clamp-2">
                     {post.title}
                   </h2>
 
@@ -135,7 +135,7 @@ export default async function BlogPage() {
                   </div>
 
                   {/* Read More */}
-                  <div className="flex items-center gap-2 text-purple-400 text-sm font-medium pt-2">
+                  <div className="flex items-center gap-2 text-brand-magenta text-sm font-medium pt-2">
                     <span>Read More</span>
                     <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
                   </div>
