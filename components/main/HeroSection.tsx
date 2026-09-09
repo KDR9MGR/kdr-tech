@@ -22,7 +22,7 @@ const HeroSection = () => {
     >
       {/* Background */}
       <div className="absolute inset-0 pointer-events-none">
-        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[900px] h-[600px] bg-[#2563EB]/8 rounded-full blur-[120px]" />
+        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[900px] h-[600px] bg-[#5252C7]/8 rounded-full blur-[120px]" />
         <div className="absolute bottom-0 right-0 w-[500px] h-[400px] bg-[#10B981]/5 rounded-full blur-[100px]" />
         <div
           className="absolute inset-0 opacity-[0.03]"
@@ -83,14 +83,14 @@ const HeroSection = () => {
                 href={CALENDLY_URL}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center justify-center gap-2 px-7 py-4 bg-[#2563EB] hover:bg-[#1D4ED8] text-white font-semibold rounded-xl transition-all duration-200 shadow-lg shadow-blue-900/30 hover:shadow-blue-900/50 hover:-translate-y-0.5 text-base"
+                className="inline-flex items-center justify-center gap-2 px-7 py-4 bg-[#5252C7] hover:bg-[#3838AE] text-white font-semibold rounded-xl transition-all duration-200 shadow-lg shadow-indigo-900/30 hover:shadow-indigo-900/50 hover:-translate-y-0.5 text-base"
               >
                 Book a Free Strategy Call
                 <ArrowRight className="w-5 h-5" />
               </a>
               <a
                 href="#services"
-                className="inline-flex items-center justify-center gap-2 px-7 py-4 bg-transparent border border-[#1E3A5F] hover:border-[#2563EB]/50 hover:bg-[#2563EB]/5 text-white font-semibold rounded-xl transition-all duration-200 text-base"
+                className="inline-flex items-center justify-center gap-2 px-7 py-4 bg-transparent border border-[#1E3A5F] hover:border-[#5252C7]/50 hover:bg-[#5252C7]/5 text-white font-semibold rounded-xl transition-all duration-200 text-base"
               >
                 See Packages & Pricing
                 <ChevronRight className="w-5 h-5" />
@@ -119,11 +119,11 @@ const HeroSection = () => {
             className="relative flex items-center justify-center lg:justify-end"
           >
             <div className="relative">
-              <div className="absolute inset-0 bg-[#2563EB]/15 rounded-full blur-3xl scale-110" />
+              <div className="absolute inset-0 bg-[#5252C7]/15 rounded-full blur-3xl scale-110" />
 
               <div className="relative w-72 h-72 lg:w-96 lg:h-96 flex items-center justify-center">
                 <div className="absolute inset-0 rounded-full border border-[#1E3A5F]/60" />
-                <div className="absolute inset-6 rounded-full border border-[#2563EB]/20" />
+                <div className="absolute inset-6 rounded-full border border-[#5252C7]/20" />
                 <Image
                   src="/images/kdr-tech-logo.png"
                   alt="KDR Tech — Mobile App & Website Development Agency"
@@ -157,7 +157,7 @@ const HeroSection = () => {
                 transition={{ duration: 4, repeat: Infinity, ease: "easeInOut", delay: 1 }}
                 className="absolute top-1/2 -right-6 lg:-right-14 -translate-y-1/2 bg-[#0F2040] border border-[#1E3A5F] rounded-xl px-4 py-3 shadow-xl"
               >
-                <div className="text-2xl font-bold text-[#2563EB]">15+</div>
+                <div className="text-2xl font-bold text-[#5252C7]">15+</div>
                 <div className="text-xs text-[#94A3B8]">Countries</div>
               </motion.div>
             </div>

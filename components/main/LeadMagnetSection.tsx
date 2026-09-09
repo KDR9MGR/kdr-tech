@@ -65,7 +65,7 @@ export default function LeadMagnetSection() {
 
           {/* Left — Copy */}
           <div className="flex flex-col gap-6">
-            <p className="text-sm font-semibold tracking-[0.2em] uppercase text-[#2563EB]">
+            <p className="text-sm font-semibold tracking-[0.2em] uppercase text-[#5252C7]">
               Start Your Project
             </p>
             <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-white leading-tight">
@@ -96,7 +96,7 @@ export default function LeadMagnetSection() {
                 href={CALENDLY_URL}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center justify-center gap-2 px-5 py-3 bg-[#2563EB] hover:bg-[#1D4ED8] text-white font-semibold rounded-xl text-sm transition-colors"
+                className="inline-flex items-center justify-center gap-2 px-5 py-3 bg-[#5252C7] hover:bg-[#3838AE] text-white font-semibold rounded-xl text-sm transition-colors"
               >
                 <CalendarDays className="w-4 h-4" />
                 Book a Free 30-Min Call
@@ -129,7 +129,7 @@ export default function LeadMagnetSection() {
                   href={CALENDLY_URL}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="mt-2 inline-flex items-center gap-2 px-6 py-3 bg-[#2563EB] hover:bg-[#1D4ED8] text-white font-semibold rounded-xl text-sm transition-colors"
+                  className="mt-2 inline-flex items-center gap-2 px-6 py-3 bg-[#5252C7] hover:bg-[#3838AE] text-white font-semibold rounded-xl text-sm transition-colors"
                 >
                   Also book a call →
                 </a>
@@ -154,7 +154,7 @@ export default function LeadMagnetSection() {
                       value={formData.name}
                       onChange={(e) => handleChange("name", e.target.value)}
                       placeholder="Your first name"
-                      className="w-full px-4 py-3 bg-[#0A1628] border border-[#1E3A5F] rounded-xl text-white placeholder-[#64748B] text-sm focus:outline-none focus:border-[#2563EB] transition-colors"
+                      className="w-full px-4 py-3 bg-[#0A1628] border border-[#1E3A5F] rounded-xl text-white placeholder-[#64748B] text-sm focus:outline-none focus:border-[#5252C7] transition-colors"
                     />
                   </div>
 
@@ -168,7 +168,7 @@ export default function LeadMagnetSection() {
                       value={formData.email}
                       onChange={(e) => handleChange("email", e.target.value)}
                       placeholder="you@company.com"
-                      className="w-full px-4 py-3 bg-[#0A1628] border border-[#1E3A5F] rounded-xl text-white placeholder-[#64748B] text-sm focus:outline-none focus:border-[#2563EB] transition-colors"
+                      className="w-full px-4 py-3 bg-[#0A1628] border border-[#1E3A5F] rounded-xl text-white placeholder-[#64748B] text-sm focus:outline-none focus:border-[#5252C7] transition-colors"
                     />
                   </div>
 
@@ -179,7 +179,7 @@ export default function LeadMagnetSection() {
                     <select
                       value={formData.project_type}
                       onChange={(e) => handleChange("project_type", e.target.value)}
-                      className="w-full px-4 py-3 bg-[#0A1628] border border-[#1E3A5F] rounded-xl text-white text-sm focus:outline-none focus:border-[#2563EB] transition-colors appearance-none cursor-pointer"
+                      className="w-full px-4 py-3 bg-[#0A1628] border border-[#1E3A5F] rounded-xl text-white text-sm focus:outline-none focus:border-[#5252C7] transition-colors appearance-none cursor-pointer"
                     >
                       <option value="" className="bg-[#0A1628]">Select project type...</option>
                       {projectTypes.map((opt) => (
@@ -197,7 +197,7 @@ export default function LeadMagnetSection() {
                       onChange={(e) => handleChange("app_idea", e.target.value)}
                       placeholder="e.g., A booking platform for personal trainers where clients can schedule sessions and pay online..."
                       rows={3}
-                      className="w-full px-4 py-3 bg-[#0A1628] border border-[#1E3A5F] rounded-xl text-white placeholder-[#64748B] text-sm focus:outline-none focus:border-[#2563EB] transition-colors resize-none"
+                      className="w-full px-4 py-3 bg-[#0A1628] border border-[#1E3A5F] rounded-xl text-white placeholder-[#64748B] text-sm focus:outline-none focus:border-[#5252C7] transition-colors resize-none"
                     />
                   </div>
 
@@ -208,7 +208,7 @@ export default function LeadMagnetSection() {
                     <select
                       value={formData.budget_range}
                       onChange={(e) => handleChange("budget_range", e.target.value)}
-                      className="w-full px-4 py-3 bg-[#0A1628] border border-[#1E3A5F] rounded-xl text-white text-sm focus:outline-none focus:border-[#2563EB] transition-colors appearance-none cursor-pointer"
+                      className="w-full px-4 py-3 bg-[#0A1628] border border-[#1E3A5F] rounded-xl text-white text-sm focus:outline-none focus:border-[#5252C7] transition-colors appearance-none cursor-pointer"
                     >
                       <option value="" className="bg-[#0A1628]">Select a range...</option>
                       {budgetOptions.map((opt) => (
@@ -227,7 +227,7 @@ export default function LeadMagnetSection() {
                 <button
                   type="submit"
                   disabled={status === "loading"}
-                  className="flex items-center justify-center gap-2 px-6 py-4 bg-[#2563EB] hover:bg-[#1D4ED8] disabled:opacity-60 text-white font-semibold rounded-xl text-sm transition-colors"
+                  className="flex items-center justify-center gap-2 px-6 py-4 bg-[#5252C7] hover:bg-[#3838AE] disabled:opacity-60 text-white font-semibold rounded-xl text-sm transition-colors"
                 >
                   {status === "loading" ? (
                     <>

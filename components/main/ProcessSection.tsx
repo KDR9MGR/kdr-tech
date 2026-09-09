@@ -58,7 +58,7 @@ const ProcessSection = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <div className="text-center mb-14">
-          <p className="text-sm font-semibold tracking-[0.2em] uppercase text-[#2563EB] mb-3">
+          <p className="text-sm font-semibold tracking-[0.2em] uppercase text-[#5252C7] mb-3">
             How We Work
           </p>
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-white mb-4">
@@ -77,21 +77,21 @@ const ProcessSection = () => {
             return (
               <div
                 key={step.number}
-                className="group relative bg-[#0F2040] border border-[#1E3A5F] rounded-2xl p-6 hover:border-[#2563EB]/40 transition-all duration-200 card-glow"
+                className="group relative bg-[#0F2040] border border-[#1E3A5F] rounded-2xl p-6 hover:border-[#5252C7]/40 transition-all duration-200 card-glow"
               >
                 {/* Step number + connector */}
                 <div className="flex items-start justify-between mb-5">
                   <span className="text-5xl font-extrabold text-[#1E3A5F] leading-none select-none">
                     {step.number}
                   </span>
-                  <div className="w-10 h-10 rounded-xl bg-[#2563EB]/10 border border-[#2563EB]/20 flex items-center justify-center group-hover:bg-[#2563EB]/20 transition-colors">
-                    <Icon className="w-5 h-5 text-[#2563EB]" />
+                  <div className="w-10 h-10 rounded-xl bg-[#5252C7]/10 border border-[#5252C7]/20 flex items-center justify-center group-hover:bg-[#5252C7]/20 transition-colors">
+                    <Icon className="w-5 h-5 text-[#5252C7]" />
                   </div>
                 </div>
 
                 {/* Content */}
                 <div>
-                  <div className="text-xs font-semibold text-[#2563EB] tracking-wider uppercase mb-1">
+                  <div className="text-xs font-semibold text-[#5252C7] tracking-wider uppercase mb-1">
                     {step.timeline}
                   </div>
                   <h3 className="text-lg font-bold text-white mb-2">{step.title}</h3>

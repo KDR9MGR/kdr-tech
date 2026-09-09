@@ -58,8 +58,21 @@ html {
 /* =====================================================
    GRADIENT TEXT UTILITY
    ===================================================== */
+/* Real logo colors (sampled from public/images/kdr-tech-logo.png), not
+   generic Tailwind blue/cyan — used for the hero headline and pricing
+   emphasis text. */
 .text-gradient-blue {
-  background: linear-gradient(135deg, #2563EB 0%, #38BDF8 100%);
+  background: linear-gradient(135deg, #7AB3EC 0%, #5252C7 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* Full three-stop brand gradient, for spots that want the whole logo
+   range rather than just the cyan->indigo half (e.g. the admin
+   wordmark). */
+.text-gradient-brand {
+  background: linear-gradient(135deg, #7AB3EC 0%, #5252C7 55%, #EA28AD 100%);
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;

@@ -49,7 +49,7 @@ export default function CaseStudiesSection() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <div className="text-center mb-14">
-          <p className="text-sm font-semibold tracking-[0.2em] uppercase text-[#2563EB] mb-3">
+          <p className="text-sm font-semibold tracking-[0.2em] uppercase text-[#5252C7] mb-3">
             Portfolio
           </p>
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-white mb-4">
@@ -68,7 +68,7 @@ export default function CaseStudiesSection() {
             return (
               <div
                 key={cs.id}
-                className="bg-[#0F2040] border border-[#1E3A5F] rounded-2xl overflow-hidden hover:border-[#2563EB]/40 transition-all duration-200 card-glow"
+                className="bg-[#0F2040] border border-[#1E3A5F] rounded-2xl overflow-hidden hover:border-[#5252C7]/40 transition-all duration-200 card-glow"
               >
                 {/* Card Header */}
                 <div className="p-6 pb-5 border-b border-[#1E3A5F]">
@@ -80,7 +80,7 @@ export default function CaseStudiesSection() {
                       </p>
                     </div>
                     {cs.package_name && (
-                      <span className="flex-shrink-0 px-3 py-1 bg-[#2563EB]/10 border border-[#2563EB]/25 rounded-full text-xs font-semibold text-[#2563EB] whitespace-nowrap">
+                      <span className="flex-shrink-0 px-3 py-1 bg-[#5252C7]/10 border border-[#5252C7]/25 rounded-full text-xs font-semibold text-[#5252C7] whitespace-nowrap">
                         {cs.package_name}
                       </span>
                     )}
@@ -94,7 +94,7 @@ export default function CaseStudiesSection() {
                     )}
                     {cs.timeline && (
                       <span className="inline-flex items-center gap-1">
-                        <Clock className="w-3.5 h-3.5 text-[#2563EB]" />
+                        <Clock className="w-3.5 h-3.5 text-[#5252C7]" />
                         {cs.timeline}
                       </span>
                     )}
@@ -117,7 +117,7 @@ export default function CaseStudiesSection() {
                 <div className="px-6 pb-6 pt-4">
                   <button
                     onClick={() => setExpanded(isOpen ? null : cs.id)}
-                    className="flex items-center gap-1.5 text-sm font-medium text-[#2563EB] hover:text-[#38BDF8] transition-colors mb-4"
+                    className="flex items-center gap-1.5 text-sm font-medium text-[#5252C7] hover:text-[#38BDF8] transition-colors mb-4"
                   >
                     {isOpen ? "Show less" : "See full case study"}
                     <ChevronRight className={`w-4 h-4 transition-transform ${isOpen ? "rotate-90" : ""}`} />
@@ -155,7 +155,7 @@ export default function CaseStudiesSection() {
                     href={CALENDLY_URL}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="mt-5 inline-flex items-center gap-1.5 text-sm font-semibold text-white hover:text-[#2563EB] transition-colors"
+                    className="mt-5 inline-flex items-center gap-1.5 text-sm font-semibold text-white hover:text-[#5252C7] transition-colors"
                   >
                     Build something similar →
                   </a>

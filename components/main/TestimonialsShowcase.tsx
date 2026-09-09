@@ -89,7 +89,7 @@ function VideoCard({ testimonial }: { testimonial: VideoTestimonial }) {
   }
 
   return (
-    <div className="group relative bg-[#0a0f1e] border border-[#1E3A5F] rounded-2xl overflow-hidden hover:border-[#2563EB]/50 transition-all duration-300 flex flex-col shadow-xl shadow-black/40">
+    <div className="group relative bg-[#0a0f1e] border border-[#1E3A5F] rounded-2xl overflow-hidden hover:border-[#5252C7]/50 transition-all duration-300 flex flex-col shadow-xl shadow-black/40">
       <div className={`relative w-full bg-black ${portrait ? 'aspect-[9/16]' : 'aspect-video'}`}>
         {direct ? (
           <video
@@ -126,13 +126,13 @@ function VideoCard({ testimonial }: { testimonial: VideoTestimonial }) {
       </div>
 
       <div className="px-4 py-3 flex items-center gap-3 border-t border-[#1E3A5F]">
-        <div className="w-8 h-8 rounded-full bg-[#2563EB]/20 border border-[#2563EB]/30 flex items-center justify-center text-xs font-bold text-[#2563EB] flex-shrink-0">
+        <div className="w-8 h-8 rounded-full bg-[#5252C7]/20 border border-[#5252C7]/30 flex items-center justify-center text-xs font-bold text-[#5252C7] flex-shrink-0">
           {testimonial.client_name.charAt(0)}
         </div>
         <div className="min-w-0">
           <p className="text-sm font-semibold text-white truncate">{testimonial.client_name}</p>
           {(testimonial.company_name || testimonial.country) && (
-            <p className="text-xs text-[#2563EB] truncate">
+            <p className="text-xs text-[#5252C7] truncate">
               {testimonial.company_name || ''}
               {testimonial.company_name && testimonial.country ? ' · ' : ''}
               {testimonial.country || ''}
@@ -182,7 +182,7 @@ export default function TestimonialsShowcase() {
 
         {/* Section Header */}
         <div className="text-center mb-14">
-          <p className="text-sm font-semibold tracking-[0.2em] uppercase text-[#2563EB] mb-3">
+          <p className="text-sm font-semibold tracking-[0.2em] uppercase text-[#5252C7] mb-3">
             Testimonials
           </p>
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-white mb-4">
@@ -223,7 +223,7 @@ export default function TestimonialsShowcase() {
             {textTestimonials.map((testimonial) => (
               <div
                 key={testimonial.id}
-                className="bg-[#0F2040] border border-[#1E3A5F] rounded-2xl p-6 hover:border-[#2563EB]/40 transition-all duration-200 card-glow flex flex-col"
+                className="bg-[#0F2040] border border-[#1E3A5F] rounded-2xl p-6 hover:border-[#5252C7]/40 transition-all duration-200 card-glow flex flex-col"
               >
                 {testimonial.rating && (
                   <div className="flex gap-1 mb-4">
@@ -232,7 +232,7 @@ export default function TestimonialsShowcase() {
                     ))}
                   </div>
                 )}
-                <Quote className="w-8 h-8 text-[#2563EB] mb-3 opacity-40" />
+                <Quote className="w-8 h-8 text-[#5252C7] mb-3 opacity-40" />
                 <p className="text-[#94A3B8] mb-6 flex-1 leading-relaxed text-sm">
                   &ldquo;{testimonial.testimonial}&rdquo;
                 </p>
@@ -248,13 +248,13 @@ export default function TestimonialsShowcase() {
                       />
                     </div>
                   ) : (
-                    <div className="w-9 h-9 rounded-full bg-[#2563EB]/10 border border-[#2563EB]/20 flex items-center justify-center text-sm font-bold text-[#2563EB]">
+                    <div className="w-9 h-9 rounded-full bg-[#5252C7]/10 border border-[#5252C7]/20 flex items-center justify-center text-sm font-bold text-[#5252C7]">
                       {testimonial.client_name.charAt(0)}
                     </div>
                   )}
                   <div>
                     <p className="text-white font-semibold text-sm">{testimonial.client_name}</p>
-                    <p className="text-xs text-[#2563EB]">
+                    <p className="text-xs text-[#5252C7]">
                       {testimonial.company_name || testimonial.project_name || ''}
                       {testimonial.country && ` · ${testimonial.country}`}
                     </p>

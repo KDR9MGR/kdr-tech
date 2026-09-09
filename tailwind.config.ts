@@ -19,6 +19,18 @@ const config: Config = {
         sm: 'calc(var(--radius) - 4px)'
       },
       colors: {
+        // Sampled directly from public/images/kdr-tech-logo.png (see
+        // SECURITY_FIXES.md-adjacent design notes) rather than generic
+        // Tailwind purple/cyan. `indigo` is the most-used hue in the logo
+        // by pixel count, so it's the true primary brand color, not just a
+        // gradient midpoint.
+        brand: {
+          cyan: '#7AB3EC',
+          indigo: '#5252C7',
+          'indigo-hover': '#3838AE',
+          magenta: '#EA28AD',
+          'magenta-hover': '#D41598',
+        },
         background: 'hsl(var(--background))',
         foreground: 'hsl(var(--foreground))',
         card: {

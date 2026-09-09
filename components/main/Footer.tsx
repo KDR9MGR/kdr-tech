@@ -106,7 +106,7 @@ const Footer = async () => {
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="Instagram"
-                className="w-9 h-9 flex items-center justify-center rounded-lg bg-[#0F2040] border border-[#1E3A5F] text-[#94A3B8] hover:text-white hover:border-[#2563EB]/50 transition-all"
+                className="w-9 h-9 flex items-center justify-center rounded-lg bg-[#0F2040] border border-[#1E3A5F] text-[#94A3B8] hover:text-white hover:border-[#5252C7]/50 transition-all"
               >
                 <RxInstagramLogo className="w-4 h-4" />
               </a>
@@ -119,7 +119,7 @@ const Footer = async () => {
                     target="_blank"
                     rel="noopener noreferrer"
                     aria-label={link.title}
-                    className="w-9 h-9 flex items-center justify-center rounded-lg bg-[#0F2040] border border-[#1E3A5F] text-[#94A3B8] hover:text-white hover:border-[#2563EB]/50 transition-all"
+                    className="w-9 h-9 flex items-center justify-center rounded-lg bg-[#0F2040] border border-[#1E3A5F] text-[#94A3B8] hover:text-white hover:border-[#5252C7]/50 transition-all"
                   >
                     {Icon}
                   </a>

@@ -13,7 +13,7 @@ const StatsSection = () => {
   return (
     <section className="w-full py-16 lg:py-20 border-y border-[#1E3A5F] bg-[#0F2040]/60">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <p className="text-center text-sm font-semibold tracking-[0.2em] uppercase text-[#2563EB] mb-10">
+        <p className="text-center text-sm font-semibold tracking-[0.2em] uppercase text-[#5252C7] mb-10">
           Numbers Don&apos;t Lie
         </p>
         <div className="grid grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-4">

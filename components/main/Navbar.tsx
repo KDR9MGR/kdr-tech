@@ -80,7 +80,7 @@ const Navbar = () => {
               href={CALENDLY_URL}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-1.5 px-5 py-2.5 bg-[#2563EB] hover:bg-[#1D4ED8] text-white text-sm font-semibold rounded-lg transition-colors shadow-lg shadow-blue-900/30"
+              className="inline-flex items-center gap-1.5 px-5 py-2.5 bg-[#5252C7] hover:bg-[#3838AE] text-white text-sm font-semibold rounded-lg transition-colors shadow-lg shadow-indigo-900/30"
             >
               Book a Free Call
               <ChevronRight className="w-4 h-4" />
@@ -146,7 +146,7 @@ const Navbar = () => {
               target="_blank"
               rel="noopener noreferrer"
               onClick={() => setIsOpen(false)}
-              className="flex items-center justify-center gap-2 px-4 py-3 bg-[#2563EB] hover:bg-[#1D4ED8] rounded-lg text-white text-sm font-semibold transition-colors"
+              className="flex items-center justify-center gap-2 px-4 py-3 bg-[#5252C7] hover:bg-[#3838AE] rounded-lg text-white text-sm font-semibold transition-colors"
             >
               📅 Book a Free Call
             </a>

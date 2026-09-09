@@ -32,12 +32,12 @@ const mobileAppTiers = [
     cta: "Get a Free Quote",
     highlighted: false,
     cardClass: "bg-[#0F2040] border-[#1E3A5F]",
-    ctaClass: "border border-[#2563EB] text-[#2563EB] hover:bg-[#2563EB] hover:text-white",
+    ctaClass: "border border-[#5252C7] text-[#5252C7] hover:bg-[#5252C7] hover:text-white",
   },
   {
     icon: Rocket,
     badge: "⭐ Most Popular",
-    badgeColor: "text-[#2563EB] border-[#2563EB]/40 bg-[#2563EB]/10",
+    badgeColor: "text-[#5252C7] border-[#5252C7]/40 bg-[#5252C7]/10",
     name: "MVP Lite",
     price: "$2,000 – $4,999",
     timeline: "4 – 7 Weeks",
@@ -63,8 +63,8 @@ const mobileAppTiers = [
     ],
     cta: "Start Your MVP",
     highlighted: true,
-    cardClass: "bg-[#0F2040] border-[#2563EB]/50 shadow-xl shadow-blue-900/20",
-    ctaClass: "bg-[#2563EB] hover:bg-[#1D4ED8] text-white",
+    cardClass: "bg-[#0F2040] border-[#5252C7]/50 shadow-xl shadow-indigo-900/20",
+    ctaClass: "bg-[#5252C7] hover:bg-[#3838AE] text-white",
   },
   {
     icon: TrendingUp,
@@ -127,12 +127,12 @@ const websiteTiers = [
     cta: "Get a Free Quote",
     highlighted: false,
     cardClass: "bg-[#0F2040] border-[#1E3A5F]",
-    ctaClass: "border border-[#2563EB] text-[#2563EB] hover:bg-[#2563EB] hover:text-white",
+    ctaClass: "border border-[#5252C7] text-[#5252C7] hover:bg-[#5252C7] hover:text-white",
   },
   {
     icon: Layout,
     badge: "⭐ Most Popular",
-    badgeColor: "text-[#2563EB] border-[#2563EB]/40 bg-[#2563EB]/10",
+    badgeColor: "text-[#5252C7] border-[#5252C7]/40 bg-[#5252C7]/10",
     name: "Dynamic Website",
     price: "$1,500 – $4,000",
     timeline: "3 – 6 Weeks",
@@ -158,8 +158,8 @@ const websiteTiers = [
     ],
     cta: "Start Your Website",
     highlighted: true,
-    cardClass: "bg-[#0F2040] border-[#2563EB]/50 shadow-xl shadow-blue-900/20",
-    ctaClass: "bg-[#2563EB] hover:bg-[#1D4ED8] text-white",
+    cardClass: "bg-[#0F2040] border-[#5252C7]/50 shadow-xl shadow-indigo-900/20",
+    ctaClass: "bg-[#5252C7] hover:bg-[#3838AE] text-white",
   },
   {
     icon: Database,
@@ -211,7 +211,7 @@ const ServicesSection = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <div className="text-center mb-10">
-          <p className="text-sm font-semibold tracking-[0.2em] uppercase text-[#2563EB] mb-3">
+          <p className="text-sm font-semibold tracking-[0.2em] uppercase text-[#5252C7] mb-3">
             Pricing & Packages
           </p>
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-white mb-4">
@@ -230,7 +230,7 @@ const ServicesSection = () => {
               onClick={() => handleTabChange("mobile")}
               className={`flex items-center gap-2 px-5 py-2.5 rounded-lg text-sm font-semibold transition-all duration-200 ${
                 activeTab === "mobile"
-                  ? "bg-[#2563EB] text-white shadow-lg shadow-blue-900/30"
+                  ? "bg-[#5252C7] text-white shadow-lg shadow-indigo-900/30"
                   : "text-[#94A3B8] hover:text-white"
               }`}
             >
@@ -240,7 +240,7 @@ const ServicesSection = () => {
               onClick={() => handleTabChange("website")}
               className={`flex items-center gap-2 px-5 py-2.5 rounded-lg text-sm font-semibold transition-all duration-200 ${
                 activeTab === "website"
-                  ? "bg-[#2563EB] text-white shadow-lg shadow-blue-900/30"
+                  ? "bg-[#5252C7] text-white shadow-lg shadow-indigo-900/30"
                   : "text-[#94A3B8] hover:text-white"
               }`}
             >
@@ -274,7 +274,7 @@ const ServicesSection = () => {
                 }`}
               >
                 {tier.highlighted && (
-                  <div className="absolute -top-3 left-1/2 -translate-x-1/2 px-4 py-1 bg-[#2563EB] rounded-full text-xs font-bold text-white tracking-wide whitespace-nowrap">
+                  <div className="absolute -top-3 left-1/2 -translate-x-1/2 px-4 py-1 bg-[#5252C7] rounded-full text-xs font-bold text-white tracking-wide whitespace-nowrap">
                     MOST POPULAR
                   </div>
                 )}
@@ -284,7 +284,7 @@ const ServicesSection = () => {
                     {tier.badge}
                   </span>
                   <div className="w-10 h-10 rounded-xl bg-[#0A1628] border border-[#1E3A5F] flex items-center justify-center">
-                    <Icon className="w-5 h-5 text-[#2563EB]" />
+                    <Icon className="w-5 h-5 text-[#5252C7]" />
                   </div>
                 </div>
 
@@ -301,7 +301,7 @@ const ServicesSection = () => {
 
                 <div>
                   <button
-                    className="flex items-center gap-1.5 text-sm font-semibold text-white mb-3 hover:text-[#2563EB] transition-colors"
+                    className="flex items-center gap-1.5 text-sm font-semibold text-white mb-3 hover:text-[#5252C7] transition-colors"
                     onClick={() => setExpandedTier(isExpanded ? null : i)}
                   >
                     What&apos;s included

@@ -44,7 +44,7 @@ const About = () => {
 
           {/* Left — Copy */}
           <div className="flex flex-col gap-6">
-            <p className="text-sm font-semibold tracking-[0.2em] uppercase text-[#2563EB]">
+            <p className="text-sm font-semibold tracking-[0.2em] uppercase text-[#5252C7]">
               Why KDR Tech
             </p>
             <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-white leading-tight">
@@ -81,14 +81,14 @@ const About = () => {
                 href={CALENDLY_URL}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center justify-center gap-2 px-6 py-3.5 bg-[#2563EB] hover:bg-[#1D4ED8] text-white font-semibold rounded-xl text-sm transition-colors"
+                className="inline-flex items-center justify-center gap-2 px-6 py-3.5 bg-[#5252C7] hover:bg-[#3838AE] text-white font-semibold rounded-xl text-sm transition-colors"
               >
                 Book a Free Call
                 <ChevronRight className="w-4 h-4" />
               </a>
               <a
                 href="#team"
-                className="inline-flex items-center justify-center gap-2 px-6 py-3.5 border border-[#1E3A5F] hover:border-[#2563EB]/50 text-white font-semibold rounded-xl text-sm transition-colors"
+                className="inline-flex items-center justify-center gap-2 px-6 py-3.5 border border-[#1E3A5F] hover:border-[#5252C7]/50 text-white font-semibold rounded-xl text-sm transition-colors"
               >
                 Meet the Team
               </a>
@@ -102,10 +102,10 @@ const About = () => {
               return (
                 <div
                   key={item.title}
-                  className="bg-[#0F2040] border border-[#1E3A5F] rounded-xl p-5 hover:border-[#2563EB]/40 transition-all duration-200 card-glow"
+                  className="bg-[#0F2040] border border-[#1E3A5F] rounded-xl p-5 hover:border-[#5252C7]/40 transition-all duration-200 card-glow"
                 >
-                  <div className="w-9 h-9 rounded-lg bg-[#2563EB]/10 border border-[#2563EB]/20 flex items-center justify-center mb-3">
-                    <Icon className="w-5 h-5 text-[#2563EB]" style={{ width: "18px", height: "18px" }} />
+                  <div className="w-9 h-9 rounded-lg bg-[#5252C7]/10 border border-[#5252C7]/20 flex items-center justify-center mb-3">
+                    <Icon className="w-5 h-5 text-[#5252C7]" style={{ width: "18px", height: "18px" }} />
                   </div>
                   <h3 className="text-sm font-bold text-white mb-1">{item.title}</h3>
                   <p className="text-xs text-[#94A3B8] leading-relaxed">{item.description}</p>

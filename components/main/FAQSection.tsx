@@ -31,7 +31,7 @@ export default function FAQSection() {
       <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <div className="text-center mb-12">
-          <p className="text-sm font-semibold tracking-[0.2em] uppercase text-[#2563EB] mb-3">
+          <p className="text-sm font-semibold tracking-[0.2em] uppercase text-[#5252C7] mb-3">
             FAQ
           </p>
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-white mb-4">
@@ -50,14 +50,14 @@ export default function FAQSection() {
               <div
                 key={faq.id}
                 className={`bg-[#0F2040] border rounded-xl overflow-hidden transition-all duration-200 ${
-                  isOpen ? "border-[#2563EB]/40" : "border-[#1E3A5F]"
+                  isOpen ? "border-[#5252C7]/40" : "border-[#1E3A5F]"
                 }`}
               >
                 <button
                   onClick={() => setOpenId(isOpen ? null : faq.id)}
                   className="w-full flex items-center justify-between px-6 py-5 text-left group"
                 >
-                  <span className="text-base font-semibold text-white group-hover:text-[#2563EB] transition-colors pr-4">
+                  <span className="text-base font-semibold text-white group-hover:text-[#5252C7] transition-colors pr-4">
                     {faq.question}
                   </span>
                   <ChevronDown
@@ -86,7 +86,7 @@ export default function FAQSection() {
             href="https://calendly.com/developer-kdrtech-in/30min"
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 px-6 py-3 bg-[#2563EB] hover:bg-[#1D4ED8] text-white font-semibold rounded-xl text-sm transition-colors"
+            className="inline-flex items-center gap-2 px-6 py-3 bg-[#5252C7] hover:bg-[#3838AE] text-white font-semibold rounded-xl text-sm transition-colors"
           >
             Book a Free Call →
           </a>

@@ -38,7 +38,7 @@ export default function AdminSidebar() {
     <div className="w-64 bg-[#1A1A2E] border-r border-[#2A0E61] min-h-screen flex flex-col">
       {/* Logo */}
       <div className="p-6 border-b border-[#2A0E61]">
-        <h1 className="text-2xl font-bold bg-gradient-to-r from-purple-400 to-cyan-500 bg-clip-text text-transparent">
+        <h1 className="text-2xl font-bold text-gradient-brand">
           KDR Tech
         </h1>
         <p className="text-sm text-gray-400 mt-1">Admin Dashboard</p>
