@@ -7,6 +7,31 @@ values). Organized by severity, matching the original report.
 
 ## 🔴 Critical — code fixed, but **you must still take manual action**
 
+### 0. (Found 2026-09-09, during repo cleanup) A second leaked admin password, and a leaked SSH private key
+Two more secrets turned up while cleaning up repo hygiene tells — neither
+was caught in the original review because they weren't in the files that
+review focused on.
+
+**A second admin credential pair.** `IMPLEMENTATION_COMPLETE.md` documented
+`admin@kdrtech.in` / `Admin@123` — a *different* email+password pair from
+the `admin@kdrtech.com` one already flagged in item 2 below. **Action:**
+check whether an account with this email/password was ever created and
+rotate it if so, same as item 2.
+
+**A leaked SSH private key.** `key.pub` (a real SSH public key,
+`arbazkdr7866@gmail.com`) was sitting at the repo root. Checking history:
+its *private* counterpart was committed to this repo in March 2024 and
+later `git rm`'d — which removes it from the current tree but **not** from
+history. Anyone who clones the full repo can still pull it out in seconds
+(`git show <that commit>:key`). **This is likely the single most severe
+exposure found across this whole review** — depending on where this
+keypair is authorized, it could mean SSH/server access, not just database
+access. **Action (do this regardless of anything else):** figure out every
+place this keypair is or was ever authorized (a server's
+`~/.ssh/authorized_keys`, a GitHub/GitLab deploy key, a CI/CD secret,
+anywhere) and revoke/replace it there. Removed `key.pub` from the tree and
+added `key`/`key.pub` to `.gitignore`.
+
 ### 1. Supabase service-role key was committed to git
 **Code fix (done):** [.env.local.example](.env.local.example) rewritten to contain only
 placeholders. The file previously had a real, working `SUPABASE_SERVICE_ROLE_KEY`
@@ -214,11 +239,32 @@ flagging this as good follow-up work, not doing it speculatively tonight.
 ## Still outstanding — action items for you
 
 1. **Rotate the Supabase service-role key** (Critical, do this first).
-2. **Rotate/verify the `admin@kdrtech.com` password**, enable MFA (Critical).
-3. Run [migrations/014_site_settings_rls.sql](migrations/014_site_settings_rls.sql) in the Supabase SQL editor.
-4. Enable CAPTCHA on Supabase Auth (login brute-force protection).
-5. Set a file-size limit + allowed MIME types on the `documents` storage bucket.
-6. ~~Decide on the `documents` bucket privacy + signed-URL migration~~ — done 2026-09-09 (bucket is now private, code updated to match, see item 12 above).
-7. Enable GitHub secret scanning + push protection, and Dependabot, on the repo.
-8. Schedule a deliberate Next.js 15→16 upgrade to close the last dependency advisory.
-9. Optional: Zod validation on write routes; Sentry/error monitoring; git-history purge of the old leaked keys.
+2. **Rotate/verify both `admin@kdrtech.com` and `admin@kdrtech.in`**, enable MFA (Critical).
+3. **Find and revoke/replace the leaked SSH keypair (`arbazkdr7866@gmail.com`) everywhere it's authorized** (Critical — see item 0 above).
+4. Run [migrations/014_site_settings_rls.sql](migrations/014_site_settings_rls.sql) in the Supabase SQL editor.
+5. Enable CAPTCHA on Supabase Auth (login brute-force protection).
+6. Set a file-size limit + allowed MIME types on the `documents` storage bucket.
+7. ~~Decide on the `documents` bucket privacy + signed-URL migration~~ — done 2026-09-09 (bucket is now private, code updated to match, see item 12 above).
+8. **Make the GitHub repo private.** It's your internal CMS/CRM, not open-source — no upside to public, real downside (secret-scraping surface, and everything in "Repo hygiene cleanup" below being visible to anyone, including prospective clients evaluating you). Before flipping it: confirm Vercel's GitHub App has private-repo access, or deployments will break.
+9. Enable GitHub secret scanning + push protection, and Dependabot, on the repo.
+10. Schedule a deliberate Next.js 15→16 upgrade to close the last dependency advisory.
+11. Optional: Zod validation on write routes; Sentry/error monitoring; git-history purge of the old leaked keys/credentials (rotation neutralizes them; history-purging is cleanup on top of that, not a substitute for it).
+
+## Repo hygiene cleanup (2026-09-09)
+
+Separate from security, but done in the same pass: removed several things
+that made the repo read as a rushed AI-assisted build rather than a
+maintained codebase — renamed `package.json` from the leftover
+`"spaceportfolio"` starter-template name to `"kdr-tech"`; removed one-time
+AI-agent status-report docs (`MIGRATE_TEAM.md`, `PHASE1_COMPLETE.md`,
+`IMPLEMENTATION_COMPLETE.md`) and a stray business document
+(`kdrtech_social_media_plan.html`, sent to the owner before removal);
+removed dead code (`components/main/BrandScroll.tsx`, never rendered
+anywhere, and the now-unused legacy `lib/supabase.ts` client it was the
+last reference to); removed stray/orphaned config files in `public/`; and
+actually wired up the already-installed `next-sitemap` dependency, which
+had no `postbuild` script calling it — `/robots.txt` 404'd in production
+and `/sitemap.xml` served a stale, manually-written placeholder advertising
+a page that doesn't exist. Verified locally that a real `postbuild` step
+now generates a correct `robots.txt` and `sitemap.xml` (including
+published blog posts, fetched at build time).
