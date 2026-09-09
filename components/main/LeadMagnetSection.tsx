@@ -245,6 +245,12 @@ export default function LeadMagnetSection() {
                 <p className="text-xs text-[#64748B] text-center">
                   No spam. No sales pitch. Just a clear, honest breakdown of what your project needs and what it&apos;ll cost.
                 </p>
+                <p className="text-xs text-[#64748B] text-center">
+                  By submitting, you agree to our{" "}
+                  <a href="/privacy-policy" className="underline hover:text-white transition-colors">
+                    Privacy Policy
+                  </a>.
+                </p>
               </form>
             )}
           </div>
