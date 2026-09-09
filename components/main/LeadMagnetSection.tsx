@@ -72,9 +72,9 @@ export default function LeadMagnetSection() {
               Not Sure What Your Project Will Cost?
             </h2>
             <p className="text-lg text-[#94A3B8] leading-relaxed">
-              Tell us about your idea in 60 seconds. We&apos;ll send you a free,
-              honest Project Roadmap — a clear breakdown of features, timeline,
-              and cost. No sales pitch, no obligation.
+              Tell us about your idea in 60 seconds and we&apos;ll send back a
+              Project Roadmap — a clear breakdown of features, timeline, and
+              cost, with no strings attached.
             </p>
 
             <ul className="space-y-3">
@@ -82,7 +82,7 @@ export default function LeadMagnetSection() {
                 "Free response within 24 hours",
                 "Covers mobile apps and websites",
                 "Includes feature breakdown + cost estimate",
-                "No email spam, ever — no commitment required",
+                "We won't add you to a marketing list",
               ].map((item) => (
                 <li key={item} className="flex items-center gap-3 text-sm text-[#94A3B8]">
                   <CheckCircle className="w-5 h-5 text-[#10B981] flex-shrink-0" />
@@ -243,7 +243,7 @@ export default function LeadMagnetSection() {
                 </button>
 
                 <p className="text-xs text-[#64748B] text-center">
-                  No spam. No sales pitch. Just a clear, honest breakdown of what your project needs and what it&apos;ll cost.
+                  A real person on our team reviews every submission — not an autoresponder.
                 </p>
                 <p className="text-xs text-[#64748B] text-center">
                   By submitting, you agree to our{" "}

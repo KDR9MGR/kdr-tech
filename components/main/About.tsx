@@ -7,12 +7,12 @@ const differentiators = [
   {
     icon: Globe2,
     title: "English-Speaking Team",
-    description: "No language barriers. Clear, direct communication from kickoff to launch — and after.",
+    description: "Direct, native-English communication from kickoff to launch — and after. No translation layer, no missed nuance.",
   },
   {
     icon: Lock,
     title: "Milestone Payments",
-    description: "Pay only for approved work. Money moves when you say it moves. Zero upfront risk.",
+    description: "You approve each milestone before payment moves — nothing charged upfront, nothing charged without your sign-off.",
   },
   {
     icon: Video,
@@ -22,7 +22,7 @@ const differentiators = [
   {
     icon: Smartphone,
     title: "Flutter, React Native & Next.js",
-    description: "One codebase for iOS and Android. Modern Next.js for websites. Best tools for every job.",
+    description: "iOS and Android from a single codebase; Next.js when the job calls for a website. The stack matches the project, not the other way around.",
   },
   {
     icon: Headphones,
@@ -32,7 +32,7 @@ const differentiators = [
   {
     icon: FileCode2,
     title: "You Own Everything",
-    description: "Full source code, Figma files, and documentation. No lock-in. No recurring fees.",
+    description: "Source code, Figma files, documentation — all handed over, all yours. No recurring fees, ever.",
   },
 ];
 

@@ -8,7 +8,7 @@ const steps = [
     title: "Discovery Call",
     timeline: "Day 1",
     description:
-      "We spend 30–60 minutes understanding your vision, goals, target users, and technical needs. No charge, no commitment. We ask the right questions so nothing gets missed later.",
+      "30–60 minutes on your vision, goals, target users, and technical needs — free, no commitment attached. We ask the right questions upfront so nothing gets missed later.",
   },
   {
     number: "02",
@@ -66,7 +66,7 @@ const ProcessSection = () => {
           </h2>
           <p className="text-lg text-[#94A3B8] max-w-2xl mx-auto">
             The same transparent process for every project — mobile app or website.
-            No black boxes. No surprises. You know exactly where your build stands every day.
+            You&apos;ll know exactly where your build stands every day, not just when we remember to tell you.
           </p>
         </div>
 
