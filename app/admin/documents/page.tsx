@@ -59,6 +59,8 @@ export default function DocumentsPage() {
   const [isSnippetDialogOpen, setIsSnippetDialogOpen] = useState(false)
   const [isPreviewOpen, setIsPreviewOpen] = useState(false)
   const [selectedDoc, setSelectedDoc] = useState<Document | null>(null)
+  const [previewSrc, setPreviewSrc] = useState<string | null>(null)
+  const [openingDocId, setOpeningDocId] = useState<string | null>(null)
   const [snippetName, setSnippetName] = useState('')
   const [snippetContent, setSnippetContent] = useState('')
   const [isSavingSnippet, setIsSavingSnippet] = useState(false)
@@ -91,9 +93,53 @@ export default function DocumentsPage() {
     fetchDocuments()
   }, [fetchDocuments])
 
+  // The `documents` bucket is private, so doc.file_url is no longer directly
+  // fetchable — HTML goes through the same-origin /view proxy, everything
+  // else needs a freshly minted signed URL from the server.
+  const getSignedUrl = async (doc: Document): Promise<string> => {
+    const response = await fetch(`/api/documents/${doc.id}/signed-url`)
+    if (!response.ok) {
+      const body = await response.json().catch(() => ({}))
+      throw new Error(body.error || 'Failed to load document')
+    }
+    const { url } = await response.json()
+    return url as string
+  }
+
   const handlePreview = async (doc: Document) => {
     setSelectedDoc(doc)
     setIsPreviewOpen(true)
+    setPreviewSrc(null)
+
+    if (doc.file_type.includes('html')) {
+      setPreviewSrc(`/api/documents/${doc.id}/view`)
+      return
+    }
+
+    try {
+      const url = await getSignedUrl(doc)
+      setPreviewSrc(url)
+    } catch (error: any) {
+      toast({ title: 'Preview failed', description: error.message, variant: 'destructive' })
+      setIsPreviewOpen(false)
+    }
+  }
+
+  const handleOpenInNewTab = async (doc: Document) => {
+    if (doc.file_type.includes('html')) {
+      window.open(`/api/documents/${doc.id}/view`, '_blank', 'noopener,noreferrer')
+      return
+    }
+
+    setOpeningDocId(doc.id)
+    try {
+      const url = await getSignedUrl(doc)
+      window.open(url, '_blank', 'noopener,noreferrer')
+    } catch (error: any) {
+      toast({ title: 'Could not open document', description: error.message, variant: 'destructive' })
+    } finally {
+      setOpeningDocId(null)
+    }
   }
 
   const onDrop = useCallback(async (acceptedFiles: File[]) => {
@@ -117,7 +163,10 @@ export default function DocumentsPage() {
 
       if (uploadError) throw uploadError
 
-      // 2. Get Public URL
+      // 2. The `documents` bucket is private — this URL isn't actually
+      // fetchable, but we store it anyway purely because it encodes the
+      // storage path in a predictable format (see lib/documents-storage.ts).
+      // Real access always goes through a signed URL minted server-side.
       const { data: { publicUrl } } = supabase.storage
         .from('documents')
         .getPublicUrl(filePath)
@@ -478,16 +527,15 @@ export default function DocumentsPage() {
                               <Button
                                 variant="ghost"
                                 size="icon"
-                                asChild
+                                disabled={openingDocId === doc.id}
+                                onClick={() => handleOpenInNewTab(doc)}
                                 className="text-gray-400 hover:text-white hover:bg-[#030014]"
                               >
-                                <a 
-                                  href={doc.file_type.includes('html') ? `/api/documents/${doc.id}/view` : doc.file_url} 
-                                  target="_blank" 
-                                  rel="noopener noreferrer"
-                                >
+                                {openingDocId === doc.id ? (
+                                  <Loader2 className="w-4 h-4 animate-spin" />
+                                ) : (
                                   <ExternalLink className="w-4 h-4" />
-                                </a>
+                                )}
                               </Button>
                               <Button
                                 variant="ghost"
@@ -511,7 +559,13 @@ export default function DocumentsPage() {
       </main>
 
       {/* Preview Dialog */}
-      <Dialog open={isPreviewOpen} onOpenChange={setIsPreviewOpen}>
+      <Dialog
+        open={isPreviewOpen}
+        onOpenChange={(open) => {
+          setIsPreviewOpen(open)
+          if (!open) setPreviewSrc(null)
+        }}
+      >
         <DialogContent className="bg-[#1A1A2E] border-[#2A0E61] text-white max-w-[95vw] h-[90vh] flex flex-col p-0">
           <DialogHeader className="p-4 border-b border-[#2A0E61] flex flex-row items-center justify-between">
             <div>
@@ -521,14 +575,16 @@ export default function DocumentsPage() {
               </DialogDescription>
             </div>
           </DialogHeader>
-          <div className="flex-1 bg-white overflow-hidden">
-            {selectedDoc && (
-              <iframe 
-                src={selectedDoc.file_type.includes('html') ? `/api/documents/${selectedDoc.id}/view` : selectedDoc.file_url} 
+          <div className="flex-1 bg-white overflow-hidden flex items-center justify-center">
+            {previewSrc ? (
+              <iframe
+                src={previewSrc}
                 className="w-full h-full border-none"
-                title={selectedDoc.name}
+                title={selectedDoc?.name}
                 sandbox="allow-scripts allow-modals allow-popups allow-forms"
               />
+            ) : (
+              <Loader2 className="w-8 h-8 text-purple-500 animate-spin" />
             )}
           </div>
         </DialogContent>

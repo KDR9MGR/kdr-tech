@@ -151,16 +151,32 @@ individual admin page and API route remembering to check auth itself
 `/admin/login` for a logged-out visitor, with no redirect loop.
 
 ### 12. Documents storage bucket is public, no signed URLs
-**Not fixed — needs your action first.** The migration
-([migrations/012_documents_table.sql](migrations/012_documents_table.sql))
-explicitly chose a public bucket for simplicity. Switching to signed URLs
-requires (1) you toggle the bucket to private in Supabase Dashboard →
-Storage first, then (2) a code change to generate signed URLs instead of
-public ones. I didn't do step 2 without step 1 — writing that code now
-would provide zero actual protection while the bucket stays public, and
-risks introducing bugs into a working feature for a control that isn't
-active yet. Say the word once you've flipped the bucket and I'll wire up
-the signed-URL code.
+**Fixed (2026-09-09), following you switching the `documents` bucket to
+private in Supabase Dashboard.** Added
+[lib/documents-storage.ts](lib/documents-storage.ts) with a shared helper
+that extracts the bucket-relative path from the (now non-functional as a
+direct URL) `file_url` value stored at upload time. Every place that reads
+document content now mints a fresh short-lived signed URL server-side
+instead of trusting `file_url` directly:
+
+- [app/api/documents/[id]/view/route.ts](<app/api/documents/[id]/view/route.ts>) —
+  HTML snippet preview proxy now signs its own fetch target. This also
+  fully closes the SSRF concern from item 8 (previously mitigated by a
+  host allow-list; now there's no client-influenced fetch target at all).
+- [app/api/documents/[id]/signed-url/route.ts](<app/api/documents/[id]/signed-url/route.ts>) —
+  new endpoint for non-HTML files (images, PDFs, etc.), since those are
+  opened directly by the browser rather than proxied (proxying binary
+  content through `.text()` would corrupt it).
+- [app/api/documents/[id]/route.ts](<app/api/documents/[id]/route.ts>) (DELETE) —
+  now uses the shared path-extraction helper instead of inline string
+  splitting.
+- [app/admin/documents/page.tsx](app/admin/documents/page.tsx) — "open in new
+  tab" and the preview dialog both fetch a signed URL first (for non-HTML
+  files) instead of linking `doc.file_url` directly, which would now 403.
+
+Verified: `tsc`/build clean, and confirmed live that all three document
+routes still correctly return 401 for unauthenticated requests (no
+regression in the auth checks while rewiring the storage access).
 
 ### 13. No Privacy Policy
 **Fixed:** added [app/(public)/privacy-policy/page.tsx](<app/(public)/privacy-policy/page.tsx>),
@@ -202,7 +218,7 @@ flagging this as good follow-up work, not doing it speculatively tonight.
 3. Run [migrations/014_site_settings_rls.sql](migrations/014_site_settings_rls.sql) in the Supabase SQL editor.
 4. Enable CAPTCHA on Supabase Auth (login brute-force protection).
 5. Set a file-size limit + allowed MIME types on the `documents` storage bucket.
-6. Decide on the `documents` bucket privacy + signed-URL migration (item 12 above).
+6. ~~Decide on the `documents` bucket privacy + signed-URL migration~~ — done 2026-09-09 (bucket is now private, code updated to match, see item 12 above).
 7. Enable GitHub secret scanning + push protection, and Dependabot, on the repo.
 8. Schedule a deliberate Next.js 15→16 upgrade to close the last dependency advisory.
 9. Optional: Zod validation on write routes; Sentry/error monitoring; git-history purge of the old leaked keys.

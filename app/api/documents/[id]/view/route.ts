@@ -1,5 +1,6 @@
 import { createClient } from '@/lib/supabase/server'
 import { NextRequest, NextResponse } from 'next/server'
+import { DOCUMENTS_BUCKET, extractDocumentStoragePath } from '@/lib/documents-storage'
 
 export async function GET(
   request: NextRequest,
@@ -25,27 +26,28 @@ export async function GET(
     return NextResponse.json({ error: 'Document not found' }, { status: 404 })
   }
 
-  // SSRF guard: this route fetches a server-controlled-looking but
-  // actually client-supplied URL (set at upload time in
-  // app/admin/documents/page.tsx) and reflects the response back to the
-  // caller. Restrict it to our own Supabase storage host so it can't be
-  // used to make the server fetch internal/metadata URLs.
-  let fileUrl: URL
-  try {
-    fileUrl = new URL(document.file_url)
-  } catch {
-    return NextResponse.json({ error: 'Invalid file URL' }, { status: 400 })
+  // The `documents` bucket is private, so document.file_url (a "public
+  // style" URL string kept only to encode the storage path — see
+  // lib/documents-storage.ts) is no longer directly fetchable. Derive the
+  // path and mint our own short-lived signed URL server-side. This also
+  // closes the SSRF surface the old host-allowlist check was guarding
+  // against: we're no longer fetching a client-supplied URL at all, only
+  // one we constructed ourselves from a known bucket + derived path.
+  const filePath = extractDocumentStoragePath(document.file_url)
+  if (!filePath) {
+    return NextResponse.json({ error: 'Could not resolve document storage path' }, { status: 400 })
   }
 
-  const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL || process.env.SUPABASE_URL
-  const allowedHost = supabaseUrl ? new URL(supabaseUrl).hostname : null
+  const { data: signed, error: signError } = await supabase.storage
+    .from(DOCUMENTS_BUCKET)
+    .createSignedUrl(filePath, 60)
 
-  if (!allowedHost || fileUrl.hostname !== allowedHost) {
-    return NextResponse.json({ error: 'Document source not allowed' }, { status: 400 })
+  if (signError || !signed) {
+    return NextResponse.json({ error: 'Failed to access document content' }, { status: 500 })
   }
 
   try {
-    const response = await fetch(fileUrl.toString())
+    const response = await fetch(signed.signedUrl)
     const content = await response.text()
 
     // Return the content with the correct content type

@@ -1,5 +1,6 @@
 import { createClient } from '@/lib/supabase/server'
 import { NextRequest, NextResponse } from 'next/server'
+import { DOCUMENTS_BUCKET, extractDocumentStoragePath } from '@/lib/documents-storage'
 
 export async function DELETE(
   request: NextRequest,
@@ -25,14 +26,11 @@ export async function DELETE(
     return NextResponse.json({ error: fetchError.message }, { status: 500 })
   }
 
-  // Extract path from public URL
-  // Assuming public URL format: https://[project].supabase.co/storage/v1/object/public/documents/[path]
-  const fileUrl = document.file_url
-  const pathParts = fileUrl.split('/documents/')
-  if (pathParts.length > 1) {
-    const filePath = pathParts[1]
-    // Delete from storage
-    await supabase.storage.from('documents').remove([filePath])
+  // Extract the storage path from the stored file_url and delete the
+  // underlying object too, not just the database row.
+  const filePath = extractDocumentStoragePath(document.file_url)
+  if (filePath) {
+    await supabase.storage.from(DOCUMENTS_BUCKET).remove([filePath])
   }
 
   // Delete from database
