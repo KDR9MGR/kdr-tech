@@ -1,29 +1,26 @@
 -- Create admin user for KDR Tech Admin Dashboard
 -- This will create an admin user that can access the /admin panel
 
--- IMPORTANT: You need to create this user through the Supabase Dashboard
--- Go to: Authentication → Users → Add user
---
--- Use these credentials:
--- Email: admin@kdrtech.com
--- Password: KdrTech2024!Admin
---
--- Make sure to check "Auto Confirm User" so the user is immediately active
---
--- Alternatively, you can use the Supabase CLI or create the user programmatically
--- through your application's sign-up flow.
+-- SECURITY: this file previously documented a real, working admin email +
+-- password pair as an example. That was committed to a public repo and must
+-- be treated as compromised — rotate that account's password immediately if
+-- you haven't already (Supabase Dashboard → Authentication → Users → select
+-- the user → Reset password), regardless of whether it's still in use.
 
--- Note: This SQL file is for documentation purposes only.
--- Supabase Auth users are managed through the Supabase Auth system,
--- not through direct SQL inserts into the auth.users table.
+-- Admin users are managed entirely through Supabase Auth, not via SQL insert
+-- into auth.users. To create one:
 --
--- To create the admin user, follow these steps:
--- 1. Go to your Supabase Dashboard: https://ecdbvjqgqwhttdgfnzzr.supabase.co
--- 2. Navigate to Authentication → Users
--- 3. Click "Add user" button
--- 4. Enter email: admin@kdrtech.com
--- 5. Enter password: KdrTech2024!Admin
--- 6. Check the "Auto Confirm User" checkbox
--- 7. Click "Create user"
+-- 1. Go to your Supabase Dashboard → Authentication → Users
+-- 2. Click "Add user"
+-- 3. Enter the admin's real email address
+-- 4. Generate a strong, unique password at creation time (a password
+--    manager's generator is fine) — do not write it down in this repo
+-- 5. Check "Auto Confirm User" so the account is immediately active
+-- 6. Share the password with the admin out-of-band (not via this repo,
+--    not via chat/email in plaintext) and have them change it on first login
+-- 7. Enable MFA (TOTP) for the account under Authentication → Users
 --
--- After creating the user, you can log in at: http://localhost:3001/admin/login
+-- After creating the user, they can log in at: /admin/login
+--
+-- Note: this SQL file is documentation only — Supabase Auth users cannot be
+-- created via direct SQL insert into auth.users.
