@@ -1,7 +1,21 @@
 import { createClient } from '@/lib/supabase/server'
 import { NextRequest, NextResponse } from 'next/server'
+import { rateLimit, getClientIp } from '@/lib/rate-limit'
 
 export async function POST(request: NextRequest) {
+  // Public, unauthenticated endpoint — rate limit by IP to blunt spam/abuse.
+  const ip = getClientIp(request)
+  const { limited, retryAfterSeconds } = rateLimit(`leads:${ip}`, {
+    max: 5,
+    windowMs: 60 * 60 * 1000, // 5 submissions per IP per hour
+  })
+  if (limited) {
+    return NextResponse.json(
+      { error: 'Too many requests. Please try again later.' },
+      { status: 429, headers: { 'Retry-After': String(retryAfterSeconds) } }
+    )
+  }
+
   const supabase = await createClient()
 
   const body = await request.json()

@@ -10,14 +10,24 @@ export async function GET(
     const supabase = await createClient()
     const { slug } = await params
 
-    const { data, error } = await supabase
+    // Check if user is authenticated (admin)
+    const { data: { user } } = await supabase.auth.getUser()
+
+    let query = supabase
       .from('blog_posts')
       .select(`
         *,
         author:team_members(id, full_name, slug, photo_url, job_title)
       `)
       .eq('slug', slug)
-      .single()
+
+    // Defense-in-depth: RLS already restricts anon reads to published posts,
+    // but don't rely on that alone — filter explicitly here too.
+    if (!user) {
+      query = query.eq('status', 'published')
+    }
+
+    const { data, error } = await query.single()
 
     if (error) {
       return NextResponse.json({ error: error.message }, { status: 404 })

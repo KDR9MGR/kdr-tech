@@ -225,9 +225,39 @@ export default function DocumentsPage() {
     }
   }
 
+  const MAX_UPLOAD_BYTES = 50 * 1024 * 1024 // 50MB — matches the limit shown in the UI
+
+  const onDropRejected = useCallback((fileRejections: any[]) => {
+    const reasons = fileRejections
+      .flatMap((r) => r.errors.map((e: any) => e.message))
+      .join('; ')
+    toast({
+      title: 'File rejected',
+      description: reasons || 'File type or size not allowed (max 50MB).',
+      variant: 'destructive',
+    })
+  }, [toast])
+
   const { getRootProps, getInputProps, isDragActive } = useDropzone({
     onDrop,
+    onDropRejected,
     multiple: false,
+    maxSize: MAX_UPLOAD_BYTES,
+    // Allow-list rather than block-list: covers the asset types this page is
+    // actually used for (charts, drafts, snippets, docs, images), while
+    // ruling out arbitrary/executable file types by default.
+    accept: {
+      'image/*': ['.png', '.jpg', '.jpeg', '.gif', '.webp', '.svg'],
+      'application/pdf': ['.pdf'],
+      'text/html': ['.html', '.htm'],
+      'text/plain': ['.txt', '.md'],
+      'text/csv': ['.csv'],
+      'application/json': ['.json'],
+      'application/zip': ['.zip'],
+      'application/vnd.openxmlformats-officedocument.wordprocessingml.document': ['.docx'],
+      'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet': ['.xlsx'],
+      'application/vnd.openxmlformats-officedocument.presentationml.presentation': ['.pptx'],
+    },
   })
 
   const handleDelete = async (id: string) => {

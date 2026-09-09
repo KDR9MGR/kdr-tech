@@ -1,8 +1,22 @@
-import { type NextRequest } from 'next/server'
+import { NextResponse, type NextRequest } from 'next/server'
 import { updateSession } from '@/lib/supabase/middleware'
 
 export async function middleware(request: NextRequest) {
-  return await updateSession(request)
+  const { response, user } = await updateSession(request)
+
+  // Defense-in-depth: every /admin page and API route already checks auth
+  // itself, but that means protection depends on each current and future
+  // route remembering to do so. Enforce it once, here, as a backstop.
+  const { pathname } = request.nextUrl
+  const isAdminRoute = pathname.startsWith('/admin')
+  const isLoginPage = pathname === '/admin/login'
+
+  if (isAdminRoute && !isLoginPage && !user) {
+    const loginUrl = new URL('/admin/login', request.url)
+    return NextResponse.redirect(loginUrl)
+  }
+
+  return response
 }
 
 export const config = {

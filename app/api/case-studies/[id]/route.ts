@@ -8,11 +8,16 @@ export async function GET(
   const supabase = await createClient()
   const { id } = await params
 
-  const { data, error } = await supabase
-    .from('case_studies')
-    .select('*')
-    .eq('id', id)
-    .single()
+  // Defense-in-depth: RLS already restricts anon reads to visible rows,
+  // but don't rely on that alone — filter explicitly here too.
+  const { data: { user } } = await supabase.auth.getUser()
+
+  let query = supabase.from('case_studies').select('*').eq('id', id)
+  if (!user) {
+    query = query.eq('visible', true)
+  }
+
+  const { data, error } = await query.single()
 
   if (error) {
     return NextResponse.json({ error: error.message }, { status: 500 })
