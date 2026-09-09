@@ -252,7 +252,7 @@ export default function LoginPage() {
             style={{
               width: '100%',
               height: '44px',
-              background: 'linear-gradient(135deg, #A855F7 0%, #06B6D4 100%)',
+              background: 'linear-gradient(135deg, #5252C7 0%, #EA28AD 100%)',
               color: 'white',
               fontWeight: '600',
               fontSize: '15px',
