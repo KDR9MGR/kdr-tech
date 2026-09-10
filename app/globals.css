@@ -89,7 +89,31 @@ html {
    CARD GLOW ON HOVER
    ===================================================== */
 .card-glow:hover {
-  box-shadow: 0 0 0 1px rgba(37, 99, 235, 0.4), 0 8px 32px rgba(37, 99, 235, 0.12);
+  /* rgb(82, 82, 199) = #5252C7, brand indigo */
+  box-shadow: 0 0 0 1px rgba(82, 82, 199, 0.4), 0 8px 32px rgba(82, 82, 199, 0.12);
+}
+
+/* =====================================================
+   SHOWCASE CARD — gradient highlight on hover
+   ===================================================== */
+/* Layered colored box-shadows in the real logo gradient stops (cyan ->
+   indigo -> magenta), offset to read as a soft directional glow rather
+   than a flat single-color ring. Deliberately not a literal gradient
+   border (border-image ignores border-radius, and a gradient painted via
+   a pseudo-element would sit behind this card's own backdrop-blur and
+   get blurred unpredictably) — box-shadow paints on top and stays crisp
+   regardless of the card's backdrop-filter.
+   rgb(122,179,236)=#7AB3EC cyan, rgb(82,82,199)=#5252C7 indigo,
+   rgb(234,40,173)=#EA28AD magenta */
+.showcase-card {
+  transition: box-shadow 0.4s ease;
+}
+.showcase-card:hover {
+  box-shadow:
+    0 0 0 1px rgba(82, 82, 199, 0.6),
+    -6px 6px 20px -6px rgba(122, 179, 236, 0.35),
+    6px -6px 20px -6px rgba(234, 40, 173, 0.35),
+    0 8px 28px -6px rgba(82, 82, 199, 0.3);
 }
 
 /* =====================================================

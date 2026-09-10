@@ -98,7 +98,7 @@ function ScrollingRow({ apps, direction, speed }: ScrollingRowProps) {
           <div
             key={`${app.id}-${index}`}
             onClick={() => handleLogoClick(app)}
-            className={`flex-shrink-0 relative flex flex-col items-center justify-center gap-3 w-28 md:w-36 rounded-2xl bg-white/[0.03] backdrop-blur-sm border border-white/[0.06] py-6 transition-all duration-500 hover:bg-white/[0.07] hover:border-white/[0.15] hover:scale-[1.03] ${
+            className={`showcase-card flex-shrink-0 relative flex flex-col items-center justify-center gap-3 w-28 md:w-36 rounded-2xl bg-white/[0.03] backdrop-blur-sm border border-white/[0.06] py-6 transition-all duration-500 hover:bg-white/[0.07] hover:border-transparent hover:scale-[1.03] ${
               app.app_url ? 'cursor-pointer' : ''
             }`}
             title={app.app_name}
