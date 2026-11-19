@@ -58,62 +58,154 @@ html {
 /* =====================================================
    GRADIENT TEXT UTILITY
    ===================================================== */
-/* Real logo colors (sampled from public/images/kdr-tech-logo.png), not
-   generic Tailwind blue/cyan — used for the hero headline and pricing
-   emphasis text. */
+/* GTA VI / Vice City palette: sun yellow -> sunset orange -> hot pink.
+   `.text-gradient-blue` keeps its old name (it is referenced all over the
+   public pages) but is now the sunset gradient. */
 .text-gradient-blue {
-  background: linear-gradient(135deg, #7AB3EC 0%, #5252C7 100%);
+  background: linear-gradient(100deg, #FFC857 0%, #FF8A3D 42%, #F0328A 100%);
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
+  filter: drop-shadow(0 0 22px rgba(240, 50, 138, 0.35));
 }
 
-/* Full three-stop brand gradient, for spots that want the whole logo
-   range rather than just the cyan->indigo half (e.g. the admin
-   wordmark). */
+/* Full-range gradient: teal (Vice water) -> pink -> orange. */
 .text-gradient-brand {
-  background: linear-gradient(135deg, #7AB3EC 0%, #5252C7 55%, #EA28AD 100%);
+  background: linear-gradient(135deg, #22D3C5 0%, #F0328A 55%, #FF8A3D 100%);
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
 }
 
 .text-gradient-green {
-  background: linear-gradient(135deg, #10B981 0%, #34D399 100%);
+  background: linear-gradient(135deg, #22D3C5 0%, #8CF5E8 100%);
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
+  filter: drop-shadow(0 0 20px rgba(34, 211, 197, 0.35));
 }
 
 /* =====================================================
    CARD GLOW ON HOVER
    ===================================================== */
 .card-glow:hover {
-  /* rgb(82, 82, 199) = #5252C7, brand indigo */
-  box-shadow: 0 0 0 1px rgba(82, 82, 199, 0.4), 0 8px 32px rgba(82, 82, 199, 0.12);
+  /* #F0328A hot pink */
+  box-shadow: 0 0 0 1px rgba(240, 50, 138, 0.5), 0 8px 32px rgba(240, 50, 138, 0.18);
 }
 
 /* =====================================================
    SHOWCASE CARD — gradient highlight on hover
    ===================================================== */
-/* Layered colored box-shadows in the real logo gradient stops (cyan ->
-   indigo -> magenta), offset to read as a soft directional glow rather
-   than a flat single-color ring. Deliberately not a literal gradient
-   border (border-image ignores border-radius, and a gradient painted via
-   a pseudo-element would sit behind this card's own backdrop-blur and
-   get blurred unpredictably) — box-shadow paints on top and stays crisp
-   regardless of the card's backdrop-filter.
-   rgb(122,179,236)=#7AB3EC cyan, rgb(82,82,199)=#5252C7 indigo,
-   rgb(234,40,173)=#EA28AD magenta */
+/* Layered coloured box-shadows (teal -> pink -> orange), offset to read as a
+   soft directional neon glow rather than a flat single-colour ring.
+   Deliberately not a literal gradient border (border-image ignores
+   border-radius, and a gradient painted via a pseudo-element would sit
+   behind this card's own backdrop-blur) — box-shadow paints on top and stays
+   crisp regardless of the card's backdrop-filter.
+   rgb(34,211,197)=#22D3C5 teal, rgb(240,50,138)=#F0328A pink,
+   rgb(255,138,61)=#FF8A3D orange */
 .showcase-card {
   transition: box-shadow 0.4s ease;
 }
 .showcase-card:hover {
   box-shadow:
-    0 0 0 1px rgba(82, 82, 199, 0.6),
-    -6px 6px 20px -6px rgba(122, 179, 236, 0.35),
-    6px -6px 20px -6px rgba(234, 40, 173, 0.35),
-    0 8px 28px -6px rgba(82, 82, 199, 0.3);
+    0 0 0 1px rgba(240, 50, 138, 0.65),
+    -6px 6px 20px -6px rgba(34, 211, 197, 0.35),
+    6px -6px 20px -6px rgba(255, 138, 61, 0.4),
+    0 8px 28px -6px rgba(240, 50, 138, 0.35);
+}
+
+/* =====================================================
+   GTA VI / VICE CITY THEME  (scoped to .vice-theme, see
+   app/(public)/layout.tsx — the admin area is not affected)
+   ===================================================== */
+.vice-theme {
+  position: relative;
+  isolation: isolate;
+}
+
+/* Fixed ambient sunset glow behind the whole page. */
+.vice-theme::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background:
+    radial-gradient(60rem 40rem at 6% -8%, rgba(240, 50, 138, 0.16), transparent 62%),
+    radial-gradient(50rem 36rem at 102% 38%, rgba(34, 211, 197, 0.09), transparent 62%),
+    radial-gradient(54rem 40rem at -4% 96%, rgba(255, 138, 61, 0.09), transparent 62%);
+}
+
+/* Poster-style display face for headings. Bowlby One has a single weight, so
+   turn off synthesised bold from Tailwind's font-bold. Legal pages have
+   plain <h2>s inside prose, which also pick this up. */
+.vice-theme :is(h1, h2) {
+  font-family: var(--font-display), Impact, system-ui, sans-serif;
+  font-weight: 400;
+  font-synthesis: none;
+  letter-spacing: 0.005em;
+}
+
+.vice-theme ::selection {
+  background: #F0328A;
+  color: #fff;
+}
+
+/* Pink -> orange scrollbar on a dark track (WebKit + Firefox). */
+html {
+  scrollbar-color: #F0328A #0D0620;
+}
+html::-webkit-scrollbar {
+  width: 11px;
+}
+html::-webkit-scrollbar-track {
+  background: #0D0620;
+}
+html::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, #F0328A, #FF8A3D);
+  border-radius: 9999px;
+  border: 2px solid #0D0620;
+}
+
+/* Neon glow helpers */
+.neon-pink {
+  box-shadow: 0 0 0 1px rgba(240, 50, 138, 0.55), 0 0 24px rgba(240, 50, 138, 0.35);
+}
+.neon-teal {
+  box-shadow: 0 0 0 1px rgba(34, 211, 197, 0.5), 0 0 24px rgba(34, 211, 197, 0.3);
+}
+
+/* Hot-pink -> orange hairline used as a section accent. */
+.vice-rule {
+  height: 2px;
+  background: linear-gradient(90deg, transparent, #F0328A 30%, #FF8A3D 70%, transparent);
+  opacity: 0.8;
+}
+
+/* Hero: slowly twinkling stars + heat-shimmer on the sun */
+@keyframes vice-twinkle {
+  0%, 100% { opacity: 0.25; }
+  50%      { opacity: 0.95; }
+}
+.vice-star {
+  position: absolute;
+  border-radius: 9999px;
+  background: #FFF1E8;
+  animation: vice-twinkle 3.6s ease-in-out infinite;
+}
+@keyframes vice-sun-pulse {
+  0%, 100% { filter: drop-shadow(0 0 40px rgba(255, 138, 61, 0.45)); }
+  50%      { filter: drop-shadow(0 0 64px rgba(240, 50, 138, 0.6)); }
+}
+.vice-sun-pulse {
+  animation: vice-sun-pulse 6s ease-in-out infinite;
+}
+@media (prefers-reduced-motion: reduce) {
+  .vice-star,
+  .vice-sun-pulse {
+    animation: none;
+  }
 }
 
 /* =====================================================

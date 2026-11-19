@@ -29,7 +29,7 @@ const Navbar = () => {
     <nav
       className={`w-full fixed top-0 z-50 transition-all duration-300 ${
         scrolled
-          ? "bg-[#0A1628]/95 backdrop-blur-md shadow-lg shadow-black/20 border-b border-[#1E3A5F]"
+          ? "bg-[#0D0620]/95 backdrop-blur-md shadow-lg shadow-black/20 border-b border-[#43226F]"
           : "bg-transparent"
       }`}
     >
@@ -47,7 +47,7 @@ const Navbar = () => {
             />
             <div className="flex flex-col leading-none">
               <span className="font-bold text-white text-base tracking-wide">KDR Tech</span>
-              <span className="text-[10px] text-[#94A3B8] font-medium tracking-wider uppercase">
+              <span className="text-[10px] text-[#C0B3DA] font-medium tracking-wider uppercase">
                 Digital Agency
               </span>
             </div>
@@ -59,7 +59,7 @@ const Navbar = () => {
               <a
                 key={link.href}
                 href={link.href}
-                className="px-4 py-2 text-sm font-medium text-[#94A3B8] hover:text-white rounded-md hover:bg-white/5 transition-all duration-150"
+                className="px-4 py-2 text-sm font-medium text-[#C0B3DA] hover:text-white rounded-md hover:bg-white/5 transition-all duration-150"
               >
                 {link.label}
               </a>
@@ -72,7 +72,7 @@ const Navbar = () => {
               href="https://wa.me/919136667294?text=Hi, I'd like to discuss a mobile app project."
               target="_blank"
               rel="noopener noreferrer"
-              className="text-sm font-medium text-[#94A3B8] hover:text-white transition-colors"
+              className="text-sm font-medium text-[#C0B3DA] hover:text-white transition-colors"
             >
               WhatsApp
             </a>
@@ -80,7 +80,7 @@ const Navbar = () => {
               href={CALENDLY_URL}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-1.5 px-5 py-2.5 bg-[#5252C7] hover:bg-[#3838AE] text-white text-sm font-semibold rounded-lg transition-colors shadow-lg shadow-indigo-900/30"
+              className="inline-flex items-center gap-1.5 px-5 py-2.5 bg-vice-btn hover:brightness-110 text-white text-sm font-semibold rounded-lg transition-colors shadow-lg shadow-pink-600/30"
             >
               Book a Free Call
               <ChevronRight className="w-4 h-4" />
@@ -109,13 +109,13 @@ const Navbar = () => {
           onClick={() => setIsOpen(false)}
         />
         <div
-          className={`absolute right-0 top-0 h-full w-72 bg-[#0F2040] border-l border-[#1E3A5F] shadow-2xl transform transition-transform duration-300 ${
+          className={`absolute right-0 top-0 h-full w-72 bg-[#1A0C3D] border-l border-[#43226F] shadow-2xl transform transition-transform duration-300 ${
             isOpen ? "translate-x-0" : "translate-x-full"
           }`}
         >
-          <div className="flex items-center justify-between p-5 border-b border-[#1E3A5F]">
+          <div className="flex items-center justify-between p-5 border-b border-[#43226F]">
             <span className="font-bold text-white text-lg">KDR Tech</span>
-            <button onClick={() => setIsOpen(false)} className="text-[#94A3B8] hover:text-white">
+            <button onClick={() => setIsOpen(false)} className="text-[#C0B3DA] hover:text-white">
               <X size={20} />
             </button>
           </div>
@@ -125,19 +125,19 @@ const Navbar = () => {
                 key={link.href}
                 href={link.href}
                 onClick={() => setIsOpen(false)}
-                className="px-4 py-3 text-[#94A3B8] hover:text-white hover:bg-white/5 rounded-lg text-base font-medium transition-colors"
+                className="px-4 py-3 text-[#C0B3DA] hover:text-white hover:bg-white/5 rounded-lg text-base font-medium transition-colors"
               >
                 {link.label}
               </a>
             ))}
           </div>
-          <div className="p-4 border-t border-[#1E3A5F] mt-auto absolute bottom-0 left-0 right-0 flex flex-col gap-3">
+          <div className="p-4 border-t border-[#43226F] mt-auto absolute bottom-0 left-0 right-0 flex flex-col gap-3">
             <a
               href="https://wa.me/919136667294?text=Hi, I'd like to discuss a mobile app project."
               target="_blank"
               rel="noopener noreferrer"
               onClick={() => setIsOpen(false)}
-              className="flex items-center justify-center gap-2 px-4 py-3 border border-[#1E3A5F] rounded-lg text-white text-sm font-medium hover:bg-white/5 transition-colors"
+              className="flex items-center justify-center gap-2 px-4 py-3 border border-[#43226F] rounded-lg text-white text-sm font-medium hover:bg-white/5 transition-colors"
             >
               💬 Chat on WhatsApp
             </a>
@@ -146,7 +146,7 @@ const Navbar = () => {
               target="_blank"
               rel="noopener noreferrer"
               onClick={() => setIsOpen(false)}
-              className="flex items-center justify-center gap-2 px-4 py-3 bg-[#5252C7] hover:bg-[#3838AE] rounded-lg text-white text-sm font-semibold transition-colors"
+              className="flex items-center justify-center gap-2 px-4 py-3 bg-vice-btn hover:brightness-110 rounded-lg text-white text-sm font-semibold transition-colors"
             >
               📅 Book a Free Call
             </a>

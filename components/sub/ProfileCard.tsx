@@ -20,12 +20,12 @@ const ProfileCard: React.FC<ProfileCardProps> = ({ image, name, role, descriptio
 
   return (
     <div
-      className={`max-w-sm bg-[#1A1A2E] rounded-lg shadow-md overflow-hidden transform transition duration-500 hover:scale-105 hover:shadow-xl border-4 border-transparent hover:border-indigo-600 ${profileUrl ? 'cursor-pointer' : ''}`}
+      className={`max-w-sm bg-[#1A0C3D] rounded-lg shadow-md overflow-hidden transform transition duration-500 hover:scale-105 hover:shadow-xl border-4 border-transparent hover:border-pink-500 ${profileUrl ? 'cursor-pointer' : ''}`}
       onClick={handleClick}
       title={profileUrl ? `Visit ${name}'s profile` : ''}
     >
       <div className="flex justify-center mt-4">
-        <div className="relative h-32 w-32 rounded-full overflow-hidden border-4 border-indigo-600 transition duration-500">
+        <div className="relative h-32 w-32 rounded-full overflow-hidden border-4 border-pink-500 transition duration-500">
           <Image
             src={image}
             alt={name}
@@ -39,7 +39,7 @@ const ProfileCard: React.FC<ProfileCardProps> = ({ image, name, role, descriptio
         <h3 className="text-lg leading-6 font-medium text-white mb-2">{name}</h3>
         <div className='py-2 px-4 button-primary text-center text-white cursor-pointer rounded-lg max-w-[200px]'><p className="text-base text-gray-400">{role}</p></div>
         <p className="mt-2 text-sm text-gray-400">{description}</p>
-        <p className="mt-2 text-sm text-indigo-400">{quote}</p>
+        <p className="mt-2 text-sm text-pink-400">{quote}</p>
         {profileUrl && (
           <p className="mt-2 text-xs text-brand-magenta flex items-center gap-1">
             <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">

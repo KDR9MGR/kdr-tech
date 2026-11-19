@@ -30,13 +30,13 @@ export default function LegalPageLayout({
         </h1>
 
         {effectiveDate && (
-          <p className="text-sm text-[#64748B] mb-10">
+          <p className="text-sm text-[#9484B8] mb-10">
             Effective Date: {effectiveDate}
           </p>
         )}
 
         <div
-          className="space-y-4 text-[#94A3B8] leading-relaxed border-t border-[#1E3A5F] pt-10
+          className="space-y-4 text-[#C0B3DA] leading-relaxed border-t border-[#43226F] pt-10
           [&_h2]:text-2xl [&_h2]:font-bold [&_h2]:text-white [&_h2]:mt-10 [&_h2]:mb-4 [&_h2]:first:mt-0
           [&_h3]:text-lg [&_h3]:font-semibold [&_h3]:text-white [&_h3]:mt-6 [&_h3]:mb-2
           [&_p]:mb-4
@@ -48,7 +48,7 @@ export default function LegalPageLayout({
         </div>
 
         {lastUpdated && (
-          <p className="text-sm text-[#64748B] mt-12 pt-6 border-t border-[#1E3A5F]">
+          <p className="text-sm text-[#9484B8] mt-12 pt-6 border-t border-[#43226F]">
             Last Updated: {lastUpdated}
           </p>
         )}

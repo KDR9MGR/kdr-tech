@@ -160,10 +160,10 @@ const Team = async () => {
 
   return (
     <>
-      <div id="team" className="py-12 pb-24 bg-[#060F1E]">
+      <div id="team" className="py-12 pb-24 bg-[#070314]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center">
-            {/* <h2 className="text-base text-indigo-600 font-semibold tracking-wide uppercase">
+            {/* <h2 className="text-base text-pink-500 font-semibold tracking-wide uppercase">
               Our Team
             </h2> */}
             <p className="mt-2 text-3xl leading-8 font-extrabold tracking-tight text-white sm:text-4xl">
@@ -203,7 +203,7 @@ const Team = async () => {
                       <p className="text-yellow-400 font-semibold mb-2">No Team Members Found</p>
                       <p className="text-gray-400 text-sm">{error || 'Loading team members...'}</p>
                       {error && error.includes('admin panel') && (
-                        <a href="/admin" className="mt-4 inline-block bg-indigo-600 hover:bg-indigo-700 text-white px-6 py-2 rounded-lg transition-colors">
+                        <a href="/admin" className="mt-4 inline-block bg-indigo-600 hover:bg-pink-600 text-white px-6 py-2 rounded-lg transition-colors">
                           Go to Admin Panel
                         </a>
                       )}

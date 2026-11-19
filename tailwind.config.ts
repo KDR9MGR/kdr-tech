@@ -9,7 +9,12 @@ const config: Config = {
   ],
   theme: {
     extend: {
+      fontFamily: {
+        display: ['var(--font-display)', 'Impact', 'system-ui', 'sans-serif'],
+      },
       backgroundImage: {
+        'vice-sunset': 'linear-gradient(135deg, #FFC857 0%, #FF8A3D 45%, #F0328A 100%)',
+        'vice-btn': 'linear-gradient(90deg, #E8307F 0%, #FF5A4E 100%)',
         'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
         'gradient-conic': 'conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))'
       },
@@ -19,17 +24,29 @@ const config: Config = {
         sm: 'calc(var(--radius) - 4px)'
       },
       colors: {
-        // Sampled directly from public/images/kdr-tech-logo.png (see
-        // SECURITY_FIXES.md-adjacent design notes) rather than generic
-        // Tailwind purple/cyan. `indigo` is the most-used hue in the logo
-        // by pixel count, so it's the true primary brand color, not just a
-        // gradient midpoint.
+        // GTA VI / Vice City theme. The `brand-*` keys are kept (existing
+        // classes like `hover:border-brand-magenta` still resolve) but now
+        // point at the sunset palette: pink replaces the old logo indigo,
+        // teal replaces the old logo cyan.
         brand: {
-          cyan: '#7AB3EC',
-          indigo: '#5252C7',
-          'indigo-hover': '#3838AE',
-          magenta: '#EA28AD',
-          'magenta-hover': '#D41598',
+          cyan: '#22D3C5',
+          indigo: '#F0328A',
+          'indigo-hover': '#D01F74',
+          magenta: '#F0328A',
+          'magenta-hover': '#D01F74',
+        },
+        vice: {
+          pink: '#F0328A',
+          'pink-hover': '#D01F74',
+          orange: '#FF8A3D',
+          sun: '#FFC857',
+          teal: '#22D3C5',
+          night: '#0D0620',
+          deep: '#070314',
+          card: '#1A0C3D',
+          dusk: '#43226F',
+          haze: '#C0B3DA',
+          cream: '#FFF1E8',
         },
         background: 'hsl(var(--background))',
         foreground: 'hsl(var(--foreground))',

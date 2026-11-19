@@ -1,9 +1,17 @@
 import type { Metadata, Viewport } from "next";
-import { Inter } from "next/font/google";
+import { Inter, Bowlby_One } from "next/font/google";
 import "./globals.css";
 import { Toaster } from "@/components/ui/toaster";
 
 const inter = Inter({ subsets: ["latin"] });
+// Chunky poster-style display face for headings (GTA VI theme). Exposed as a
+// CSS variable so it is only applied where `.vice-theme` opts in.
+const display = Bowlby_One({
+  weight: "400",
+  subsets: ["latin"],
+  variable: "--font-display",
+  display: "swap",
+});
 
 export const metadata: Metadata = {
   title: "KDR Tech | Mobile App & Website Development Agency",
@@ -47,6 +55,7 @@ export const metadata: Metadata = {
 export const viewport: Viewport = {
   width: "device-width",
   initialScale: 1,
+  themeColor: "#0D0620",
 };
 
 const jsonLd = {
@@ -83,7 +92,7 @@ export default function RootLayout({
         />
       </head>
       <body
-        className={`${inter.className} bg-[#0A1628] overflow-y-scroll overflow-x-hidden max-w-[100vw]`}
+        className={`${inter.className} ${display.variable} bg-[#0D0620] overflow-y-scroll overflow-x-hidden max-w-[100vw]`}
       >
         {children}
         <Toaster />

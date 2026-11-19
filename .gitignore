@@ -45,3 +45,6 @@ next-env.d.ts
 # never commit key material
 key
 key.pub
+
+# local credential files (e.g. Supabase access token)
+/secrets/

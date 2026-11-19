@@ -109,7 +109,7 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
         </h1>
 
         {/* Meta */}
-        <div className="flex items-center gap-6 text-sm text-gray-400 pb-8 mb-8 border-b border-[#2A0E61]">
+        <div className="flex items-center gap-6 text-sm text-gray-400 pb-8 mb-8 border-b border-[#43226F]">
           {post.author && (
             <div className="flex items-center gap-2">
               <User className="w-4 h-4" />
