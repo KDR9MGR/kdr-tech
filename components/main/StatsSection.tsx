@@ -11,9 +11,9 @@ const stats = [
 
 const StatsSection = () => {
   return (
-    <section className="w-full py-16 lg:py-20 border-y border-[#1E3A5F] bg-[#0F2040]/60">
+    <section className="w-full py-16 lg:py-20 border-y border-[#43226F] bg-[#1A0C3D]/60">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <p className="text-center text-sm font-semibold tracking-[0.2em] uppercase text-[#5252C7] mb-10">
+        <p className="text-center text-sm font-semibold tracking-[0.2em] uppercase text-[#F0328A] mb-10">
           Numbers Don&apos;t Lie
         </p>
         <div className="grid grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-4">
@@ -29,8 +29,8 @@ const StatsSection = () => {
               <div className="text-4xl lg:text-5xl font-extrabold text-white mb-1">
                 {stat.value}
               </div>
-              <div className="text-base font-semibold text-[#E8ECF4] mb-1">{stat.label}</div>
-              <div className="text-sm text-[#94A3B8]">{stat.sub}</div>
+              <div className="text-base font-semibold text-[#FFF1E8] mb-1">{stat.label}</div>
+              <div className="text-sm text-[#C0B3DA]">{stat.sub}</div>
             </motion.div>
           ))}
         </div>
@@ -46,7 +46,7 @@ const StatsSection = () => {
           ].map((badge) => (
             <span
               key={badge}
-              className="px-4 py-2 bg-[#0A1628] border border-[#1E3A5F] rounded-full text-sm text-[#94A3B8]"
+              className="px-4 py-2 bg-[#0D0620] border border-[#43226F] rounded-full text-sm text-[#C0B3DA]"
             >
               {badge}
             </span>

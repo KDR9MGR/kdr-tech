@@ -58,13 +58,13 @@ const ProcessSection = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <div className="text-center mb-14">
-          <p className="text-sm font-semibold tracking-[0.2em] uppercase text-[#5252C7] mb-3">
+          <p className="text-sm font-semibold tracking-[0.2em] uppercase text-[#F0328A] mb-3">
             How We Work
           </p>
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-white mb-4">
             From Idea to Live in 6 Clear Steps
           </h2>
-          <p className="text-lg text-[#94A3B8] max-w-2xl mx-auto">
+          <p className="text-lg text-[#C0B3DA] max-w-2xl mx-auto">
             The same transparent process for every project — mobile app or website.
             You&apos;ll know exactly where your build stands every day, not just when we remember to tell you.
           </p>
@@ -77,25 +77,25 @@ const ProcessSection = () => {
             return (
               <div
                 key={step.number}
-                className="group relative bg-[#0F2040] border border-[#1E3A5F] rounded-2xl p-6 hover:border-[#5252C7]/40 transition-all duration-200 card-glow"
+                className="group relative bg-[#1A0C3D] border border-[#43226F] rounded-2xl p-6 hover:border-[#F0328A]/40 transition-all duration-200 card-glow"
               >
                 {/* Step number + connector */}
                 <div className="flex items-start justify-between mb-5">
-                  <span className="text-5xl font-extrabold text-[#1E3A5F] leading-none select-none">
+                  <span className="text-5xl font-extrabold text-[#43226F] leading-none select-none">
                     {step.number}
                   </span>
-                  <div className="w-10 h-10 rounded-xl bg-[#5252C7]/10 border border-[#5252C7]/20 flex items-center justify-center group-hover:bg-[#5252C7]/20 transition-colors">
-                    <Icon className="w-5 h-5 text-[#5252C7]" />
+                  <div className="w-10 h-10 rounded-xl bg-[#F0328A]/10 border border-[#F0328A]/20 flex items-center justify-center group-hover:bg-[#F0328A]/20 transition-colors">
+                    <Icon className="w-5 h-5 text-[#F0328A]" />
                   </div>
                 </div>
 
                 {/* Content */}
                 <div>
-                  <div className="text-xs font-semibold text-[#5252C7] tracking-wider uppercase mb-1">
+                  <div className="text-xs font-semibold text-[#F0328A] tracking-wider uppercase mb-1">
                     {step.timeline}
                   </div>
                   <h3 className="text-lg font-bold text-white mb-2">{step.title}</h3>
-                  <p className="text-sm text-[#94A3B8] leading-relaxed">{step.description}</p>
+                  <p className="text-sm text-[#C0B3DA] leading-relaxed">{step.description}</p>
                 </div>
               </div>
             );

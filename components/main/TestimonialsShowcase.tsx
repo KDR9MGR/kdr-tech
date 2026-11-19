@@ -89,7 +89,7 @@ function VideoCard({ testimonial }: { testimonial: VideoTestimonial }) {
   }
 
   return (
-    <div className="group relative bg-[#0a0f1e] border border-[#1E3A5F] rounded-2xl overflow-hidden hover:border-[#5252C7]/50 transition-all duration-300 flex flex-col shadow-xl shadow-black/40">
+    <div className="group relative bg-[#070314] border border-[#43226F] rounded-2xl overflow-hidden hover:border-[#F0328A]/50 transition-all duration-300 flex flex-col shadow-xl shadow-black/40">
       <div className={`relative w-full bg-black ${portrait ? 'aspect-[9/16]' : 'aspect-video'}`}>
         {direct ? (
           <video
@@ -125,14 +125,14 @@ function VideoCard({ testimonial }: { testimonial: VideoTestimonial }) {
         </button>
       </div>
 
-      <div className="px-4 py-3 flex items-center gap-3 border-t border-[#1E3A5F]">
-        <div className="w-8 h-8 rounded-full bg-[#5252C7]/20 border border-[#5252C7]/30 flex items-center justify-center text-xs font-bold text-[#5252C7] flex-shrink-0">
+      <div className="px-4 py-3 flex items-center gap-3 border-t border-[#43226F]">
+        <div className="w-8 h-8 rounded-full bg-[#F0328A]/20 border border-[#F0328A]/30 flex items-center justify-center text-xs font-bold text-[#F0328A] flex-shrink-0">
           {testimonial.client_name.charAt(0)}
         </div>
         <div className="min-w-0">
           <p className="text-sm font-semibold text-white truncate">{testimonial.client_name}</p>
           {(testimonial.company_name || testimonial.country) && (
-            <p className="text-xs text-[#5252C7] truncate">
+            <p className="text-xs text-[#F0328A] truncate">
               {testimonial.company_name || ''}
               {testimonial.company_name && testimonial.country ? ' · ' : ''}
               {testimonial.country || ''}
@@ -182,13 +182,13 @@ export default function TestimonialsShowcase() {
 
         {/* Section Header */}
         <div className="text-center mb-14">
-          <p className="text-sm font-semibold tracking-[0.2em] uppercase text-[#5252C7] mb-3">
+          <p className="text-sm font-semibold tracking-[0.2em] uppercase text-[#F0328A] mb-3">
             Testimonials
           </p>
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-white mb-4">
             What Our Clients Say
           </h2>
-          <p className="text-lg text-[#94A3B8] max-w-2xl mx-auto">
+          <p className="text-lg text-[#C0B3DA] max-w-2xl mx-auto">
             We let our clients do the talking.
           </p>
         </div>
@@ -223,20 +223,20 @@ export default function TestimonialsShowcase() {
             {textTestimonials.map((testimonial) => (
               <div
                 key={testimonial.id}
-                className="bg-[#0F2040] border border-[#1E3A5F] rounded-2xl p-6 hover:border-[#5252C7]/40 transition-all duration-200 card-glow flex flex-col"
+                className="bg-[#1A0C3D] border border-[#43226F] rounded-2xl p-6 hover:border-[#F0328A]/40 transition-all duration-200 card-glow flex flex-col"
               >
                 {testimonial.rating && (
                   <div className="flex gap-1 mb-4">
                     {Array.from({ length: 5 }).map((_, i) => (
-                      <Star key={i} className={`w-4 h-4 ${i < testimonial.rating! ? 'fill-yellow-400 text-yellow-400' : 'text-[#1E3A5F]'}`} />
+                      <Star key={i} className={`w-4 h-4 ${i < testimonial.rating! ? 'fill-yellow-400 text-yellow-400' : 'text-[#43226F]'}`} />
                     ))}
                   </div>
                 )}
-                <Quote className="w-8 h-8 text-[#5252C7] mb-3 opacity-40" />
-                <p className="text-[#94A3B8] mb-6 flex-1 leading-relaxed text-sm">
+                <Quote className="w-8 h-8 text-[#F0328A] mb-3 opacity-40" />
+                <p className="text-[#C0B3DA] mb-6 flex-1 leading-relaxed text-sm">
                   &ldquo;{testimonial.testimonial}&rdquo;
                 </p>
-                <div className="border-t border-[#1E3A5F] pt-4 flex items-center gap-3">
+                <div className="border-t border-[#43226F] pt-4 flex items-center gap-3">
                   {testimonial.avatar_url ? (
                     <div className="relative w-9 h-9">
                       <Image
@@ -248,13 +248,13 @@ export default function TestimonialsShowcase() {
                       />
                     </div>
                   ) : (
-                    <div className="w-9 h-9 rounded-full bg-[#5252C7]/10 border border-[#5252C7]/20 flex items-center justify-center text-sm font-bold text-[#5252C7]">
+                    <div className="w-9 h-9 rounded-full bg-[#F0328A]/10 border border-[#F0328A]/20 flex items-center justify-center text-sm font-bold text-[#F0328A]">
                       {testimonial.client_name.charAt(0)}
                     </div>
                   )}
                   <div>
                     <p className="text-white font-semibold text-sm">{testimonial.client_name}</p>
-                    <p className="text-xs text-[#5252C7]">
+                    <p className="text-xs text-[#F0328A]">
                       {testimonial.company_name || testimonial.project_name || ''}
                       {testimonial.country && ` · ${testimonial.country}`}
                     </p>

@@ -119,8 +119,8 @@ function ScrollingRow({ apps, direction, speed }: ScrollingRowProps) {
       </div>
 
       {/* Fade edges */}
-      <div className="absolute top-0 left-0 w-24 md:w-40 h-full bg-gradient-to-r from-[#0A1628] to-transparent pointer-events-none z-10" />
-      <div className="absolute top-0 right-0 w-24 md:w-40 h-full bg-gradient-to-l from-[#0A1628] to-transparent pointer-events-none z-10" />
+      <div className="absolute top-0 left-0 w-24 md:w-40 h-full bg-gradient-to-r from-[#0D0620] to-transparent pointer-events-none z-10" />
+      <div className="absolute top-0 right-0 w-24 md:w-40 h-full bg-gradient-to-l from-[#0D0620] to-transparent pointer-events-none z-10" />
     </div>
   )
 }

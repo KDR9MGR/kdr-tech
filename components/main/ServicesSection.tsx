@@ -8,7 +8,7 @@ const mobileAppTiers = [
   {
     icon: Zap,
     badge: "Most Affordable",
-    badgeColor: "text-[#94A3B8] border-[#1E3A5F] bg-[#0A1628]",
+    badgeColor: "text-[#C0B3DA] border-[#43226F] bg-[#0D0620]",
     name: "Basic App",
     price: "$500 – $1,500",
     timeline: "1 – 3 Weeks",
@@ -31,13 +31,13 @@ const mobileAppTiers = [
     ],
     cta: "Get a Free Quote",
     highlighted: false,
-    cardClass: "bg-[#0F2040] border-[#1E3A5F]",
-    ctaClass: "border border-[#5252C7] text-[#5252C7] hover:bg-[#5252C7] hover:text-white",
+    cardClass: "bg-[#1A0C3D] border-[#43226F]",
+    ctaClass: "border border-[#F0328A] text-[#F0328A] hover:bg-[#F0328A] hover:text-white",
   },
   {
     icon: Rocket,
     badge: "⭐ Most Popular",
-    badgeColor: "text-[#5252C7] border-[#5252C7]/40 bg-[#5252C7]/10",
+    badgeColor: "text-[#F0328A] border-[#F0328A]/40 bg-[#F0328A]/10",
     name: "MVP Lite",
     price: "$2,000 – $4,999",
     timeline: "4 – 7 Weeks",
@@ -63,13 +63,13 @@ const mobileAppTiers = [
     ],
     cta: "Start Your MVP",
     highlighted: true,
-    cardClass: "bg-[#0F2040] border-[#5252C7]/50 shadow-xl shadow-indigo-900/20",
-    ctaClass: "bg-[#5252C7] hover:bg-[#3838AE] text-white",
+    cardClass: "bg-[#1A0C3D] border-[#F0328A]/50 shadow-xl shadow-pink-600/20",
+    ctaClass: "bg-vice-btn hover:brightness-110 text-white",
   },
   {
     icon: TrendingUp,
     badge: "Full-Scale Build",
-    badgeColor: "text-[#10B981] border-[#10B981]/40 bg-[#10B981]/10",
+    badgeColor: "text-[#22D3C5] border-[#22D3C5]/40 bg-[#22D3C5]/10",
     name: "Growth MVP",
     price: "$5,000 – $10,000",
     timeline: "8 – 12 Weeks",
@@ -93,8 +93,8 @@ const mobileAppTiers = [
     excluded: [],
     cta: "Discuss Your Project",
     highlighted: false,
-    cardClass: "bg-[#0F2040] border-[#1E3A5F]",
-    ctaClass: "border border-[#10B981] text-[#10B981] hover:bg-[#10B981] hover:text-[#0A1628]",
+    cardClass: "bg-[#1A0C3D] border-[#43226F]",
+    ctaClass: "border border-[#22D3C5] text-[#22D3C5] hover:bg-[#22D3C5] hover:text-[#0D0620]",
   },
 ];
 
@@ -102,7 +102,7 @@ const websiteTiers = [
   {
     icon: Globe,
     badge: "Fast & Affordable",
-    badgeColor: "text-[#94A3B8] border-[#1E3A5F] bg-[#0A1628]",
+    badgeColor: "text-[#C0B3DA] border-[#43226F] bg-[#0D0620]",
     name: "Static Website",
     price: "$400 – $1,200",
     timeline: "1 – 2 Weeks",
@@ -126,13 +126,13 @@ const websiteTiers = [
     ],
     cta: "Get a Free Quote",
     highlighted: false,
-    cardClass: "bg-[#0F2040] border-[#1E3A5F]",
-    ctaClass: "border border-[#5252C7] text-[#5252C7] hover:bg-[#5252C7] hover:text-white",
+    cardClass: "bg-[#1A0C3D] border-[#43226F]",
+    ctaClass: "border border-[#F0328A] text-[#F0328A] hover:bg-[#F0328A] hover:text-white",
   },
   {
     icon: Layout,
     badge: "⭐ Most Popular",
-    badgeColor: "text-[#5252C7] border-[#5252C7]/40 bg-[#5252C7]/10",
+    badgeColor: "text-[#F0328A] border-[#F0328A]/40 bg-[#F0328A]/10",
     name: "Dynamic Website",
     price: "$1,500 – $4,000",
     timeline: "3 – 6 Weeks",
@@ -158,13 +158,13 @@ const websiteTiers = [
     ],
     cta: "Start Your Website",
     highlighted: true,
-    cardClass: "bg-[#0F2040] border-[#5252C7]/50 shadow-xl shadow-indigo-900/20",
-    ctaClass: "bg-[#5252C7] hover:bg-[#3838AE] text-white",
+    cardClass: "bg-[#1A0C3D] border-[#F0328A]/50 shadow-xl shadow-pink-600/20",
+    ctaClass: "bg-vice-btn hover:brightness-110 text-white",
   },
   {
     icon: Database,
     badge: "Full-Featured",
-    badgeColor: "text-[#10B981] border-[#10B981]/40 bg-[#10B981]/10",
+    badgeColor: "text-[#22D3C5] border-[#22D3C5]/40 bg-[#22D3C5]/10",
     name: "Dynamic + CMS",
     price: "$3,000 – $8,000",
     timeline: "5 – 9 Weeks",
@@ -188,8 +188,8 @@ const websiteTiers = [
     excluded: [],
     cta: "Discuss Your Project",
     highlighted: false,
-    cardClass: "bg-[#0F2040] border-[#1E3A5F]",
-    ctaClass: "border border-[#10B981] text-[#10B981] hover:bg-[#10B981] hover:text-[#0A1628]",
+    cardClass: "bg-[#1A0C3D] border-[#43226F]",
+    ctaClass: "border border-[#22D3C5] text-[#22D3C5] hover:bg-[#22D3C5] hover:text-[#0D0620]",
   },
 ];
 
@@ -211,13 +211,13 @@ const ServicesSection = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <div className="text-center mb-10">
-          <p className="text-sm font-semibold tracking-[0.2em] uppercase text-[#5252C7] mb-3">
+          <p className="text-sm font-semibold tracking-[0.2em] uppercase text-[#F0328A] mb-3">
             Pricing & Packages
           </p>
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-white mb-4">
             Transparent Pricing. No Surprises.
           </h2>
-          <p className="text-lg text-[#94A3B8] max-w-2xl mx-auto">
+          <p className="text-lg text-[#C0B3DA] max-w-2xl mx-auto">
             Every project starts with a free strategy call. We scope it
             together, then you choose the package that fits your stage and budget.
           </p>
@@ -225,13 +225,13 @@ const ServicesSection = () => {
 
         {/* Service tabs */}
         <div className="flex justify-center mb-10">
-          <div className="flex gap-1 p-1 bg-[#0F2040] border border-[#1E3A5F] rounded-xl">
+          <div className="flex gap-1 p-1 bg-[#1A0C3D] border border-[#43226F] rounded-xl">
             <button
               onClick={() => handleTabChange("mobile")}
               className={`flex items-center gap-2 px-5 py-2.5 rounded-lg text-sm font-semibold transition-all duration-200 ${
                 activeTab === "mobile"
-                  ? "bg-[#5252C7] text-white shadow-lg shadow-indigo-900/30"
-                  : "text-[#94A3B8] hover:text-white"
+                  ? "bg-[#F0328A] text-white shadow-lg shadow-pink-600/30"
+                  : "text-[#C0B3DA] hover:text-white"
               }`}
             >
               📱 Mobile App Development
@@ -240,8 +240,8 @@ const ServicesSection = () => {
               onClick={() => handleTabChange("website")}
               className={`flex items-center gap-2 px-5 py-2.5 rounded-lg text-sm font-semibold transition-all duration-200 ${
                 activeTab === "website"
-                  ? "bg-[#5252C7] text-white shadow-lg shadow-indigo-900/30"
-                  : "text-[#94A3B8] hover:text-white"
+                  ? "bg-[#F0328A] text-white shadow-lg shadow-pink-600/30"
+                  : "text-[#C0B3DA] hover:text-white"
               }`}
             >
               🌐 Website Development
@@ -255,7 +255,7 @@ const ServicesSection = () => {
             ? ["Flutter", "React Native", "Android", "iOS", "Firebase", "Supabase", "Stripe"]
             : ["Next.js", "React", "WordPress", "Supabase", "PostgreSQL", "Vercel", "Stripe"]
           ).map((tech) => (
-            <span key={tech} className="px-3 py-1 bg-[#0A1628] border border-[#1E3A5F] rounded-full text-xs text-[#94A3B8]">
+            <span key={tech} className="px-3 py-1 bg-[#0D0620] border border-[#43226F] rounded-full text-xs text-[#C0B3DA]">
               {tech}
             </span>
           ))}
@@ -274,7 +274,7 @@ const ServicesSection = () => {
                 }`}
               >
                 {tier.highlighted && (
-                  <div className="absolute -top-3 left-1/2 -translate-x-1/2 px-4 py-1 bg-[#5252C7] rounded-full text-xs font-bold text-white tracking-wide whitespace-nowrap">
+                  <div className="absolute -top-3 left-1/2 -translate-x-1/2 px-4 py-1 bg-[#F0328A] rounded-full text-xs font-bold text-white tracking-wide whitespace-nowrap">
                     MOST POPULAR
                   </div>
                 )}
@@ -283,25 +283,25 @@ const ServicesSection = () => {
                   <span className={`inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-medium border ${tier.badgeColor}`}>
                     {tier.badge}
                   </span>
-                  <div className="w-10 h-10 rounded-xl bg-[#0A1628] border border-[#1E3A5F] flex items-center justify-center">
-                    <Icon className="w-5 h-5 text-[#5252C7]" />
+                  <div className="w-10 h-10 rounded-xl bg-[#0D0620] border border-[#43226F] flex items-center justify-center">
+                    <Icon className="w-5 h-5 text-[#F0328A]" />
                   </div>
                 </div>
 
                 <div>
                   <h3 className="text-2xl font-bold text-white mb-1">{tier.name}</h3>
                   <div className="text-3xl font-extrabold text-gradient-blue mb-1">{tier.price}</div>
-                  <div className="text-sm text-[#94A3B8]">Timeline: <span className="text-white">{tier.timeline}</span></div>
+                  <div className="text-sm text-[#C0B3DA]">Timeline: <span className="text-white">{tier.timeline}</span></div>
                 </div>
 
-                <p className="text-sm text-[#94A3B8] border-t border-[#1E3A5F] pt-4">
+                <p className="text-sm text-[#C0B3DA] border-t border-[#43226F] pt-4">
                   <span className="font-medium text-white">Ideal for: </span>
                   {tier.idealFor}
                 </p>
 
                 <div>
                   <button
-                    className="flex items-center gap-1.5 text-sm font-semibold text-white mb-3 hover:text-[#5252C7] transition-colors"
+                    className="flex items-center gap-1.5 text-sm font-semibold text-white mb-3 hover:text-[#F0328A] transition-colors"
                     onClick={() => setExpandedTier(isExpanded ? null : i)}
                   >
                     What&apos;s included
@@ -310,14 +310,14 @@ const ServicesSection = () => {
                   {isExpanded && (
                     <ul className="space-y-2">
                       {tier.included.map((item) => (
-                        <li key={item} className="flex items-start gap-2.5 text-sm text-[#94A3B8]">
-                          <Check className="w-4 h-4 text-[#10B981] flex-shrink-0 mt-0.5" />
+                        <li key={item} className="flex items-start gap-2.5 text-sm text-[#C0B3DA]">
+                          <Check className="w-4 h-4 text-[#22D3C5] flex-shrink-0 mt-0.5" />
                           {item}
                         </li>
                       ))}
                       {tier.excluded.map((item) => (
-                        <li key={item} className="flex items-start gap-2.5 text-sm text-[#64748B]">
-                          <X className="w-4 h-4 text-[#64748B] flex-shrink-0 mt-0.5" />
+                        <li key={item} className="flex items-start gap-2.5 text-sm text-[#9484B8]">
+                          <X className="w-4 h-4 text-[#9484B8] flex-shrink-0 mt-0.5" />
                           {item}
                         </li>
                       ))}
@@ -340,11 +340,11 @@ const ServicesSection = () => {
         </div>
 
         {/* Payment note */}
-        <div className="mt-10 text-center p-5 bg-[#0F2040] border border-[#1E3A5F] rounded-xl max-w-2xl mx-auto">
-          <p className="text-[#94A3B8] text-sm">
+        <div className="mt-10 text-center p-5 bg-[#1A0C3D] border border-[#43226F] rounded-xl max-w-2xl mx-auto">
+          <p className="text-[#C0B3DA] text-sm">
             <span className="text-white font-semibold">💳 Payments via Stripe, Wise, PayPal, or bank transfer.</span>
             {" "}Milestone-based — you only pay as work is delivered and approved.{" "}
-            <span className="text-[#10B981] font-medium">Zero risk.</span>
+            <span className="text-[#22D3C5] font-medium">Zero risk.</span>
           </p>
         </div>
       </div>

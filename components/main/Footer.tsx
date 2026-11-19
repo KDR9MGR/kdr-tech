@@ -75,7 +75,8 @@ const Footer = async () => {
   const pageLinks = allLinks.filter((l) => l.category === "page");
 
   return (
-    <footer className="w-full border-t border-[#1E3A5F] bg-[#060F1E]">
+    <footer className="w-full bg-[#070314]">
+      <div className="vice-rule" aria-hidden="true" />
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-14">
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10 mb-12">
 
@@ -91,12 +92,12 @@ const Footer = async () => {
               />
               <div className="flex flex-col leading-none">
                 <span className="font-bold text-white text-base">KDR Tech</span>
-                <span className="text-[10px] text-[#94A3B8] tracking-wider uppercase">
+                <span className="text-[10px] text-[#C0B3DA] tracking-wider uppercase">
                   Digital Agency
                 </span>
               </div>
             </Link>
-            <p className="text-sm text-[#94A3B8] leading-relaxed max-w-xs">
+            <p className="text-sm text-[#C0B3DA] leading-relaxed max-w-xs">
               Building mobile apps and websites that launch, scale, and sell — for founders across the globe.
             </p>
             <div className="flex items-center gap-3">
@@ -106,7 +107,7 @@ const Footer = async () => {
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="Instagram"
-                className="w-9 h-9 flex items-center justify-center rounded-lg bg-[#0F2040] border border-[#1E3A5F] text-[#94A3B8] hover:text-white hover:border-[#5252C7]/50 transition-all"
+                className="w-9 h-9 flex items-center justify-center rounded-lg bg-[#1A0C3D] border border-[#43226F] text-[#C0B3DA] hover:text-white hover:border-[#F0328A]/50 transition-all"
               >
                 <RxInstagramLogo className="w-4 h-4" />
               </a>
@@ -119,7 +120,7 @@ const Footer = async () => {
                     target="_blank"
                     rel="noopener noreferrer"
                     aria-label={link.title}
-                    className="w-9 h-9 flex items-center justify-center rounded-lg bg-[#0F2040] border border-[#1E3A5F] text-[#94A3B8] hover:text-white hover:border-[#5252C7]/50 transition-all"
+                    className="w-9 h-9 flex items-center justify-center rounded-lg bg-[#1A0C3D] border border-[#43226F] text-[#C0B3DA] hover:text-white hover:border-[#F0328A]/50 transition-all"
                   >
                     {Icon}
                   </a>
@@ -134,7 +135,7 @@ const Footer = async () => {
             <ul className="space-y-3">
               {serviceLinks.map((s) => (
                 <li key={s}>
-                  <span className="text-sm text-[#94A3B8] hover:text-white transition-colors cursor-default">
+                  <span className="text-sm text-[#C0B3DA] hover:text-white transition-colors cursor-default">
                     {s}
                   </span>
                 </li>
@@ -150,7 +151,7 @@ const Footer = async () => {
                 <li key={link.label}>
                   <a
                     href={link.href}
-                    className="text-sm text-[#94A3B8] hover:text-white transition-colors"
+                    className="text-sm text-[#C0B3DA] hover:text-white transition-colors"
                   >
                     {link.label}
                   </a>
@@ -164,7 +165,7 @@ const Footer = async () => {
             <h4 className="text-sm font-bold text-white uppercase tracking-wider mb-5">Contact</h4>
             <ul className="space-y-3 mb-6">
               <li>
-                <a href="mailto:developer.kdrtech.in@gmail.com" className="text-sm text-[#94A3B8] hover:text-white transition-colors flex items-center gap-2">
+                <a href="mailto:developer.kdrtech.in@gmail.com" className="text-sm text-[#C0B3DA] hover:text-white transition-colors flex items-center gap-2">
                   📧 developer.kdrtech.in@gmail.com
                 </a>
               </li>
@@ -173,7 +174,7 @@ const Footer = async () => {
                   href="https://wa.me/919136667294"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-sm text-[#94A3B8] hover:text-white transition-colors flex items-center gap-2"
+                  className="text-sm text-[#C0B3DA] hover:text-white transition-colors flex items-center gap-2"
                 >
                   💬 WhatsApp
                 </a>
@@ -183,26 +184,26 @@ const Footer = async () => {
                   href="https://calendly.com/developer-kdrtech-in/30min"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-sm text-[#94A3B8] hover:text-white transition-colors flex items-center gap-2"
+                  className="text-sm text-[#C0B3DA] hover:text-white transition-colors flex items-center gap-2"
                 >
                   📅 Book a Call
                 </a>
               </li>
             </ul>
             <div>
-              <p className="text-xs text-[#94A3B8] mb-2 font-medium">Working hours (IST)</p>
-              <p className="text-xs text-[#64748B]">Mon – Fri · 9 AM – 7 PM</p>
-              <p className="text-xs text-[#64748B]">Overlaps US EST mornings & UK afternoons</p>
+              <p className="text-xs text-[#C0B3DA] mb-2 font-medium">Working hours (IST)</p>
+              <p className="text-xs text-[#9484B8]">Mon – Fri · 9 AM – 7 PM</p>
+              <p className="text-xs text-[#9484B8]">Overlaps US EST mornings & UK afternoons</p>
             </div>
           </div>
         </div>
 
         {/* Bottom bar */}
-        <div className="border-t border-[#1E3A5F] pt-8 flex flex-col sm:flex-row items-center justify-between gap-4">
-          <p className="text-sm text-[#64748B]">
+        <div className="border-t border-[#43226F] pt-8 flex flex-col sm:flex-row items-center justify-between gap-4">
+          <p className="text-sm text-[#9484B8]">
             © {new Date().getFullYear()} KDR Tech. All rights reserved.
           </p>
-          <div className="flex flex-wrap items-center gap-x-5 gap-y-2 text-sm text-[#64748B]">
+          <div className="flex flex-wrap items-center gap-x-5 gap-y-2 text-sm text-[#9484B8]">
             <a href="/contact-us" className="hover:text-white transition-colors">Contact Us</a>
             <a href="/privacy-policy" className="hover:text-white transition-colors">Privacy Policy</a>
             <a href="/terms-and-conditions" className="hover:text-white transition-colors">Terms &amp; Conditions</a>

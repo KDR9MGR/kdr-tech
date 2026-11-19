@@ -87,7 +87,7 @@ export default async function BlogPage() {
               <Link
                 key={post.id}
                 href={`/blog/${post.slug}`}
-                className="group bg-[#1A1A2E] border border-[#2A0E61] rounded-lg overflow-hidden hover:border-brand-magenta transition-all duration-300"
+                className="group bg-[#1A0C3D] border border-[#43226F] rounded-lg overflow-hidden hover:border-brand-magenta transition-all duration-300"
               >
                 {/* Featured Image */}
                 {post.featured_image && (
@@ -121,7 +121,7 @@ export default async function BlogPage() {
                   )}
 
                   {/* Meta */}
-                  <div className="flex items-center gap-4 text-xs text-gray-500 pt-4 border-t border-[#2A0E61]">
+                  <div className="flex items-center gap-4 text-xs text-gray-500 pt-4 border-t border-[#43226F]">
                     {post.author && (
                       <div className="flex items-center gap-1">
                         <User className="w-3 h-3" />

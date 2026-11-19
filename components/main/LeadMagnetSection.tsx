@@ -65,13 +65,13 @@ export default function LeadMagnetSection() {
 
           {/* Left — Copy */}
           <div className="flex flex-col gap-6">
-            <p className="text-sm font-semibold tracking-[0.2em] uppercase text-[#5252C7]">
+            <p className="text-sm font-semibold tracking-[0.2em] uppercase text-[#F0328A]">
               Start Your Project
             </p>
             <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-white leading-tight">
               Not Sure What Your Project Will Cost?
             </h2>
-            <p className="text-lg text-[#94A3B8] leading-relaxed">
+            <p className="text-lg text-[#C0B3DA] leading-relaxed">
               Tell us about your idea in 60 seconds and we&apos;ll send back a
               Project Roadmap — a clear breakdown of features, timeline, and
               cost, with no strings attached.
@@ -84,8 +84,8 @@ export default function LeadMagnetSection() {
                 "Includes feature breakdown + cost estimate",
                 "We won't add you to a marketing list",
               ].map((item) => (
-                <li key={item} className="flex items-center gap-3 text-sm text-[#94A3B8]">
-                  <CheckCircle className="w-5 h-5 text-[#10B981] flex-shrink-0" />
+                <li key={item} className="flex items-center gap-3 text-sm text-[#C0B3DA]">
+                  <CheckCircle className="w-5 h-5 text-[#22D3C5] flex-shrink-0" />
                   {item}
                 </li>
               ))}
@@ -96,7 +96,7 @@ export default function LeadMagnetSection() {
                 href={CALENDLY_URL}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center justify-center gap-2 px-5 py-3 bg-[#5252C7] hover:bg-[#3838AE] text-white font-semibold rounded-xl text-sm transition-colors"
+                className="inline-flex items-center justify-center gap-2 px-5 py-3 bg-vice-btn hover:brightness-110 text-white font-semibold rounded-xl text-sm transition-colors"
               >
                 <CalendarDays className="w-4 h-4" />
                 Book a Free 30-Min Call
@@ -114,14 +114,14 @@ export default function LeadMagnetSection() {
           </div>
 
           {/* Right — Form */}
-          <div className="bg-[#0F2040] border border-[#1E3A5F] rounded-2xl p-6 lg:p-8">
+          <div className="bg-[#1A0C3D] border border-[#43226F] rounded-2xl p-6 lg:p-8">
             {status === "success" ? (
               <div className="flex flex-col items-center justify-center text-center gap-4 py-8">
-                <div className="w-16 h-16 bg-[#10B981]/10 border border-[#10B981]/30 rounded-full flex items-center justify-center">
-                  <CheckCircle className="w-8 h-8 text-[#10B981]" />
+                <div className="w-16 h-16 bg-[#22D3C5]/10 border border-[#22D3C5]/30 rounded-full flex items-center justify-center">
+                  <CheckCircle className="w-8 h-8 text-[#22D3C5]" />
                 </div>
                 <h3 className="text-xl font-bold text-white">We&apos;re on it!</h3>
-                <p className="text-[#94A3B8] text-sm max-w-xs">
+                <p className="text-[#C0B3DA] text-sm max-w-xs">
                   You&apos;ll receive your free Project Roadmap within 24 hours.
                   Check your inbox (and spam, just in case).
                 </p>
@@ -129,7 +129,7 @@ export default function LeadMagnetSection() {
                   href={CALENDLY_URL}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="mt-2 inline-flex items-center gap-2 px-6 py-3 bg-[#5252C7] hover:bg-[#3838AE] text-white font-semibold rounded-xl text-sm transition-colors"
+                  className="mt-2 inline-flex items-center gap-2 px-6 py-3 bg-vice-btn hover:brightness-110 text-white font-semibold rounded-xl text-sm transition-colors"
                 >
                   Also book a call →
                 </a>
@@ -140,12 +140,12 @@ export default function LeadMagnetSection() {
                   <h3 className="text-xl font-bold text-white mb-1">
                     Get Your Free Project Roadmap
                   </h3>
-                  <p className="text-sm text-[#94A3B8]">Delivered within 24 hours. Apps and websites.</p>
+                  <p className="text-sm text-[#C0B3DA]">Delivered within 24 hours. Apps and websites.</p>
                 </div>
 
                 <div className="flex flex-col gap-4">
                   <div>
-                    <label className="block text-sm font-medium text-[#E8ECF4] mb-1.5">
+                    <label className="block text-sm font-medium text-[#FFF1E8] mb-1.5">
                       First Name *
                     </label>
                     <input
@@ -154,12 +154,12 @@ export default function LeadMagnetSection() {
                       value={formData.name}
                       onChange={(e) => handleChange("name", e.target.value)}
                       placeholder="Your first name"
-                      className="w-full px-4 py-3 bg-[#0A1628] border border-[#1E3A5F] rounded-xl text-white placeholder-[#64748B] text-sm focus:outline-none focus:border-[#5252C7] transition-colors"
+                      className="w-full px-4 py-3 bg-[#0D0620] border border-[#43226F] rounded-xl text-white placeholder-[#9484B8] text-sm focus:outline-none focus:border-[#F0328A] transition-colors"
                     />
                   </div>
 
                   <div>
-                    <label className="block text-sm font-medium text-[#E8ECF4] mb-1.5">
+                    <label className="block text-sm font-medium text-[#FFF1E8] mb-1.5">
                       Email Address *
                     </label>
                     <input
@@ -168,28 +168,28 @@ export default function LeadMagnetSection() {
                       value={formData.email}
                       onChange={(e) => handleChange("email", e.target.value)}
                       placeholder="you@company.com"
-                      className="w-full px-4 py-3 bg-[#0A1628] border border-[#1E3A5F] rounded-xl text-white placeholder-[#64748B] text-sm focus:outline-none focus:border-[#5252C7] transition-colors"
+                      className="w-full px-4 py-3 bg-[#0D0620] border border-[#43226F] rounded-xl text-white placeholder-[#9484B8] text-sm focus:outline-none focus:border-[#F0328A] transition-colors"
                     />
                   </div>
 
                   <div>
-                    <label className="block text-sm font-medium text-[#E8ECF4] mb-1.5">
+                    <label className="block text-sm font-medium text-[#FFF1E8] mb-1.5">
                       Project Type
                     </label>
                     <select
                       value={formData.project_type}
                       onChange={(e) => handleChange("project_type", e.target.value)}
-                      className="w-full px-4 py-3 bg-[#0A1628] border border-[#1E3A5F] rounded-xl text-white text-sm focus:outline-none focus:border-[#5252C7] transition-colors appearance-none cursor-pointer"
+                      className="w-full px-4 py-3 bg-[#0D0620] border border-[#43226F] rounded-xl text-white text-sm focus:outline-none focus:border-[#F0328A] transition-colors appearance-none cursor-pointer"
                     >
-                      <option value="" className="bg-[#0A1628]">Select project type...</option>
+                      <option value="" className="bg-[#0D0620]">Select project type...</option>
                       {projectTypes.map((opt) => (
-                        <option key={opt} value={opt} className="bg-[#0A1628]">{opt}</option>
+                        <option key={opt} value={opt} className="bg-[#0D0620]">{opt}</option>
                       ))}
                     </select>
                   </div>
 
                   <div>
-                    <label className="block text-sm font-medium text-[#E8ECF4] mb-1.5">
+                    <label className="block text-sm font-medium text-[#FFF1E8] mb-1.5">
                       Describe Your Project
                     </label>
                     <textarea
@@ -197,22 +197,22 @@ export default function LeadMagnetSection() {
                       onChange={(e) => handleChange("app_idea", e.target.value)}
                       placeholder="e.g., A booking platform for personal trainers where clients can schedule sessions and pay online..."
                       rows={3}
-                      className="w-full px-4 py-3 bg-[#0A1628] border border-[#1E3A5F] rounded-xl text-white placeholder-[#64748B] text-sm focus:outline-none focus:border-[#5252C7] transition-colors resize-none"
+                      className="w-full px-4 py-3 bg-[#0D0620] border border-[#43226F] rounded-xl text-white placeholder-[#9484B8] text-sm focus:outline-none focus:border-[#F0328A] transition-colors resize-none"
                     />
                   </div>
 
                   <div>
-                    <label className="block text-sm font-medium text-[#E8ECF4] mb-1.5">
+                    <label className="block text-sm font-medium text-[#FFF1E8] mb-1.5">
                       Budget Range
                     </label>
                     <select
                       value={formData.budget_range}
                       onChange={(e) => handleChange("budget_range", e.target.value)}
-                      className="w-full px-4 py-3 bg-[#0A1628] border border-[#1E3A5F] rounded-xl text-white text-sm focus:outline-none focus:border-[#5252C7] transition-colors appearance-none cursor-pointer"
+                      className="w-full px-4 py-3 bg-[#0D0620] border border-[#43226F] rounded-xl text-white text-sm focus:outline-none focus:border-[#F0328A] transition-colors appearance-none cursor-pointer"
                     >
-                      <option value="" className="bg-[#0A1628]">Select a range...</option>
+                      <option value="" className="bg-[#0D0620]">Select a range...</option>
                       {budgetOptions.map((opt) => (
-                        <option key={opt} value={opt} className="bg-[#0A1628]">{opt}</option>
+                        <option key={opt} value={opt} className="bg-[#0D0620]">{opt}</option>
                       ))}
                     </select>
                   </div>
@@ -227,7 +227,7 @@ export default function LeadMagnetSection() {
                 <button
                   type="submit"
                   disabled={status === "loading"}
-                  className="flex items-center justify-center gap-2 px-6 py-4 bg-[#5252C7] hover:bg-[#3838AE] disabled:opacity-60 text-white font-semibold rounded-xl text-sm transition-colors"
+                  className="flex items-center justify-center gap-2 px-6 py-4 bg-vice-btn hover:brightness-110 disabled:opacity-60 text-white font-semibold rounded-xl text-sm transition-colors"
                 >
                   {status === "loading" ? (
                     <>
@@ -242,10 +242,10 @@ export default function LeadMagnetSection() {
                   )}
                 </button>
 
-                <p className="text-xs text-[#64748B] text-center">
+                <p className="text-xs text-[#9484B8] text-center">
                   A real person on our team reviews every submission — not an autoresponder.
                 </p>
-                <p className="text-xs text-[#64748B] text-center">
+                <p className="text-xs text-[#9484B8] text-center">
                   By submitting, you agree to our{" "}
                   <a href="/privacy-policy" className="underline hover:text-white transition-colors">
                     Privacy Policy
