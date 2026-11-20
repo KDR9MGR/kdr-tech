@@ -1,5 +1,6 @@
 "use client";
 import React, { useState } from "react";
+import Link from "next/link";
 import { ArrowRight, CalendarDays, MessageCircle, CheckCircle, Loader2 } from "lucide-react";
 
 const CALENDLY_URL = "https://calendly.com/developer-kdrtech-in/30min";
@@ -247,9 +248,9 @@ export default function LeadMagnetSection() {
                 </p>
                 <p className="text-xs text-[#9484B8] text-center">
                   By submitting, you agree to our{" "}
-                  <a href="/privacy-policy" className="underline hover:text-white transition-colors">
+                  <Link href="/privacy-policy" className="underline hover:text-white transition-colors">
                     Privacy Policy
-                  </a>.
+                  </Link>.
                 </p>
               </form>
             )}

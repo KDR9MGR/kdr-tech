@@ -1,4 +1,5 @@
 import type { Metadata } from "next"
+import Link from "next/link"
 import LegalPageLayout from "@/components/main/LegalPageLayout"
 
 export const metadata: Metadata = {
@@ -32,7 +33,7 @@ export default function PrivacyPolicyPage() {
         <li>
           <strong>Direct contact</strong> — anything you send us by email or
           WhatsApp using the details on our{" "}
-          <a href="/contact-us">Contact Us</a> page.
+          <Link href="/contact-us">Contact Us</Link> page.
         </li>
         <li>
           <strong>Testimonials</strong> — if you provide a written or video
