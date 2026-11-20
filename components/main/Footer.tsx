@@ -204,11 +204,11 @@ const Footer = async () => {
             © {new Date().getFullYear()} KDR Tech. All rights reserved.
           </p>
           <div className="flex flex-wrap items-center gap-x-5 gap-y-2 text-sm text-[#9484B8]">
-            <a href="/contact-us" className="hover:text-white transition-colors">Contact Us</a>
-            <a href="/privacy-policy" className="hover:text-white transition-colors">Privacy Policy</a>
-            <a href="/terms-and-conditions" className="hover:text-white transition-colors">Terms &amp; Conditions</a>
-            <a href="/refund-and-cancellation-policy" className="hover:text-white transition-colors">Refund Policy</a>
-            <a href="/shipping-and-delivery-policy" className="hover:text-white transition-colors">Shipping Policy</a>
+            <Link href="/contact-us" className="hover:text-white transition-colors">Contact Us</Link>
+            <Link href="/privacy-policy" className="hover:text-white transition-colors">Privacy Policy</Link>
+            <Link href="/terms-and-conditions" className="hover:text-white transition-colors">Terms &amp; Conditions</Link>
+            <Link href="/refund-and-cancellation-policy" className="hover:text-white transition-colors">Refund Policy</Link>
+            <Link href="/shipping-and-delivery-policy" className="hover:text-white transition-colors">Shipping Policy</Link>
           </div>
         </div>
       </div>

@@ -201,10 +201,23 @@ html::-webkit-scrollbar-thumb {
 .vice-sun-pulse {
   animation: vice-sun-pulse 6s ease-in-out infinite;
 }
+/* Background-music button: tiny equalizer bars while the track plays */
+@keyframes vice-eq {
+  0%, 100% { transform: scaleY(0.3); }
+  50%      { transform: scaleY(1); }
+}
+.vice-eq-bar {
+  transform-origin: bottom;
+  animation: vice-eq 0.9s ease-in-out infinite;
+}
 @media (prefers-reduced-motion: reduce) {
   .vice-star,
   .vice-sun-pulse {
     animation: none;
+  }
+  .vice-eq-bar {
+    animation: none;
+    transform: scaleY(0.7);
   }
 }
 
